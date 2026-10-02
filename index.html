@@ -2,53 +2,55 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>MUSINA BAR & TAVERN - POSTER STANDARD</title>
+<title>MUSINA BAR & TAVERN - POSTER BLUE 5 ALIVE</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:#000;color:#fff;font-family:Inter,sans-serif}
-.top{text-align:center;padding:12px 0 6px;border-bottom:3px solid #00A8FF;background:#000}
-.top img{width:92%;max-width:360px;filter:drop-shadow(0 0 18px #00A8FF) drop-shadow(0 0 35px #00A8FF)}
-.top p{color:#00A8FF;letter-spacing:4px;font-size:10px;font-weight:900;margin-top:4px}
-.head{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;background:#070707;border-bottom:1.5px solid #00A8FF;position:sticky;top:0;z-index:20}
-.live{color:#00A8FF;font-weight:900;font-size:11px}
+:root{--blue:#00A8FF;--glow:0 0 14px #00A8FF, 0 0 32px #00A8FF, 0 0 50px rgba(0,168,255,.6)}
+body{background:#000;color:#fff;font-family:Inter,system-ui,sans-serif; -webkit-tap-highlight-color:transparent}
+.top{text-align:center;padding:14px 0 8px;background:#000;border-bottom:3px solid var(--blue);box-shadow:0 4px 25px rgba(0,168,255,.5)}
+.top img{width:90%;max-width:360px;filter:drop-shadow(0 0 18px var(--blue)) drop-shadow(0 0 35px var(--blue))}
+.top p{color:var(--blue);letter-spacing:4px;font-size:10px;font-weight:900;margin-top:5px;text-shadow:var(--glow)}
+.head{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;background:#080808;border-bottom:1.5px solid var(--blue);position:sticky;top:0;z-index:30;box-shadow:0 2px 15px rgba(0,168,255,.2)}
+.live{color:var(--blue);font-weight:900;font-size:11px;text-shadow:var(--glow)}
 .btns{display:flex;gap:6px}
-.b{padding:8px 12px;border-radius:20px;border:none;font-weight:900;font-size:11px}
-.b-add{background:#00A8FF;color:#fff;box-shadow:0 0 12px #00A8FF}
-.b-x{background:#111;color:#00A8FF;border:1px solid #00A8FF}
-.nav{display:flex;gap:7px;overflow-x:auto;padding:10px 10px;background:#050505;scrollbar-width:none}
+.b{padding:8px 12px;border-radius:20px;border:none;font-weight:900;font-size:11px;cursor:pointer}
+.b-add{background:var(--blue);color:#fff;box-shadow:var(--glow)}
+.b-x{background:#111;color:var(--blue);border:1px solid var(--blue)}
+.nav{display:flex;gap:7px;overflow-x:auto;padding:11px 10px;background:#050505;scrollbar-width:none}
 .nav::-webkit-scrollbar{display:none}
-.chip{padding:9px 15px;background:#121212;border:1px solid #222;border-radius:22px;color:#7dcfff;font-weight:900;font-size:10px;white-space:nowrap}
-.chip.active{background:#00A8FF;color:#fff;box-shadow:0 0 15px #00A8FF;border-color:#00A8FF}
+.chip{padding:9px 15px;background:#111;border:1px solid #222;border-radius:22px;color:#7dcfff;font-weight:900;font-size:10px;white-space:nowrap;cursor:pointer}
+.chip.active{background:var(--blue);color:#fff;box-shadow:var(--glow);border-color:var(--blue)}
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:11px;padding:11px}
-.card{background:linear-gradient(180deg,#161616,#0e0e0e);border:1.5px solid #222;border-radius:18px;overflow:hidden;transition:.2s}
-.card:active{transform:scale(.96);border-color:#00A8FF;box-shadow:0 0 22px #00A8FF}
-.bottle{height:132px;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at center,rgba(0,168,255,.28) 0%,rgba(0,0,0,0) 70%);position:relative}
-.bottle img{height:118px;width:auto;object-fit:contain;filter:drop-shadow(0 6px 12px #000) drop-shadow(0 0 10px rgba(0,168,255,.7));transition:.2s}
-.card:active .bottle img{transform:scale(1.12) translateY(-4px);filter:drop-shadow(0 0 18px #00A8FF)}
-.emoji{font-size:56px;display:none;filter:drop-shadow(0 0 10px #00A8FF)}
+.card{background:linear-gradient(180deg,#171717,#0d0d0d);border:1.5px solid #222;border-radius:18px;overflow:hidden;transition:.15s;cursor:pointer}
+.card:active{transform:scale(.97);border-color:var(--blue);box-shadow:var(--glow)}
+.bottle{height:134px;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at center,rgba(0,168,255,.38) 0%,rgba(0,0,0,0) 72%)}
+.bottle img{height:120px;width:auto;object-fit:contain;filter:drop-shadow(0 8px 14px #000) drop-shadow(0 0 12px var(--blue));transition:.15s}
+.card:active .bottle img{transform:scale(1.12) translateY(-4px);filter:drop-shadow(0 0 20px var(--blue))}
+.emoji{font-size:58px;display:none;text-shadow:var(--glow)}
 .info{padding:9px 10px;background:#111;border-top:1px solid #1e1e1e}
 .name{font-weight:900;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.meta{font-size:9px;color:#777;margin:2px 0}
+.meta{font-size:9px;color:#666;margin:2px 0}
 .row{display:flex;justify-content:space-between;align-items:center;margin-top:4px}
-.price{color:#00A8FF;font-weight:900;font-size:16px;text-shadow:0 0 8px #00A8FF}
+.price{color:var(--blue);font-weight:900;font-size:17px;text-shadow:var(--glow)}
 .stock{font-size:9px;padding:3px 7px;border-radius:10px;background:#000;border:1px solid #333;color:#aaa}
-.cart{position:fixed;bottom:0;left:0;right:0;background:#080808;border-top:2px solid #00A8FF;box-shadow:0 -8px 25px rgba(0,168,255,.25);padding:10px;z-index:30}
+.cart{position:fixed;bottom:0;left:0;right:0;background:#080808;border-top:2.5px solid var(--blue);box-shadow:0 -10px 30px rgba(0,168,255,.35);padding:10px;z-index:40}
 .cart-top{display:flex;justify-content:space-between;font-weight:900;font-size:13px}
 .btn-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:8px}
-.pay{padding:13px;border-radius:12px;border:none;font-weight:900;font-size:13px}
-.pay-cash{background:#00A8FF;color:#fff;box-shadow:0 0 14px #00A8FF}
-.pay-card{background:#fff;color:#00A8FF}
+.pay{padding:13px;border-radius:12px;border:none;font-weight:900;font-size:13px;cursor:pointer}
+.pay-cash{background:var(--blue);color:#fff;box-shadow:var(--glow)}
+.pay-card{background:#fff;color:var(--blue)}
+.small-btn{flex:1;background:#1a1a1a;color:#777;border:1px solid #222;padding:8px;border-radius:8px;font-size:10px;cursor:pointer}
 </style>
 </head>
 <body>
 <div class="top"><img src="logo.jpg" onerror="this.style.display='none'"><p>SMART SOLUTIONS FOR YOUR BUSINESS</p></div>
-<div class="head"><div class="live" id="clock">--:-- --</div><div class="btns"><button class="b b-add" onclick="location.reload()">+ ADD</button><button class="b b-x" onclick="doX()">X-READ</button><button class="b b-x" onclick="doZ()">Z-READ</button></div></div>
+<div class="head"><div class="live" id="clock">--:--</div><div class="btns"><button class="b b-add" onclick="location.reload()">+ ADD</button><button class="b b-x" onclick="doX()">X-READ</button><button class="b b-x" onclick="doZ()">Z-READ</button></div></div>
 <div class="nav" id="nav"></div><div class="grid" id="grid"></div>
-<div style="height:320px"></div>
+<div style="height:340px"></div>
 <div class="cart">
-<div class="cart-top"><span>SALE (<span id="cnt">0</span>) <small id="list" style="color:#777;font-size:9px"></small></span><span id="tot" style="color:#00A8FF">R0.00</span></div>
+<div class="cart-top"><span>SALE (<span id="cnt">0</span>) <small id="list" style="color:#666;font-size:9px"></small></span><span id="tot" style="color:var(--blue);text-shadow:var(--glow)">R0.00</span></div>
 <div class="btn-grid"><button class="pay pay-cash" onclick="pay('CASH')">CASH SALE</button><button class="pay pay-card" onclick="pay('CARD')">CARD PAYMENT</button></div>
-<div style="display:flex;gap:6px;margin-top:7px"><button onclick="clearCart()" style="flex:1;background:#1a1a1a;color:#777;border:1px solid #222;padding:8px;border-radius:8px;font-size:10px">CLEAR</button><button onclick="voidLast()" style="flex:1;background:#1a0000;color:#ff5a5a;border:1px solid #331111;padding:8px;border-radius:8px;font-size:10px">VOID LAST</button></div>
+<div style="display:flex;gap:6px;margin-top:7px"><button class="small-btn" onclick="clearCart()">CLEAR</button><button class="small-btn" style="color:#ff5a5a;border-color:#331111;background:#1a0000" onclick="voidLast()">VOID LAST</button></div>
 </div>
 <script>
 let CATS=["ALL","BEERS","DUMPIES","CIDERS","WHISKEY","BRANDY","SOFT","FOOD"];
@@ -71,18 +73,21 @@ let PRODUCTS=[
 {name:"Chips + Meat",price:85,cat:"FOOD",stock:50,img:"food.jpg",emoji:"🍖"},
 ];
 function renderNav(){document.getElementById('nav').innerHTML=CATS.map(c=>`<div class="chip ${active===c?'active':''}" onclick="active='${c}';renderNav();renderGrid()">${c}</div>`).join('')}
-function renderGrid(){let list=active==="ALL"?PRODUCTS:PRODUCTS.filter(p=>p.cat===active);document.getElementById('grid').innerHTML=list.map((p,i)=>{let idx=PRODUCTS.indexOf(p);return `<div class="card" onclick="add(${idx})"><div class="bottle"><img src="${p.img}" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><div class="emoji" style="display:block">${p.emoji}</div><script>document.currentScript.previousElementSibling.previousElementSibling.onerror=function(){this.style.display='none';this.nextElementSibling.style.display='block'}<\/script></div><div class="info"><div class="name">${p.name}</div><div class="meta">${p.cat} • ${p.stock} left</div><div class="row"><div class="price">R${p.price}</div><div class="stock">${p.stock>20?'IN':'LOW'}</div></div></div></div>`}).join('').replace(/<script>.*?<\/script>/g,''); 
-// fix emoji fallback manually
-document.querySelectorAll('.bottle img').forEach((im,ii)=>{im.onerror=()=>{im.style.display='none';im.nextElementSibling.style.display='block'}});
+function renderGrid(){
+let list=active==="ALL"?PRODUCTS:PRODUCTS.filter(p=>p.cat===active);
+document.getElementById('grid').innerHTML=list.map(p=>{
+let idx=PRODUCTS.indexOf(p);
+return `<div class="card" onclick="add(${idx})"><div class="bottle"><img src="${p.img}" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><div class="emoji">${p.emoji}</div></div><div class="info"><div class="name">${p.name}</div><div class="meta">${p.cat} • ${p.stock} left</div><div class="row"><div class="price">R${p.price}</div><div class="stock">${p.stock>20?'IN':'LOW'}</div></div></div></div>`;
+}).join('');
 }
 function add(i){let p=PRODUCTS[i];let f=cart.find(c=>c.idx===i);if(f)f.qty++;else cart.push({idx:i,name:p.name,price:p.price,qty:1});calc()}
-function calc(){let sub=cart.reduce((s,c)=>s+c.price*c.qty,0);let vat=sub*0.15;document.getElementById('tot').textContent='R'+(sub+vat).toFixed(2);document.getElementById('cnt').textContent=cart.reduce((a,b)=>a+b.qty,0);document.getElementById('list').textContent=cart.map(c=>c.name.substring(0,4)).join(', ')}
+function calc(){let sub=cart.reduce((s,c)=>s+c.price*c.qty,0);let vat=sub*0.15;document.getElementById('tot').textContent='R'+(sub+vat).toFixed(2);document.getElementById('cnt').textContent=cart.reduce((a,b)=>a+b.qty,0);document.getElementById('list').textContent=cart.map(c=>c.name.substring(0,3)).join(', ')}
 function clearCart(){cart=[];calc()}
 function voidLast(){cart.pop();calc()}
-function doX(){let t=cart.reduce((s,c)=>s+c.price*c.qty,0)*1.15;alert('X-READ\\nSales today: R'+sales.toFixed(2)+'\\nCart now: R'+t.toFixed(2)+'\\nTime: '+new Date().toLocaleString())}
-function doZ(){if(!confirm('Z-READ will close day. Continue?'))return;alert('Z-READ\\nTotal: R'+sales.toFixed(2)+'\\nReceipt printed');sales=0;localStorage.setItem('m_sales',0);cart=[];calc()}
-function pay(type){if(cart.length===0)return alert('Cart empty');let sub=cart.reduce((s,c)=>s+c.price*c.qty,0);let total=sub*1.15;sales+=total;localStorage.setItem('m_sales',sales);let w=window.open('','_blank','width=300,height=600');w.document.write(`<pre style="font-family:monospace;text-align:center"><img src="logo.jpg" style="width:180px"><br>MUSINA BAR & TAVERN<br>${new Date().toLocaleString()}<br>${type}<br>----------------<br>${cart.map(c=>`${c.name} x${c.qty} R${(c.price*c.qty).toFixed(2)}`).join('<br>')}<br>----------------<br>SUB R${sub.toFixed(2)}<br>VAT R${(sub*0.15).toFixed(2)}<br>TOTAL R${total.toFixed(2)}<br>THANK YOU</pre>`);w.print();cart=[];calc()}
-setInterval(()=>{document.getElementById('clock').textContent=new Date().toLocaleDateString()+' • '+new Date().toLocaleTimeString()},1000);
+function doX(){let t=cart.reduce((s,c)=>s+c.price*c.qty,0)*1.15;alert('X-READ\nSales today: R'+sales.toFixed(2)+'\nCart now: R'+t.toFixed(2)+'\nTime: '+new Date().toLocaleString())}
+function doZ(){if(!confirm('Z-READ will close day. Continue?'))return;alert('Z-READ\nTotal: R'+sales.toFixed(2));sales=0;localStorage.setItem('m_sales',0);cart=[];calc()}
+function pay(type){if(cart.length===0)return alert('Cart empty');let sub=cart.reduce((s,c)=>s+c.price*c.qty,0);let total=sub*1.15;sales+=total;localStorage.setItem('m_sales',sales);let w=window.open('','_blank','width=320,height=600');w.document.write(`<pre style="font-family:monospace;text-align:center"><img src="logo.jpg" style="width:180px"><br>MUSINA BAR & TAVERN<br>${new Date().toLocaleString()}<br>${type}<br>----------------<br>${cart.map(c=>`${c.name} x${c.qty} R${(c.price*c.qty).toFixed(2)}`).join('<br>')}<br>----------------<br>SUB R${sub.toFixed(2)}<br>VAT R${(sub*0.15).toFixed(2)}<br>TOTAL R${total.toFixed(2)}<br>THANK YOU<br>MUSINA SMART SOLUTIONS</pre>`);w.document.close();setTimeout(()=>w.print(),300);cart=[];calc()}
+setInterval(()=>{let d=new Date();document.getElementById('clock').textContent=d.toLocaleDateString()+' • '+d.toLocaleTimeString()},1000);
 renderNav();renderGrid();
 </script>
 </body>
