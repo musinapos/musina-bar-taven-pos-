@@ -1,117 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>MUSINA POS SYSTEMS - COMPLETE</title>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MUSINA BAR & TAVERN - POSTER STANDARD</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:system-ui,sans-serif;background:#000;color:#fff;min-height:100vh}
-.top-banner{background:#000;border-bottom:3px solid #00A8FF;padding:10px;text-align:center}
-.top-banner img{max-width:360px;width:95%;height:auto;filter:drop-shadow(0 0 15px #00A8FF)}
-.h{position:sticky;top:0;z-index:99;background:rgba(0,0,0,.95);border-bottom:2px solid #00A8FF;padding:10px 14px;display:flex;justify-content:space-between;align-items:center}
-.timebox{font-size:11px;color:#00A8FF;font-weight:800;line-height:1.3}
-.timebox b{color:#fff;font-size:13px}
-.btn{padding:9px 14px;border-radius:20px;font-weight:900;font-size:11px;border:none;cursor:pointer}
-.btn-add{background:#00A8FF;color:#fff;box-shadow:0 0 15px #00A8FF}
-.btn-x{background:#111;color:#00A8FF;border:1.5px solid #00A8FF}
-.nav{display:flex;gap:7px;overflow-x:auto;padding:10px;background:#050505}
-.n{white-space:nowrap;padding:9px 14px;border-radius:18px;background:#111;font-weight:900;font-size:11px;border:1px solid #222;color:#7ccfff;cursor:pointer}
-.n.active{background:#00A8FF;color:#fff;box-shadow:0 0 12px #00A8FF}
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding:12px}
-@media(min-width:700px){.grid{grid-template-columns:repeat(4,1fr)}}
-@media(min-width:1100px){.grid{grid-template-columns:repeat(5,1fr)}}
-.card{background:linear-gradient(180deg,#151515,#0a0a0a);border-radius:16px;border:1.5px solid #222;overflow:hidden;cursor:pointer;position:relative}
-.card:active{border-color:#00A8FF;box-shadow:0 0 20px #00A8FF;transform:scale(.96)}
-.iconbox{height:86px;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at center,rgba(0,168,255,.2),transparent 70%);font-size:44px;position:relative}
-.badge{position:absolute;top:6px;left:6px;background:#00A8FF;color:#fff;font-size:7px;font-weight:900;padding:3px 6px;border-radius:8px}
-.plus{position:absolute;top:6px;right:6px;width:24px;height:24px;background:#fff;color:#00A8FF;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900}
-.info{padding:9px}.name{font-weight:900;font-size:11px}.price{font-weight:900;color:#00A8FF;font-size:17px}.stock{font-size:9px;color:#5fa8d8}
-.footer-info{padding:20px;text-align:center;background:#050505;border-top:1px solid #111;margin-top:20px}
-.footer-info img{max-width:220px;width:80%}
-.cart{position:fixed;bottom:0;left:0;right:0;background:#0a0a0a;border-top:2px solid #00A8FF;z-index:90;display:flex;flex-direction:column;max-height:56vh}
-@media(min-width:1100px){.cart{left:auto;width:390px;top:106px;max-height:none;border-left:2px solid #00A8FF}}
-.cart-top{padding:10px;background:#000;display:flex;justify-content:space-between;font-weight:900;font-size:12px;border-bottom:1px solid #1a1a1a}
-.items{overflow:auto;padding:10px;flex:1}
-.row{display:flex;justify-content:space-between;background:#151515;border:1px solid #222;border-radius:9px;padding:8px;margin-bottom:6px;font-size:12px}
-.tot{padding:10px;background:#000;border-top:1px dashed #222}
-.tline{display:flex;justify-content:space-between;margin:3px 0;font-weight:700;color:#6bb7ff;font-size:11px}
-.tline.big{color:#fff;font-size:18px}.tline.big b{color:#00A8FF}
-.pay{display:grid;grid-template-columns:1fr 1fr;gap:7px;padding:10px}
-.pay button{padding:13px;border-radius:11px;font-weight:900;border:none;cursor:pointer;font-size:11px}
+body{background:#000;color:#fff;font-family:Inter,sans-serif}
+.top{text-align:center;padding:12px 0 6px;border-bottom:3px solid #00A8FF;background:#000}
+.top img{width:92%;max-width:360px;filter:drop-shadow(0 0 18px #00A8FF) drop-shadow(0 0 35px #00A8FF)}
+.top p{color:#00A8FF;letter-spacing:4px;font-size:10px;font-weight:900;margin-top:4px}
+.head{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;background:#070707;border-bottom:1.5px solid #00A8FF;position:sticky;top:0;z-index:20}
+.live{color:#00A8FF;font-weight:900;font-size:11px}
+.btns{display:flex;gap:6px}
+.b{padding:8px 12px;border-radius:20px;border:none;font-weight:900;font-size:11px}
+.b-add{background:#00A8FF;color:#fff;box-shadow:0 0 12px #00A8FF}
+.b-x{background:#111;color:#00A8FF;border:1px solid #00A8FF}
+.nav{display:flex;gap:7px;overflow-x:auto;padding:10px 10px;background:#050505;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.chip{padding:9px 15px;background:#121212;border:1px solid #222;border-radius:22px;color:#7dcfff;font-weight:900;font-size:10px;white-space:nowrap}
+.chip.active{background:#00A8FF;color:#fff;box-shadow:0 0 15px #00A8FF;border-color:#00A8FF}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:11px;padding:11px}
+.card{background:linear-gradient(180deg,#161616,#0e0e0e);border:1.5px solid #222;border-radius:18px;overflow:hidden;transition:.2s}
+.card:active{transform:scale(.96);border-color:#00A8FF;box-shadow:0 0 22px #00A8FF}
+.bottle{height:132px;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at center,rgba(0,168,255,.28) 0%,rgba(0,0,0,0) 70%);position:relative}
+.bottle img{height:118px;width:auto;object-fit:contain;filter:drop-shadow(0 6px 12px #000) drop-shadow(0 0 10px rgba(0,168,255,.7));transition:.2s}
+.card:active .bottle img{transform:scale(1.12) translateY(-4px);filter:drop-shadow(0 0 18px #00A8FF)}
+.emoji{font-size:56px;display:none;filter:drop-shadow(0 0 10px #00A8FF)}
+.info{padding:9px 10px;background:#111;border-top:1px solid #1e1e1e}
+.name{font-weight:900;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.meta{font-size:9px;color:#777;margin:2px 0}
+.row{display:flex;justify-content:space-between;align-items:center;margin-top:4px}
+.price{color:#00A8FF;font-weight:900;font-size:16px;text-shadow:0 0 8px #00A8FF}
+.stock{font-size:9px;padding:3px 7px;border-radius:10px;background:#000;border:1px solid #333;color:#aaa}
+.cart{position:fixed;bottom:0;left:0;right:0;background:#080808;border-top:2px solid #00A8FF;box-shadow:0 -8px 25px rgba(0,168,255,.25);padding:10px;z-index:30}
+.cart-top{display:flex;justify-content:space-between;font-weight:900;font-size:13px}
+.btn-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:8px}
+.pay{padding:13px;border-radius:12px;border:none;font-weight:900;font-size:13px}
+.pay-cash{background:#00A8FF;color:#fff;box-shadow:0 0 14px #00A8FF}
+.pay-card{background:#fff;color:#00A8FF}
 </style>
 </head>
 <body>
-<div class="top-banner">
-<img src="logo.jpg" alt="MUSINA POS SYSTEMS">
-<div style="font-size:10px;color:#00A8FF;letter-spacing:3px;margin-top:4px;font-weight:800">SMART SOLUTIONS FOR YOUR BUSINESS</div>
-</div>
-<div class="h">
-<div class="timebox"><b id="date">Loading...</b><br><span id="time"></span> • <span id="todaySales" style="color:#fff">TODAY R0</span></div>
-<div style="display:flex;gap:6px"><button class="btn btn-add" onclick="openAdd()">+ ADD</button><button class="btn btn-x" onclick="showX()">X-READ</button><button class="btn btn-x" onclick="showZ()">Z-READ</button></div>
-</div>
-<div class="nav" id="nav"></div>
-<div class="grid" id="grid"></div>
-<div class="footer-info">
-<img src="logo.jpg" alt="MUSINA POS"><br><br>
-<div style="display:flex;justify-content:center;gap:14px;font-size:10px;color:#00A8FF;font-weight:800;flex-wrap:wrap">
-<span>✓ SALES & STOCK</span><span>✓ REAL-TIME REPORTS</span><span>✓ SECURE</span><span>✓ CLOUD BASED</span><span>✓ TABLET & POS SUPPLY</span>
-</div>
-<div style="margin-top:10px;color:#5fa8d8;font-size:11px;font-style:italic">Your Business, Our Priority</div>
-<div style="height:360px"></div>
-</div>
+<div class="top"><img src="logo.jpg" onerror="this.style.display='none'"><p>SMART SOLUTIONS FOR YOUR BUSINESS</p></div>
+<div class="head"><div class="live" id="clock">--:-- --</div><div class="btns"><button class="b b-add" onclick="location.reload()">+ ADD</button><button class="b b-x" onclick="doX()">X-READ</button><button class="b b-x" onclick="doZ()">Z-READ</button></div></div>
+<div class="nav" id="nav"></div><div class="grid" id="grid"></div>
+<div style="height:320px"></div>
 <div class="cart">
-<div class="cart-top"><span>🧾 SALE <span id="cnt" style="color:#00A8FF">(0)</span></span><span style="display:flex;gap:6px"><span onclick="doVoid()" style="background:#222;padding:5px 9px;border-radius:7px;font-size:10px;cursor:pointer">VOID</span><span onclick="cart=[];rc()" style="background:#222;padding:5px 9px;border-radius:7px;font-size:10px">CLEAR</span><span onclick="mgr()" style="background:#00A8FF;color:#fff;padding:5px 9px;border-radius:7px;font-size:10px">MGR 1234</span></span></div>
-<div class="items" id="items"></div>
-<div class="tot"><div class="tline"><span>Subtotal</span><span id="sub">R0.00</span></div><div class="tline"><span>VAT 15%</span><span id="vat">R0.00</span></div><div class="tline big"><span>TOTAL</span><b id="total">R0.00</b></div></div>
-<div class="pay">
-<button style="background:#00A8FF;color:#fff;box-shadow:0 0 12px #00A8FF" onclick="pay('CASH')">💵 CASH SALE</button>
-<button style="background:#fff;color:#00A8FF" onclick="pay('CARD')">💳 CARD PAYMENT</button>
-<button style="background:#111;color:#00A8FF;border:1.5px solid #00A8FF" onclick="pr()">🖨️ PRINT RECEIPT</button>
-<button style="background:#222;color:#fff" onclick="pay('ACCOUNT')">📒 ACCOUNT / TAB</button>
+<div class="cart-top"><span>SALE (<span id="cnt">0</span>) <small id="list" style="color:#777;font-size:9px"></small></span><span id="tot" style="color:#00A8FF">R0.00</span></div>
+<div class="btn-grid"><button class="pay pay-cash" onclick="pay('CASH')">CASH SALE</button><button class="pay pay-card" onclick="pay('CARD')">CARD PAYMENT</button></div>
+<div style="display:flex;gap:6px;margin-top:7px"><button onclick="clearCart()" style="flex:1;background:#1a1a1a;color:#777;border:1px solid #222;padding:8px;border-radius:8px;font-size:10px">CLEAR</button><button onclick="voidLast()" style="flex:1;background:#1a0000;color:#ff5a5a;border:1px solid #331111;padding:8px;border-radius:8px;font-size:10px">VOID LAST</button></div>
 </div>
-</div>
-<div id="mA" style="position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:200;display:none;align-items:center;justify-content:center;padding:16px"><div style="background:#111;border-radius:16px;padding:16px;width:100%;max-width:340px;border:2px solid #00A8FF"><div style="font-weight:900;color:#00A8FF;margin-bottom:10px">ADD / EDIT PRODUCT</div><input id="an" style="width:100%;padding:11px;border-radius:10px;background:#000;border:1px solid #222;color:#fff;margin:5px 0" placeholder="Castle Light"><input id="ap" type="number" style="width:100%;padding:11px;border-radius:10px;background:#000;border:1px solid #222;color:#fff;margin:5px 0" placeholder="28"><select id="ac" style="width:100%;padding:11px;border-radius:10px;background:#000;border:1px solid #222;color:#fff;margin:5px 0"><option>BEERS</option><option>DUMPIES</option><option>CIDERS</option><option>CLEAR SPIRITS</option><option>WHISKEY</option><option>BRANDY</option><option>SOFT</option><option>FOOD</option></select><input id="ast" type="number" style="width:100%;padding:11px;border-radius:10px;background:#000;border:1px solid #222;color:#fff;margin:5px 0" placeholder="Stock 100"><div style="display:flex;gap:8px;margin-top:10px"><button onclick="cA()" style="flex:1;padding:11px;border-radius:10px;background:#222;color:#fff;border:none">Cancel</button><button onclick="sP()" style="flex:1;padding:11px;border-radius:10px;background:#00A8FF;color:#fff;border:none">SAVE ✅</button></div><div id="eD" style="display:none;margin-top:10px"><button onclick="dP()" style="width:100%;padding:11px;border-radius:10px;background:#5a1010;color:#fff;border:none">DELETE</button></div></div></div>
-<div id="mR" style="position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:200;display:none;align-items:center;justify-content:center;padding:16px"><div style="background:#111;border-radius:16px;padding:16px;width:100%;max-width:380px;border:2px solid #00A8FF"><div id="rT" style="font-weight:900;color:#00A8FF;margin-bottom:10px">X-READING</div><div id="rB" style="background:#000;padding:10px;border-radius:10px;font-size:11px;max-height:60vh;overflow:auto;color:#8bc9ff;white-space:pre-wrap"></div><button onclick="document.getElementById('mR').style.display='none'" style="width:100%;margin-top:10px;padding:11px;border-radius:10px;background:#222;color:#fff;border:none">Close</button></div></div>
 <script>
-let CATS=["ALL","BEERS","DUMPIES","CIDERS","CLEAR SPIRITS","WHISKEY","BRANDY","SOFT","FOOD"];
-let active="ALL";let editId=null;let cart=[];let sales=parseFloat(localStorage.getItem('mp_sales')||0);
-let PRODUCTS=JSON.parse(localStorage.getItem('mp_complete')||'null')||[
-{name:"Castle Light",price:28,cat:"BEERS",stock:120,emoji:"🍺"},
-{name:"Black Label",price:30,cat:"BEERS",stock:100,emoji:"🍻"},
-{name:"Amstel",price:28,cat:"BEERS",stock:100,emoji:"🍺"},
-{name:"Heineken",price:35,cat:"BEERS",stock:80,emoji:"🍺"},
-{name:"Hansa Pony",price:22,cat:"DUMPIES",stock:150,emoji:"🍺"},
-{name:"Castle Pony",price:22,cat:"DUMPIES",stock:150,emoji:"🍺"},
-{name:"Savanna Dry",price:32,cat:"CIDERS",stock:90,emoji:"🍾"},
-{name:"Hunters Dry",price:30,cat:"CIDERS",stock:95,emoji:"🍏"},
-{name:"Bernini",price:30,cat:"CIDERS",stock:85,emoji:"🍹"},
-{name:"Smirnoff Vodka",price:40,cat:"CLEAR SPIRITS",stock:50,emoji:"🍸"},
-{name:"Jameson",price:42,cat:"WHISKEY",stock:40,emoji:"🥃"},
-{name:"Jack Daniels",price:45,cat:"WHISKEY",stock:40,emoji:"🥃"},
-{name:"Klipdrift",price:38,cat:"BRANDY",stock:40,emoji:"🥃"},
-{name:"Coke 330ml",price:18,cat:"SOFT",stock:120,emoji:"🥤"},
-{name:"Chisanyama",price:85,cat:"FOOD",stock:50,emoji:"🍖"}
+let CATS=["ALL","BEERS","DUMPIES","CIDERS","WHISKEY","BRANDY","SOFT","FOOD"];
+let active="ALL";let cart=[];let sales=parseFloat(localStorage.getItem('m_sales')||0);
+let PRODUCTS=[
+{name:"Castle Light",price:28,cat:"BEERS",stock:120,img:"castle-lite.jpg",emoji:"🍺"},
+{name:"Black Label",price:30,cat:"BEERS",stock:100,img:"black-label.jpg",emoji:"🍻"},
+{name:"Amstel",price:28,cat:"BEERS",stock:100,img:"amstel.jpg",emoji:"🍺"},
+{name:"Heineken",price:35,cat:"BEERS",stock:80,img:"heineken.jpg",emoji:"🍺"},
+{name:"Hansa Pony",price:22,cat:"DUMPIES",stock:150,img:"hansa.jpg",emoji:"🍺"},
+{name:"Castle Pony",price:22,cat:"DUMPIES",stock:150,img:"castle-pony.jpg",emoji:"🍺"},
+{name:"Savanna Dry",price:32,cat:"CIDERS",stock:90,img:"savanna.jpg",emoji:"🍾"},
+{name:"Hunters Dry",price:30,cat:"CIDERS",stock:95,img:"hunters.jpg",emoji:"🍏"},
+{name:"Bernini",price:30,cat:"CIDERS",stock:85,img:"bernini.jpg",emoji:"🍹"},
+{name:"Smirnoff Vodka",price:40,cat:"WHISKEY",stock:50,img:"smirnoff.jpg",emoji:"🍸"},
+{name:"Jameson",price:42,cat:"WHISKEY",stock:40,img:"jameson.jpg",emoji:"🥃"},
+{name:"Jack Daniels",price:45,cat:"WHISKEY",stock:40,img:"jack.jpg",emoji:"🥃"},
+{name:"Klipdrift",price:38,cat:"BRANDY",stock:40,img:"klipdrift.jpg",emoji:"🥃"},
+{name:"Coke 330ml",price:18,cat:"SOFT",stock:120,img:"coke.jpg",emoji:"🥤"},
+{name:"Chips + Meat",price:85,cat:"FOOD",stock:50,img:"food.jpg",emoji:"🍖"},
 ];
-function save(){localStorage.setItem('mp_complete',JSON.stringify(PRODUCTS));localStorage.setItem('mp_sales',sales)}
-function tick(){let d=new Date();document.getElementById('date').textContent=d.toLocaleDateString('en-ZA',{weekday:'short',year:'numeric',month:'short',day:'numeric'});document.getElementById('time').textContent=d.toLocaleTimeString('en-ZA');document.getElementById('todaySales').textContent='TODAY R'+sales.toFixed(0)}
-setInterval(tick,1000);tick();
-function init(){rn();rg()}function rn(){document.getElementById('nav').innerHTML=CATS.map(c=>`<div class="n ${active===c?'active':''}" onclick="active='${c}';rn();rg()">${c}</div>`).join('')+`<div class="n" style="background:#00A8FF;color:#fff" onclick="openAdd()">+ ADD</div>`}
-function rg(){let list=active==="ALL"?PRODUCTS:PRODUCTS.filter(p=>p.cat===active);document.getElementById('grid').innerHTML=list.map(p=>{let idx=PRODUCTS.indexOf(p);return `<div class="card" onclick="add(${idx})" ontouchstart="pt=setTimeout(()=>edit(${idx}),650)" ontouchend="clearTimeout(pt)" oncontextmenu="edit(${idx});return false"><div class="iconbox"><span class="badge">${p.cat}</span><div class="plus">+</div><div>${p.emoji}</div></div><div class="info"><div class="name">${p.name}</div><div class="price">R${p.price.toFixed(2)}</div><div class="stock">${p.cat} • STOCK ${p.stock}</div></div></div>`}).join('');}
-let pt;function add(i){let p=PRODUCTS[i];if(p.stock<=0){alert(p.name+" OUT OF STOCK!");return;}let f=cart.find(c=>c.idx===i);if(f)f.qty++;else cart.push({idx:i,name:p.name,price:p.price,qty:1});if(navigator.vibrate)navigator.vibrate(30);rc()}
-function rc(){let el=document.getElementById('items');if(cart.length===0)el.innerHTML=`<div style="text-align:center;color:#2a5f85;padding:26px;font-weight:800">TAP DRINK TO SELL 👆</div>`;else el.innerHTML=cart.map((c,i)=>`<div class="row"><div><div style="font-weight:900;color:#fff">${c.name}</div><div style="color:#5fa8d8;font-size:11px">R${c.price} x ${c.qty} = R${(c.price*c.qty).toFixed(2)}</div></div><div style="display:flex;gap:6px;align-items:center"><div onclick="cart[${i}].qty--;if(cart[${i}].qty<=0)cart.splice(${i},1);rc()" style="width:26px;height:26px;background:#222;border-radius:7px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#00A8FF">-</div><div style="font-weight:900;color:#00A8FF">${c.qty}</div><div onclick="cart[${i}].qty++;rc()" style="width:26px;height:26px;background:#222;border-radius:7px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#00A8FF">+</div></div></div>`).join('');let sub=cart.reduce((s,c)=>s+c.price*c.qty,0);let vat=sub*0.15;let tot=sub+vat;document.getElementById('sub').textContent=`R${sub.toFixed(2)}`;document.getElementById('vat').textContent=`R${vat.toFixed(2)}`;document.getElementById('total').textContent=`R${tot.toFixed(2)}`;document.getElementById('cnt').textContent=`(${cart.reduce((a,b)=>a+b.qty,0)})`}
-function openAdd(){editId=null;document.getElementById('an').value='';document.getElementById('ap').value='';document.getElementById('ast').value='100';document.getElementById('eD').style.display='none';document.getElementById('mA').style.display='flex'}
-function cA(){document.getElementById('mA').style.display='none'}
-function edit(i){editId=i;let p=PRODUCTS[i];document.getElementById('an').value=p.name;document.getElementById('ap').value=p.price;document.getElementById('ac').value=p.cat;document.getElementById('ast').value=p.stock;document.getElementById('eD').style.display='block';document.getElementById('mA').style.display='flex'}
-function sP(){let n=document.getElementById('an').value.trim();let pr=parseFloat(document.getElementById('ap').value);let cat=document.getElementById('ac').value;let st=parseInt(document.getElementById('ast').value)||100;if(!n||!pr){alert("Name and Price!");return;}if(editId!==null){PRODUCTS[editId].name=n;PRODUCTS[editId].price=pr;PRODUCTS[editId].cat=cat;PRODUCTS[editId].stock=st;}else PRODUCTS.push({name:n,price:pr,cat:cat,stock:st,emoji:"🍺"});save();cA();rn();rg();}
-function dP(){if(editId===null)return;if(!confirm("Delete "+PRODUCTS[editId].name+"?"))return;PRODUCTS.splice(editId,1);save();cA();rg()}
-function doVoid(){if(cart.length===0){alert("Nothing to VOID!");return;}cart.pop();rc()}
-function showX(){let html=`MUSINA POS SYSTEMS\nX-READING - ${new Date().toLocaleString()}\nTODAY SALES: R${sales.toFixed(2)}\nProducts: ${PRODUCTS.length}\nStock Units: ${PRODUCTS.reduce((s,p)=>s+p.stock,0)}\n\n--- PLU ---\n`+PRODUCTS.map(p=>`${p.name} - R${p.price} [${p.stock}]`).join('\n');document.getElementById('rT').textContent='📊 X-READING';document.getElementById('rB').textContent=html;document.getElementById('mR').style.display='flex';}
-function showZ(){if(!confirm("Z-READ = CLOSE DAY? Reset TODAY to R0?"))return;let html=`MUSINA POS - Z-READ\n${new Date().toLocaleString()}\nCLOSING TOTAL: R${sales.toFixed(2)}\nAfter this TODAY=R0\n`;document.getElementById('rT').textContent='📊 Z-READ DAY CLOSE';document.getElementById('rB').textContent=html;document.getElementById('mR').style.display='flex';sales=0;save();tick();}
-function pay(m){if(cart.length===0){alert("Add items!");return;}let t=document.getElementById('total').textContent;let v=parseFloat(t.replace('R',''));cart.forEach(c=>PRODUCTS[c.idx].stock-=c.qty);sales+=v;save();tick();alert(`✅ PAID ${m} - ${t}\n${new Date().toLocaleString()}`);pr(true);cart=[];rc();rg();}
-function pr(auto=false){if(cart.length===0&&!auto){alert("Cart empty!");return;}let items=cart.length?cart:[];if(auto&&items.length===0)return;let sub=items.reduce((s,c)=>s+c.price*c.qty,0);let vat=sub*0.15;let tot=sub+vat;let w=window.open('','','width=320,height=700');w.document.write(`<html><head><style>body{font-family:monospace;width:280px;padding:10px;color:#000}.center{text-align:center}.logo{max-width:180px;width:90%}.line{border-top:1px dashed #000;margin:8px 0}.row{display:flex;justify-content:space-between;font-size:12px;margin:3px 0}.b{font-weight:900}.small{font-size:10px}</style></head><body><div class="center"><img src="logo.jpg" class="logo"><br><b>MUSINA POS SYSTEMS</b><br><span class="small">SMART SOLUTIONS</span><br><span class="small">${new Date().toLocaleString()}</span></div><div class="line"></div>${items.map(c=>`<div class="row"><span>${c.name} x${c.qty}</span><span>R${(c.price*c.qty).toFixed(2)}</span></div>`).join('')}<div class="line"></div><div class="row"><span>Subtotal</span><span>R${sub.toFixed(2)}</span></div><div class="row"><span>VAT 15%</span><span>R${vat.toFixed(2)}</span></div><div class="row b"><span>TOTAL</span><span>R${tot.toFixed(2)}</span></div><div class="line"></div><div class="center small">Your Business, Our Priority<br>Thank you!</div></body></html>`);w.document.close();w.print();}
-function mgr(){let p=prompt("Manager PIN? (1234)");if(p!=="1234"){alert("Wrong!");return;}let act=prompt("MGR:\n1=Add Stock\n2=Change Price\n3=X-READ\n4=Z-READ");if(act==="1"){let name=prompt("Product name:");let f=PRODUCTS.find(x=>x.name.toLowerCase().includes(name.toLowerCase()));if(f){let add=parseInt(prompt("Add qty?", "10")||0);f.stock+=add;save();rg();}}else if(act==="2"){let name=prompt("Product:");let f=PRODUCTS.find(x=>x.name.toLowerCase().includes(name.toLowerCase()));if(f){let pr=parseFloat(prompt("New price?", f.price));f.price=pr;save();rg();}}else if(act==="3")showX();else if(act==="4")showZ();}
-init();
+function renderNav(){document.getElementById('nav').innerHTML=CATS.map(c=>`<div class="chip ${active===c?'active':''}" onclick="active='${c}';renderNav();renderGrid()">${c}</div>`).join('')}
+function renderGrid(){let list=active==="ALL"?PRODUCTS:PRODUCTS.filter(p=>p.cat===active);document.getElementById('grid').innerHTML=list.map((p,i)=>{let idx=PRODUCTS.indexOf(p);return `<div class="card" onclick="add(${idx})"><div class="bottle"><img src="${p.img}" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><div class="emoji" style="display:block">${p.emoji}</div><script>document.currentScript.previousElementSibling.previousElementSibling.onerror=function(){this.style.display='none';this.nextElementSibling.style.display='block'}<\/script></div><div class="info"><div class="name">${p.name}</div><div class="meta">${p.cat} • ${p.stock} left</div><div class="row"><div class="price">R${p.price}</div><div class="stock">${p.stock>20?'IN':'LOW'}</div></div></div></div>`}).join('').replace(/<script>.*?<\/script>/g,''); 
+// fix emoji fallback manually
+document.querySelectorAll('.bottle img').forEach((im,ii)=>{im.onerror=()=>{im.style.display='none';im.nextElementSibling.style.display='block'}});
+}
+function add(i){let p=PRODUCTS[i];let f=cart.find(c=>c.idx===i);if(f)f.qty++;else cart.push({idx:i,name:p.name,price:p.price,qty:1});calc()}
+function calc(){let sub=cart.reduce((s,c)=>s+c.price*c.qty,0);let vat=sub*0.15;document.getElementById('tot').textContent='R'+(sub+vat).toFixed(2);document.getElementById('cnt').textContent=cart.reduce((a,b)=>a+b.qty,0);document.getElementById('list').textContent=cart.map(c=>c.name.substring(0,4)).join(', ')}
+function clearCart(){cart=[];calc()}
+function voidLast(){cart.pop();calc()}
+function doX(){let t=cart.reduce((s,c)=>s+c.price*c.qty,0)*1.15;alert('X-READ\\nSales today: R'+sales.toFixed(2)+'\\nCart now: R'+t.toFixed(2)+'\\nTime: '+new Date().toLocaleString())}
+function doZ(){if(!confirm('Z-READ will close day. Continue?'))return;alert('Z-READ\\nTotal: R'+sales.toFixed(2)+'\\nReceipt printed');sales=0;localStorage.setItem('m_sales',0);cart=[];calc()}
+function pay(type){if(cart.length===0)return alert('Cart empty');let sub=cart.reduce((s,c)=>s+c.price*c.qty,0);let total=sub*1.15;sales+=total;localStorage.setItem('m_sales',sales);let w=window.open('','_blank','width=300,height=600');w.document.write(`<pre style="font-family:monospace;text-align:center"><img src="logo.jpg" style="width:180px"><br>MUSINA BAR & TAVERN<br>${new Date().toLocaleString()}<br>${type}<br>----------------<br>${cart.map(c=>`${c.name} x${c.qty} R${(c.price*c.qty).toFixed(2)}`).join('<br>')}<br>----------------<br>SUB R${sub.toFixed(2)}<br>VAT R${(sub*0.15).toFixed(2)}<br>TOTAL R${total.toFixed(2)}<br>THANK YOU</pre>`);w.print();cart=[];calc()}
+setInterval(()=>{document.getElementById('clock').textContent=new Date().toLocaleDateString()+' • '+new Date().toLocaleTimeString()},1000);
+renderNav();renderGrid();
 </script>
 </body>
 </html>
