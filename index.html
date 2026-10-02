@@ -1,100 +1,204 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>MUSINA BAR & TAVERN - PREMIUM BLUE</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>MUSINA POS - FULL EDITABLE</title>
+<meta name="theme-color" content="#000">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@700;800;900&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-:root{--blue:#00D0FF;--glow:0 0 12px #00D0FF, 0 0 28px #00D0FF, 0 0 45px rgba(0,208,255,.65)}
-body{background:#000;color:#fff;font-family:Inter,system-ui,sans-serif;-webkit-tap-highlight-color:transparent}
-.top{text-align:center;padding:14px 0 8px;background:#000;border-bottom:3px solid var(--blue);box-shadow:0 5px 30px rgba(0,208,255,.6)}
-.top img{width:90%;max-width:360px;filter:drop-shadow(0 0 18px var(--blue)) drop-shadow(0 0 40px var(--blue))}
-.top p{color:var(--blue);letter-spacing:4px;font-size:10px;font-weight:900;margin-top:5px;text-shadow:var(--glow)}
-.head{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;background:#080808;border-bottom:1.5px solid var(--blue);position:sticky;top:0;z-index:30;box-shadow:0 2px 15px rgba(0,208,255,.3)}
-.live{color:var(--blue);font-weight:900;font-size:11px;text-shadow:var(--glow)}
-.btns{display:flex;gap:6px}
-.b{padding:8px 12px;border-radius:20px;border:none;font-weight:900;font-size:11px;cursor:pointer}
-.b-add{background:var(--blue);color:#000;box-shadow:var(--glow)}
-.b-x{background:#111;color:var(--blue);border:1px solid var(--blue)}
-.nav{display:flex;gap:7px;overflow-x:auto;padding:11px 10px;background:#050505;scrollbar-width:none}
-.nav::-webkit-scrollbar{display:none}
-.chip{padding:9px 15px;background:#111;border:1px solid #222;border-radius:22px;color:#7de8ff;font-weight:900;font-size:10px;white-space:nowrap;cursor:pointer}
-.chip.active{background:var(--blue);color:#000;box-shadow:var(--glow);border-color:var(--blue)}
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:11px;padding:11px}
-.card{background:linear-gradient(180deg,#1a1a1a,#0e0e0e);border:1.5px solid #222;border-radius:18px;overflow:hidden;transition:.15s;cursor:pointer}
-.card:active{transform:scale(.97);border-color:var(--blue);box-shadow:var(--glow)}
-.bottle{height:134px;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at center,rgba(0,208,255,.4) 0%,rgba(0,0,0,0) 72%)}
-.bottle img{height:120px;width:auto;object-fit:contain;filter:drop-shadow(0 8px 14px #000) drop-shadow(0 0 12px var(--blue));transition:.15s}
-.card:active.bottle img{transform:scale(1.12) translateY(-4px);filter:drop-shadow(0 0 20px var(--blue))}
-.emoji{font-size:58px;display:none;text-shadow:var(--glow)}
-.info{padding:9px 10px;background:#111;border-top:1px solid #222}
-.name{font-weight:900;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.meta{font-size:9px;color:#666;margin:2px 0}
-.row{display:flex;justify-content:space-between;align-items:center;margin-top:4px}
-.price{color:var(--blue);font-weight:900;font-size:17px;text-shadow:var(--glow);cursor:pointer}
-.stock{font-size:9px;padding:3px 7px;border-radius:10px;background:#000;border:1px solid #333;color:#aaa}
-.cart{position:fixed;bottom:0;left:0;right:0;background:#080808;border-top:2.5px solid var(--blue);box-shadow:0 -10px 35px rgba(0,208,255,.45);padding:10px;z-index:40}
-.cart-top{display:flex;justify-content:space-between;font-weight:900;font-size:13px}
-.btn-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:8px}
-.pay{padding:13px;border-radius:12px;border:none;font-weight:900;font-size:13px;cursor:pointer}
-.pay-cash{background:var(--blue);color:#000;box-shadow:var(--glow)}
-.pay-card{background:#fff;color:var(--blue)}
-.small-btn{flex:1;background:#1a1a1a;color:#777;border:1px solid #222;padding:8px;border-radius:8px;font-size:10px;cursor:pointer}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:'Inter',sans-serif;background:#0a0c10;color:#fff;overflow-x:hidden}
+.h{position:sticky;top:0;z-index:99;background:#000;border-bottom:4px solid #f59e0b;padding:12px 14px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-weight:900;font-size:17px}.logo span{color:#f59e0b}
+.btn{padding:8px 12px;border-radius:20px;font-weight:900;font-size:11px;border:none;cursor:pointer}
+.btn-green{background:#22c55e;color:#000}.btn-orange{background:#f59e0b;color:#000}.btn-dark{background:#1f2937;color:#fff;border:1px solid #374151}
+.nav{display:flex;gap:6px;overflow-x:auto;padding:10px 12px;background:#141821;border-bottom:2px solid #222}
+.n{white-space:nowrap;padding:8px 14px;border-radius:20px;background:#1f2937;font-weight:800;font-size:12px;border:2px solid #2d3748;cursor:pointer}
+.n.active{background:#f59e0b;color:#000;border-color:#f59e0b}
+.tools{padding:10px 12px;display:flex;gap:8px;flex-wrap:wrap;background:#0f1218}
+.tbtn{flex:1;min-width:80px;padding:10px;border-radius:10px;font-weight:900;font-size:11px;border:none;cursor:pointer;text-align:center}
+.tbtn:active{transform:scale(.95)}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding:12px}
+@media(min-width:700px){.grid{grid-template-columns:repeat(4,1fr)}}
+@media(min-width:1100px){.grid{grid-template-columns:repeat(5,1fr)}}
+.card{background:#1a202c;border-radius:14px;padding:10px;border:2px solid #2d3748;cursor:pointer;position:relative}
+.card:active{border-color:#22c55e;transform:scale(.96)}
+.icon{width:50px;height:50px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:28px}
+.name{font-weight:900;font-size:12px;margin-top:7px;min-height:30px;line-height:1.1}
+.price{font-weight:900;color:#22c55e;font-size:15px}
+.meta{font-size:9px;color:#6b7280;font-weight:800;margin-top:2px}
+.plus{position:absolute;top:6px;right:6px;width:22px;height:22px;background:#22c55e;color:#000;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px}
+.cart{position:fixed;bottom:0;left:0;right:0;background:#141821;border-top:3px solid #22c55e;z-index:90;display:flex;flex-direction:column;max-height:55vh}
+@media(min-width:1100px){.cart{left:auto;width:390px;top:56px;max-height:none;border-left:3px solid #22c55e}}
+.cart-top{padding:10px 12px;background:#1a202c;display:flex;justify-content:space-between;font-weight:900;border-bottom:2px solid #222;font-size:13px}
+.items{overflow:auto;padding:8px;flex:1}
+.row{display:flex;justify-content:space-between;background:#1a202c;border:1px solid #2d3748;border-radius:10px;padding:8px;margin-bottom:6px;font-size:12px}
+.tot{padding:10px 12px;background:#000;border-top:2px dashed #2d3748}
+.tline{display:flex;justify-content:space-between;margin:3px 0;font-weight:800;color:#9ca3af;font-size:12px}
+.tline.big{color:#fff;font-size:18px}
+.pay{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:8px 12px}
+.pay button{padding:12px;border-radius:10px;font-weight:900;border:none;cursor:pointer;font-size:12px}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:200;display:none;align-items:center;justify-content:center;padding:16px}
+.box{background:#1a202c;border-radius:16px;padding:16px;width:100%;max-width:360px;border:2px solid #2d3748}
+.inp{width:100%;padding:12px;border-radius:10px;background:#0f1218;border:2px solid #2d3748;color:#fff;font-weight:700;margin:6px 0;font-size:14px}
+.lab{font-size:11px;font-weight:800;color:#9ca3af;margin-top:8px;display:block}
+.spacer{height:420px}@media(min-width:1100px){.spacer{display:none}.wrap{margin-right:390px}}
 </style>
 </head>
 <body>
-<div class="top"><img src="logo.jpg" onerror="this.style.display='none'"><p>SMART SOLUTIONS FOR YOUR BUSINESS</p></div>
-<div class="head"><div class="live" id="clock">--:--</div><div class="btns"><button class="b b-add" onclick="location.reload()">+ ADD</button><button class="b b-x" onclick="doX()">X-READ</button><button class="b b-x" onclick="doZ()">Z-READ</button></div></div>
-<div class="nav" id="nav"></div><div class="grid" id="grid"></div>
-<div style="height:340px"></div>
-<div class="cart">
-<div class="cart-top"><span>SALE (<span id="cnt">0</span>) <small id="list" style="color:#666;font-size:9px"></small></span><span id="tot" style="color:var(--blue);text-shadow:var(--glow)">R0.00</span></div>
-<div class="btn-grid"><button class="pay pay-cash" onclick="pay('CASH')">CASH SALE</button><button class="pay pay-card" onclick="pay('CARD')">CARD PAYMENT</button></div>
-<div style="display:flex;gap:6px;margin-top:7px"><button class="small-btn" onclick="clearCart()">CLEAR</button><button class="small-btn" style="color:#ff5a5a;border-color:#331111;background:#1a0000" onclick="voidLast()">VOID LAST</button></div>
+<div class="h">
+  <div class="logo">🔥 MUSINA <span>POS</span> <span style="font-size:10px;background:#22c55e;color:#000;padding:2px 6px;border-radius:10px;margin-left:6px">EDITABLE</span></div>
+  <div style="display:flex;gap:6px">
+    <button class="btn btn-orange" onclick="openAdd()">+ ADD DRINK</button>
+    <button class="btn btn-green" onclick="showReport()">X-READ</button>
+  </div>
 </div>
+
+<div class="nav" id="nav"></div>
+
+<div class="tools">
+  <div class="tbtn" style="background:#1f2937;color:#fff;border:1px solid #374151" onclick="doVoid()">VOID LAST</div>
+  <div class="tbtn" style="background:#1f2937;color:#fff;border:1px solid #374151" onclick="doNoSale()">NO SALE</div>
+  <div class="tbtn" style="background:#7f1d1d;color:#fff" onclick="doPLU()">PLU / PRICE CHECK</div>
+  <div class="tbtn" style="background:#f59e0b;color:#000" onclick="doHold()">HOLD TAB</div>
+  <div class="tbtn" style="background:#3b82f6;color:#fff" onclick="doZRead()">Z-READ (CLOSE)</div>
+  <div class="tbtn" style="background:#22c55e;color:#000" onclick="exportData()">BACKUP</div>
+</div>
+
+<div class="wrap">
+  <div class="grid" id="grid"></div>
+  <div class="spacer"></div>
+</div>
+
+<div class="cart">
+  <div class="cart-top">
+    <span>🧾 SALE <span id="cnt" style="color:#22c55e">(0)</span> <span id="today" style="font-size:10px;color:#9ca3af;margin-left:6px"></span></span>
+    <span style="display:flex;gap:6px">
+      <span onclick="clearCart()" style="background:#2d3748;padding:4px 8px;border-radius:6px;font-size:10px;cursor:pointer">CLEAR</span>
+      <span onclick="openManager()" style="background:#f59e0b;color:#000;padding:4px 8px;border-radius:6px;font-size:10px;cursor:pointer">MANAGER</span>
+    </span>
+  </div>
+  <div class="items" id="items"><div style="text-align:center;color:#6b7280;padding:24px;font-weight:800;font-size:12px">Tap to add<br>Long-press to EDIT price/delete<br>👆</div></div>
+  <div class="tot"><div class="tline"><span>Subtotal</span><span id="sub">R0.00</span></div><div class="tline"><span>VAT 15%</span><span id="vat">R0.00</span></div><div class="tline big"><span>TOTAL</span><span id="total">R0.00</span></div></div>
+  <div class="pay"><button style="background:#22c55e" onclick="pay('CASH')">💵 CASH</button><button style="background:#3b82f6;color:#fff" onclick="pay('CARD')">💳 CARD</button><button style="background:#f59e0b" onclick="printR()">🖨️ PRINT</button><button style="background:#1f2937;color:#fff;border:1px solid #374151" onclick="pay('ACCOUNT')">📖 ACCOUNT</button></div>
+</div>
+
+<div class="modal" id="modalAdd">
+  <div class="box">
+    <div style="font-weight:900;font-size:16px;margin-bottom:10px">➕ ADD / EDIT PRODUCT</div>
+    <span class="lab">Product Name (e.g Castle Light)</span>
+    <input id="a_name" class="inp" placeholder="Castle Light">
+    <span class="lab">Price (R)</span>
+    <input id="a_price" class="inp" type="number" placeholder="28">
+    <span class="lab">Category</span>
+    <select id="a_cat" class="inp"><option>BEERS</option><option>CIDERS</option><option>CLEAR SPIRITS</option><option>WHISKEY</option><option>BRANDY</option><option>SOFT</option><option>FOOD</option><option>DUMPIES</option></select>
+    <span class="lab">Stock Qty</span>
+    <input id="a_stock" class="inp" type="number" placeholder="100">
+    <div style="display:flex;gap:8px;margin-top:12px">
+      <button class="btn btn-dark" style="flex:1;padding:12px" onclick="closeAdd()">Cancel</button>
+      <button class="btn btn-green" style="flex:1;padding:12px" onclick="saveProduct()">SAVE ✅</button>
+    </div>
+    <div id="editDel" style="display:none;margin-top:10px"><button class="btn" style="width:100%;background:#7f1d1d;color:#fff;padding:12px" onclick="deleteProduct()">🗑️ DELETE PRODUCT</button></div>
+  </div>
+</div>
+
+<div class="modal" id="modalReport">
+  <div class="box" style="max-width:400px">
+    <div style="font-weight:900;font-size:16px;margin-bottom:10px" id="reportTitle">📊 X-READING - Daily Report</div>
+    <div id="reportBody" style="font-size:12px;line-height:1.6;max-height:60vh;overflow:auto;background:#0f1218;padding:10px;border-radius:10px"></div>
+    <button class="btn btn-dark" style="width:100%;margin-top:12px;padding:12px" onclick="document.getElementById('modalReport').style.display='none'">Close</button>
+  </div>
+</div>
+
 <script>
-let CATS=["ALL","BEERS","DUMPIES","CIDERS","WHISKEY","BRANDY","SOFT","FOOD"];
-let active="ALL";let cart=[];let sales=parseFloat(localStorage.getItem('m_sales')||0);
-let PRODUCTS=JSON.parse(localStorage.getItem('musina_products')||'null')||[
-{name:"Castle Light",price:28,cat:"BEERS",stock:120,img:"castle-lite.jpg",emoji:"🍺"},
-{name:"Black Label",price:30,cat:"BEERS",stock:100,img:"black-label.jpg",emoji:"🍻"},
-{name:"Amstel",price:28,cat:"BEERS",stock:100,img:"amstel.jpg",emoji:"🍺"},
-{name:"Heineken",price:35,cat:"BEERS",stock:80,img:"heineken.jpg",emoji:"🍺"},
-{name:"Hansa Pony",price:22,cat:"DUMPIES",stock:150,img:"hansa.jpg",emoji:"🍺"},
-{name:"Castle Pony",price:22,cat:"DUMPIES",stock:150,img:"castle-pony.jpg",emoji:"🍺"},
-{name:"Savanna Dry",price:32,cat:"CIDERS",stock:90,img:"savanna.jpg",emoji:"🍾"},
-{name:"Hunters Dry",price:30,cat:"CIDERS",stock:95,img:"hunters.jpg",emoji:"🍏"},
-{name:"Bernini",price:30,cat:"CIDERS",stock:85,img:"bernini.jpg",emoji:"🍹"},
-{name:"Smirnoff Vodka",price:40,cat:"WHISKEY",stock:50,img:"smirnoff.jpg",emoji:"🍸"},
-{name:"Jameson",price:42,cat:"WHISKEY",stock:40,img:"jameson.jpg",emoji:"🥃"},
-{name:"Jack Daniels",price:45,cat:"WHISKEY",stock:40,img:"jack.jpg",emoji:"🥃"},
-{name:"Klipdrift",price:38,cat:"BRANDY",stock:40,img:"klipdrift.jpg",emoji:"🥃"},
-{name:"Coke 330ml",price:18,cat:"SOFT",stock:120,img:"coke.jpg",emoji:"🥤"},
-{name:"Chips + Meat",price:85,cat:"FOOD",stock:50,img:"food.jpg",emoji:"🍖"},
+let CATS=["ALL","BEERS","CIDERS","CLEAR SPIRITS","WHISKEY","BRANDY","SOFT","FOOD","DUMPIES"];
+let active="ALL";
+let editId=null;
+let cart=[];
+let sales=parseFloat(localStorage.getItem('mp_sales')||0);
+let PRODUCTS=JSON.parse(localStorage.getItem('mp_products')||'null') || [
+{name:"Castle Light",price:28,cat:"BEERS",stock:120,icon:"🍺",color:"#16a34a",text:"#fff"},
+{name:"Black Label",price:30,cat:"BEERS",stock:100,icon:"🍻",color:"#000",text:"#fbbf24"},
+{name:"Hansa Pony",price:22,cat:"DUMPIES",stock:150,icon:"🍺",color:"#16a34a",text:"#fff"},
+{name:"Castle Pony",price:22,cat:"DUMPIES",stock:150,icon:"🍺",color:"#166534",text:"#fff"},
+{name:"Amstel",price:28,cat:"BEERS",stock:100,icon:"🍺",color:"#dc2626",text:"#fff"},
+{name:"Heineken",price:35,cat:"BEERS",stock:80,icon:"🍺",color:"#15803d",text:"#fff"},
+{name:"Corona",price:38,cat:"BEERS",stock:60,icon:"🍺",color:"#e0f2fe",text:"#000"},
+{name:"Savanna Dry",price:32,cat:"CIDERS",stock:90,icon:"🍾",color:"#fef3c7",text:"#000"},
+{name:"Hunters Dry",price:30,cat:"CIDERS",stock:95,icon:"🍏",color:"#facc15",text:"#000"},
+{name:"Smirnoff Vodka",price:40,cat:"CLEAR SPIRITS",stock:50,icon:"🍸",color:"#e0f2fe",text:"#000"},
+{name:"Jack Daniels",price:45,cat:"WHISKEY",stock:40,icon:"🥃",color:"#292524",text:"#fbbf24"},
+{name:"Klipdrift",price:38,cat:"BRANDY",stock:40,icon:"🥃",color:"#7c2d12",text:"#fff"},
+{name:"Coke 330ml",price:18,cat:"SOFT",stock:120,icon:"🥤",color:"#dc2626",text:"#fff"},
+{name:"Chisanyama Plate",price:85,cat:"FOOD",stock:50,icon:"🍖",color:"#f59e0b",text:"#000"},
 ];
-function renderNav(){document.getElementById('nav').innerHTML=CATS.map(c=>`<div class="chip ${active===c?'active':''}" onclick="active='${c}';renderNav();renderGrid()">${c}</div>`).join('')}
+function saveLS(){localStorage.setItem('mp_products',JSON.stringify(PRODUCTS));localStorage.setItem('mp_sales',sales)}
+function init(){renderNav();renderGrid();updateToday();document.getElementById('today').textContent=`TODAY: R${sales.toFixed(0)}`}
+function renderNav(){document.getElementById('nav').innerHTML=CATS.map(c=>`<div class="n ${active===c?'active':''}" onclick="active='${c}';renderNav();renderGrid()">${c}</div>`).join('')+`<div class="n" style="background:#22c55e;color:#000" onclick="openAdd()">+ ADD</div>`}
 function renderGrid(){
-let list=active==="ALL"?PRODUCTS:PRODUCTS.filter(p=>p.cat===active);
-document.getElementById('grid').innerHTML=list.map(p=>{
-let idx=PRODUCTS.indexOf(p);
-return `<div class="card"><div class="bottle" onclick="add(${idx})"><img src="${p.img}" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><div class="emoji">${p.emoji}</div></div><div class="info"><div class="name">${p.name}</div><div class="meta">${p.cat} • ${p.stock} left</div><div class="row"><div class="price" onclick="editOne(${idx})">R${p.price}</div><div class="stock">${p.stock>20?'IN':'LOW'}</div></div></div></div>`;
-}).join('');
+ let list=active==="ALL"?PRODUCTS:PRODUCTS.filter(p=>p.cat===active);
+ document.getElementById('grid').innerHTML=list.map((p,idx)=>{
+  let realIdx=PRODUCTS.indexOf(p);
+  return `<div class="card" onclick="add(${realIdx})" oncontextmenu="edit(${realIdx});return false" ontouchstart="pressTimer=setTimeout(()=>edit(${realIdx}),700)" ontouchend="clearTimeout(pressTimer)">
+    <div style="display:flex;justify-content:space-between"><div class="icon" style="background:${p.color||'#1f2937'};color:${p.text||'#fff'}">${p.icon||'🍺'}</div><div class="plus">+</div></div>
+    <div class="name">${p.name}</div><div class="price">R${p.price.toFixed(2)}</div><div class="meta">${p.cat} • Stock ${p.stock}</div>
+  </div>`
+ }).join('');
 }
-function add(i){let p=PRODUCTS[i];let f=cart.find(c=>c.idx===i);if(f)f.qty++;else cart.push({idx:i,name:p.name,price:p.price,qty:1});calc()}
-function calc(){let sub=cart.reduce((s,c)=>s+c.price*c.qty,0);let tot=sub*1.15;document.getElementById('tot').textContent='R'+tot.toFixed(2);document.getElementById('cnt').textContent=cart.reduce((a,b)=>a+b.qty,0);document.getElementById('list').textContent=cart.map(c=>c.name.substring(0,3)).join(', ')}
-function clearCart(){cart=[];calc()}
-function voidLast(){cart.pop();calc()}
-function editOne(idx){
-let p=PRODUCTS[idx];
-let copy=JSON.parse(JSON.stringify(PRODUCTS));
-let np=prompt(`Edit ONLY ${p.name}\nCurrent: R${p.price}\nNew price:`,p.price);
-if(np&&!isNaN(np)){copy[idx].price=parseFloat(np);PRODUCTS=copy;localStorage.setItem('musina_products',JSON.stringify(PRODUCTS));renderGrid();}
+let pressTimer;
+function add(i){let p=PRODUCTS[i];if(p.stock<=0){alert(p.name+" OUT OF STOCK!");return;}let f=cart.find(c=>c.idx===i);if(f)f.qty++;else cart.push({idx:i,name:p.name,price:p.price,qty:1});if(navigator.vibrate)navigator.vibrate(30);renderCart()}
+function renderCart(){
+ let el=document.getElementById('items');
+ if(cart.length===0)el.innerHTML=`<div style="text-align:center;color:#6b7280;padding:24px;font-weight:800;font-size:12px">Tap to add<br>Long-press to EDIT<br>👆</div>`;
+ else el.innerHTML=cart.map((c,i)=>`<div class="row"><div><div style="font-weight:900">${c.name}</div><div style="color:#9ca3af">R${c.price} x ${c.qty} = R${(c.price*c.qty).toFixed(2)}</div></div><div style="display:flex;gap:6px;align-items:center"><div onclick="cart[${i}].qty--;if(cart[${i}].qty<=0)cart.splice(${i},1);renderCart()" style="width:28px;height:28px;background:#2d3748;border-radius:6px;display:flex;align-items:center;justify-content:center;cursor:pointer">-</div><div style="font-weight:900">${c.qty}</div><div onclick="cart[${i}].qty++;renderCart()" style="width:28px;height:28px;background:#2d3748;border-radius:6px;display:flex;align-items:center;justify-content:center;cursor:pointer">+</div></div></div>`).join('');
+ let sub=cart.reduce((s,c)=>s+c.price*c.qty,0);let vat=sub*0.15;let tot=sub+vat;
+ document.getElementById('sub').textContent=`R${sub.toFixed(2)}`;document.getElementById('vat').textContent=`R${vat.toFixed(2)}`;document.getElementById('total').textContent=`R${tot.toFixed(2)}`;document.getElementById('cnt').textContent=`(${cart.reduce((a,b)=>a+b.qty,0)})`
 }
-function doX(){let t=cart.reduce((s,c)=>s+c.price*c.qty,0)*1.15;alert('X-READ\nToday: R'+sales.toFixed(2)+'\nCart: R'+t.toFixed(2)+'\nTime: '+new Date().toLocaleString())}
-function doZ(){if(!confirm('Z-READ close day?'))return;alert('Z-READ\nTotal: R'+sales.toFixed(2));sales=0;localStorage.setItem('m_sales',0);cart=[];calc()}
-function pay(type){if(cart.length===0)return alert('Cart empty');let sub=cart.reduce((s,c)=>s+c.price*c.qty,0);let total=sub*1.15;sales+=total;localStorage.setItem('m_sales',sales);let w=window.open('','_blank','width=320,height=600');w.document.write(`<pre style="font-family:monospace;text-align:center"><img src="logo.jpg" style="width:180px"><br>MUSINA BAR & TAVERN<br>${new Date().toLocaleString()}<br>${type}<br>----------------<br>${cart.map(c=>`${c.name} x${c.qty} R${(c.price*c.qty).toFixed(2)}`).join('<br>')}<br>----------------<br>SUB R${sub.toFixed(2)}<br>VAT R${(sub*0.15).toFixed(2)}<br>TOTAL R${total.toFixed(2)}<br>THANK YOU<br>SMART SOLUTIONS</pre>`);w.document.close();setTimeout(()=>w.print(),300);cart=[];calc()}
-setInterval(()=>{let d=new Date();document.getElementById('clock').textContent=d.toLocaleDateString()+' • '+d.toLocaleTimeString()},1000);
-renderNav();renderGrid();
+function clearCart(){cart=[];renderCart()}
+function openAdd(){editId=null;document.getElementById('a_name').value='';document.getElementById('a_price').value='';document.getElementById('a_stock').value='100';document.getElementById('editDel').style.display='none';document.getElementById('modalAdd').style.display='flex'}
+function closeAdd(){document.getElementById('modalAdd').style.display='none'}
+function edit(i){editId=i;let p=PRODUCTS[i];document.getElementById('a_name').value=p.name;document.getElementById('a_price').value=p.price;document.getElementById('a_cat').value=p.cat;document.getElementById('a_stock').value=p.stock;document.getElementById('editDel').style.display='block';document.getElementById('modalAdd').style.display='flex'}
+function saveProduct(){
+ let n=document.getElementById('a_name').value.trim();let pr=parseFloat(document.getElementById('a_price').value);let cat=document.getElementById('a_cat').value;let st=parseInt(document.getElementById('a_stock').value)||100;
+ if(!n||!pr){alert("Enter name and price!");return;}
+ if(editId!==null){PRODUCTS[editId].name=n;PRODUCTS[editId].price=pr;PRODUCTS[editId].cat=cat;PRODUCTS[editId].stock=st;}
+ else{PRODUCTS.push({name:n,price:pr,cat:cat,stock:st,icon:"🍺",color:"#1f2937",text:"#fff"})}
+ saveLS();closeAdd();renderNav();renderGrid();alert("✅ Saved! "+n+" R"+pr)
+}
+function deleteProduct(){if(editId===null)return;if(!confirm("Delete "+PRODUCTS[editId].name+"?"))return;PRODUCTS.splice(editId,1);saveLS();closeAdd();renderGrid()}
+function doVoid(){if(cart.length===0){alert("Nothing to VOID!");return;}cart.pop();renderCart()}
+function doNoSale(){alert("🔓 DRAWER OPEN - NO SALE");if(navigator.vibrate)navigator.vibrate([50,50,50])}
+function doPLU(){let q=prompt("Enter PLU / Name to check price:");if(!q)return;let f=PRODUCTS.find(p=>p.name.toLowerCase().includes(q.toLowerCase()));if(f)alert(f.name+" = R"+f.price+" | Stock: "+f.stock);else alert("Not found!")}
+function doHold(){if(cart.length===0){alert("Cart empty!");return;}alert("📋 TAB HELD: "+document.getElementById('total').textContent+"\n(For full tabs we add table name system next)");cart=[];renderCart()}
+function showReport(){
+ let totalItems=PRODUCTS.reduce((s,p)=>s+p.stock,0);
+ let html=`<b>MUSINA POS - X-READING</b><br>${new Date().toLocaleString()}<br><br><b>Today Sales: R${sales.toFixed(2)}</b><br>Products: ${PRODUCTS.length}<br>Total Stock Units: ${totalItems}<br><br><b>--- BY CATEGORY ---</b><br>`+CATS.slice(1).map(c=>{let count=PRODUCTS.filter(p=>p.cat===c).length;return `${c}: ${count} items`}).join('<br>')+`<br><br><b>--- PRICE LIST (PLU) ---</b><br>`+PRODUCTS.map(p=>`${p.name} - R${p.price} (${p.stock})`).join('<br>');
+ document.getElementById('reportTitle').textContent="📊 X-READING";document.getElementById('reportBody').innerHTML=html;document.getElementById('modalReport').style.display='flex';
+}
+function doZRead(){if(!confirm("Z-READ = CLOSE DAY? This will reset TODAY to R0. Continue?"))return;alert(`Z-READ PRINTED\nToday Total: R${sales.toFixed(2)}\nDay Closed!`);sales=0;saveLS();updateToday();document.getElementById('today').textContent=`TODAY: R0`}
+function updateToday(){}
+function pay(m){
+ if(cart.length===0){alert("Add items!");return;}
+ let t=document.getElementById('total').textContent;let totVal=parseFloat(t.replace('R',''));
+ cart.forEach(c=>{PRODUCTS[c.idx].stock-=c.qty});
+ sales+=totVal;saveLS();document.getElementById('today').textContent=`TODAY: R${sales.toFixed(0)}`;
+ alert(`✅ PAID ${m} - ${t}`);printR(true);cart=[];renderCart();renderGrid();
+}
+function printR(auto=false){
+ if(cart.length===0&&!auto){alert("No sale");return;}
+ let items=cart.length?cart.map(c=>({name:c.name,qty:c.qty,price:c.price})): [{name:"MUSINA POS",qty:1,price:sales}];
+ let sub=items.reduce((s,c)=>s+c.price*c.qty,0);let tot=sub*1.15;
+ let w=window.open('','','width=320,height=600');w.document.write(`<html><head><style>body{font-family:monospace;width:280px;padding:10px;color:#000}h2{text-align:center;margin:4px 0}.c{text-align:center;font-size:11px}.line{border-top:1px dashed #000;margin:8px 0}.row{display:flex;justify-content:space-between;font-size:12px;margin:3px 0}.b{font-weight:900}</style></head><body><h2>MUSINA BAR TAVERN</h2><div class="c">${new Date().toLocaleString()}<br>Manager Copy</div><div class="line"></div>${items.map(c=>`<div class="row"><span>${c.name} x${c.qty}</span><span>R${(c.price*c.qty).toFixed(2)}</span></div>`).join('')}<div class="line"></div><div class="row b"><span>TOTAL</span><span>R${tot.toFixed(2)}</span></div><div class="line"></div><div class="c">Thank you</div></body></html>`);w.document.close();w.print();
+}
+function exportData(){
+ let data=JSON.stringify(PRODUCTS);let blob=new Blob([data],{type:'application/json'});let url=URL.createObjectURL(blob);let a=document.createElement('a');a.href=url;a.download='musina-pos-backup.json';a.click();alert("Backup downloaded!");
+}
+function openManager(){
+ let p=prompt("Manager PIN? (Enter 1234)");if(p!=="1234"){alert("Wrong PIN!");return;}
+ let act=prompt("MANAGER MENU:\n1 = Add Stock\n2 = Change Price\n3 = View All PLU\nType 1/2/3");if(act==="1"){let name=prompt("Product name to add stock:");let f=PRODUCTS.find(x=>x.name.toLowerCase().includes(name.toLowerCase()));if(f){let add=parseInt(prompt("How many to add?")||0);f.stock+=add;saveLS();renderGrid();alert("Stock updated!")} } else if(act==="2"){let name=prompt("Product name to change price:");let f=PRODUCTS.find(x=>x.name.toLowerCase().includes(name.toLowerCase()));if(f){let pr=parseFloat(prompt("New price?",f.price));f.price=pr;saveLS();renderGrid();alert("Price updated!")} } else if(act==="3"){showReport()}
+}
+init();
 </script>
 </body>
 </html>
