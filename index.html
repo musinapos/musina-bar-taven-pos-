@@ -1,213 +1,175 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MUSINA BAR / TAVERN POS - FULL SYSTEM</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>BAR POS - MOOSETown</title>
+<meta name="theme-color" content="#0f1115">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiTU9PU0VUb3duIEJBUiBQT1MiLCJzaG9ydF9uYW1lIjoiQkFSIFBPUyIsInN0YXJ0X3VybCI6Ii4iLCJkaXNwbGF5Ijoic3RhbmRhbG9uZSIsImJhY2tncm91bmRfY29sb3IiOiIjMGYxMTE1IiwidGhlbWVfY29sb3IiOiIjMjJjNTVlIiwiaWNvbnMiOlt7InNyYyI6Imh0dHBzOi8vY2RuLWljb25zLXBuZy5mbGF0aWNvbi5jb20vNTEyLzEwMjkvMTAyOTM5MjIucG5nIiwic2l6ZXMiOiI1MTJ4NTEyIiwidHlwZSI6ImltYWdlL3BuZyJ9XX0=">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@800;900&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#F1F8F3;--card:#fff;--light:#E8F5E9;--mint:#C8E6C9;--teal:#4DB6AC;--dark:#1A3C34;--border:#D5E8D8;--red:#FF5252;--orange:#FFB74D}
-*{box-sizing:border-box;margin:0;padding:0;font-family:Segoe UI,Inter,sans-serif}
-body{background:var(--bg);color:var(--dark)}
-header{display:flex;justify-content:space-between;align-items:center;padding:12px 18px;background:#fff;border-bottom:2px solid var(--border);position:sticky;top:0;z-index:100}
-nav{display:flex;gap:6px}
-nav button{padding:8px 14px;border:1.5px solid var(--border);border-radius:20px;background:#fff;font-weight:700;cursor:pointer;font-size:12px}
-nav button.active{background:var(--teal);color:#fff;border-color:var(--teal)}
-.page{display:none;padding:16px;max-width:1300px;margin:0 auto}
-.page.active{display:block}
-.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.card{background:var(--card);border:1.5px solid var(--border);border-radius:14px;padding:14px}
-.kpi{border-left:4px solid var(--teal)}
-.btn{padding:10px 14px;border:none;border-radius:10px;font-weight:800;cursor:pointer}
-.btn-teal{background:var(--teal);color:#fff}
-.btn-light{background:var(--light);color:var(--dark)}
-.btn-dark{background:var(--dark);color:#fff}
-.input{width:100%;padding:10px;border:1.5px solid var(--border);border-radius:10px;background:#fff}
-table{width:100%;border-collapse:collapse;font-size:13px}
-th{background:var(--light);padding:8px;text-align:left}
-td{padding:8px;border-bottom:1px solid var(--border)}
-.badge{padding:3px 8px;border-radius:12px;font-size:10px;font-weight:800}
-.low{background:#FFEBEE;color:var(--red)}
-.ok{background:var(--light);color:var(--dark)}
-.prod{border:1.5px solid var(--border);border-radius:12px;padding:10px;text-align:center;background:#fff}
-.prod.add{width:100%;margin-top:6px;padding:7px;background:var(--light);border:none;border-radius:8px;font-weight:700;cursor:pointer}
-.mainPOS{display:grid;grid-template-columns:1.6fr 0.9fr;gap:14px}
-@media(max-width:900px){.mainPOS{grid-template-columns:1fr}.grid3,.grid4{grid-template-columns:repeat(2,1fr)}}
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:'Inter',sans-serif;background:#0a0c10;color:#fff}
+.header{background:#000;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;border-bottom:4px solid #f59e0b;position:sticky;top:0;z-index:100}
+.logo{font-weight:900;font-size:18px}.logo span{color:#f59e0b}
+.install-btn{background:#22c55e;color:#000;font-weight:900;padding:7px 14px;border-radius:20px;font-size:12px;border:none;cursor:pointer}
+.section{margin:14px 12px}
+.sec-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;padding:10px 14px;border-radius:12px;font-weight:900;letter-spacing:1px}
+.sec-head.beers{background:linear-gradient(90deg,#16a34a,#15803d)}
+.sec-head.ciders{background:linear-gradient(90deg,#f59e0b,#d97706);color:#000}
+.sec-head.clear{background:linear-gradient(90deg,#06b6d4,#0891b2);color:#000}
+.sec-head.whiskey{background:linear-gradient(90deg,#78350f,#451a03)}
+.sec-head.brandy{background:linear-gradient(90deg,#7c2d12,#431407)}
+.sec-head.food{background:linear-gradient(90deg,#be185d,#9d174d)}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(min-width:700px){.grid{grid-template-columns:repeat(4,1fr)}}
+@media(min-width:1100px){.grid{grid-template-columns:repeat(5,1fr)}}
+.p-card{background:#1a202c;border-radius:16px;padding:12px;border:2px solid #2d3748;cursor:pointer;position:relative}
+.p-card:active{transform:scale(.94);border-color:#22c55e}
+.p-icon{width:54px;height:54px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:32px}
+.p-name{font-weight:900;font-size:13px;margin-top:8px;min-height:28px;line-height:1.1}
+.p-price{font-weight:900;color:#22c55e;font-size:17px;margin-top:4px}
+.p-cat{font-size:9px;color:#6b7280;font-weight:800;margin-top:2px;letter-spacing:.5px}
+.add{position:absolute;top:8px;right:8px;width:26px;height:26px;background:#22c55e;color:#000;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900}
+.cart{position:fixed;bottom:0;left:0;right:0;background:#141821;border-top:3px solid #22c55e;max-height:55vh;display:flex;flex-direction:column;z-index:90}
+@media(min-width:1100px){.cart{left:auto;width:380px;top:58px;bottom:0;max-height:none;border-left:3px solid #22c55e;border-top:none}}
+.cart-top{padding:12px 14px;background:#1a202c;display:flex;justify-content:space-between;font-weight:900;border-bottom:2px solid #222}
+.items{overflow:auto;padding:10px;flex:1}
+.row{display:flex;justify-content:space-between;background:#1a202c;border:1px solid #2d3748;border-radius:10px;padding:8px 10px;margin-bottom:6px}
+.totals{padding:12px 14px;background:#000;border-top:2px dashed #2d3748}
+.t{display:flex;justify-content:space-between;margin:4px 0;font-weight:800;color:#9ca3af}.t.big{color:#fff;font-size:20px}.t.big span:last-child{color:#22c55e}
+.pay{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:10px 14px}
+.pay button{padding:13px;border-radius:12px;font-weight:900;border:none;cursor:pointer}
+.cash{background:#22c55e}.card{background:#3b82f6;color:#fff}.print{background:#f59e0b}.clear{background:#1f2937;color:#fff;border:1px solid #374151}
+.spacer{height:380px}@media(min-width:1100px){.spacer{display:none}.main-wrap{margin-right:380px}}
 </style>
 </head>
 <body>
-<header>
-<div><b>🍃 MUSINA BAR / TAVERN POS</b> <span style="font-size:11px;background:var(--light);padding:4px 10px;border-radius:20px">068 036 1133 • 21 Nancefield Rd, Musina • Online</span></div>
-<nav>
-<button class="active" onclick="go('pos')">🛒 POS</button>
-<button onclick="go('tables')">🪑 TABLES/BAR TAB</button>
-<button onclick="go('stock')">📦 STOCK</button>
-<button onclick="go('airtime')">📱 AIRTIME/DATA</button>
-<button onclick="go('staff')">👥 STAFF</button>
-<button onclick="go('reports')">📊 REPORTS</button>
-<button onclick="go('settings')">⚙️ SETTINGS</button>
-</nav>
-</header>
-
-<!-- POS PAGE -->
-<div id="pos" class="page active">
-<div class="mainPOS">
-<div>
-<input id="search" class="input" placeholder="Search Castle, Vodacom, DSTV, Electricity..." oninput="searchProd()">
-<div style="margin:10px 0;display:flex;gap:6px;flex-wrap:wrap" id="cats"></div>
-<div class="grid3" id="prodGrid"></div>
-</div>
-<div class="card" style="position:sticky;top:80px;height:fit-content">
-<h3>Current Order #MB2481 - <span id="custType">Walk-in</span></h3>
-<div id="cart" style="min-height:80px;margin:10px 0">No items</div>
-<div style="border-top:2px dashed var(--border);padding-top:8px">
-<div style="display:flex;justify-content:space-between"><span>Subtotal</span><span id="sub">R0.00</span></div>
-<div style="display:flex;justify-content:space-between"><span>VAT 15%</span><span id="vat">R0.00</span></div>
-<div style="display:flex;justify-content:space-between;font-weight:800;font-size:18px;margin-top:6px"><span>TOTAL</span><span id="tot">R0.00</span></div>
-</div>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:10px 0">
-<button class="btn btn-light" onclick="setPay('Cash')">💵 Cash</button>
-<button class="btn btn-light" onclick="setPay('Card')">💳 Card</button>
-<button class="btn btn-light" onclick="setPay('SnapScan')">SnapScan</button>
-<button class="btn btn-light" onclick="setPay('Credit')">🍺 Bar Tab</button>
-</div>
-<button class="btn btn-teal" style="width:100%;padding:14px;font-size:16px" onclick="pay()">CHARGE <span id="charge">R0.00</span> • <span id="payM">Cash</span></button>
-<button class="btn" style="width:100%;margin-top:6px;background:#fff;border:1.5px solid var(--teal)" onclick="hold()">Hold / Split Bill</button>
-<div style="margin-top:10px;background:var(--light);padding:8px;border-radius:8px;font-size:11px">💡 Happy Hour: 16:00-18:00 - 10% OFF Beers! • Airtime commission: 6% instant</div>
-</div>
-</div>
+<div class="header">
+  <div class="logo">🔥 MOOSETown <span>BAR POS</span></div>
+  <button class="install-btn" onclick="alert('To install as APP:\n\nOn Tablet/Chrome:\n1. Click 3 dots ⋮ top right\n2. Click Install App / Add to Home Screen\n3. It will become like real App!\n\nYou can then sell tablets with it pre-installed!')">📲 INSTALL AS APP</button>
 </div>
 
-<!-- TABLES / BAR TAB -->
-<div id="tables" class="page">
-<h3>🪑 Bar Tables & Tabs - Musina Tavern</h3>
-<div class="grid4" style="margin-top:12px">
-<div class="card" style="border-left:4px solid var(--teal)"><b>Table 1 - 2 Guests</b><p>R240.00 • Open 45min</p><button class="btn btn-light" onclick="alert('Open Table 1')">View Tab</button></div>
-<div class="card" style="border-left:4px solid var(--orange)"><b>Table 2 - 4 Guests</b><p>R0.00 • Available</p><button class="btn btn-teal" onclick="alert('New Order Table 2')">New Order</button></div>
-<div class="card" style="border-left:4px solid var(--teal)"><b>Bar Counter - Sipho</b><p>R120.50 • Tab</p><button class="btn btn-light">Add More</button></div>
-<div class="card"><b>Takeaway #102</b><p>R100.05 • Ready</p><button class="btn btn-dark">Print Receipt</button></div>
-</div>
-</div>
-
-<!-- STOCK -->
-<div id="stock" class="page">
-<div style="display:flex;justify-content:space-between"><h3>📦 Stock Control - Low Stock Alerts</h3><button class="btn btn-teal" onclick="alert('Order SMS sent to supplier!')">📦 Order Stock</button></div>
-<table style="margin-top:12px;background:#fff;border-radius:12px;overflow:hidden">
-<tr><th>Product</th><th>Category</th><th>In Stock</th><th>Cost</th><th>Sell</th><th>Profit</th><th>Status</th></tr>
-<tr><td>Castle Lager 330ml</td><td>Beer</td><td>12</td><td>R18</td><td>R28.50</td><td>R10.50</td><td><span class="badge low">LOW - ORDER!</span></td></tr>
-<tr><td>Black Label 330ml</td><td>Beer</td><td>8</td><td>R18</td><td>R27</td><td>R9</td><td><span class="badge low">LOW!</span></td></tr>
-<tr><td>Savanna Dry</td><td>Cider</td><td>34</td><td>R20</td><td>R30</td><td>R10</td><td><span class="badge ok">OK</span></td></tr>
-<tr><td>Klipdrift 50ml</td><td>Spirit</td><td>45 tots</td><td>R18</td><td>R35</td><td>R17</td><td><span class="badge ok">OK</span></td></tr>
-<tr><td>Vodacom Airtime</td><td>Airtime</td><td>∞ Digital</td><td>-</td><td>6%</td><td><span class="badge ok">DIGITAL</span></td></tr>
-</table>
+<div class="main-wrap">
+  <div class="section" id="sec-beers"></div>
+  <div class="section" id="sec-ciders"></div>
+  <div class="section" id="sec-clear"></div>
+  <div class="section" id="sec-whiskey"></div>
+  <div class="section" id="sec-brandy"></div>
+  <div class="section" id="sec-food"></div>
+  <div class="spacer"></div>
 </div>
 
-<!-- AIRTIME -->
-<div id="airtime" class="page">
-<h3>📱 Airtime, Data & Vouchers - Instant Profit</h3>
-<div class="grid4" style="margin-top:12px">
-<div class="card kpi"><p style="font-size:11px">TODAY AIRTIME SOLD</p><h2>R850.00</h2><small>Commission R51 (6%)</small></div>
-<div class="card kpi"><p style="font-size:11px">DATA BUNDLES</p><h2>R550.00</h2><small>Commission R38</small></div>
-<div class="card kpi"><p style="font-size:11px">ELECTRICITY</p><h2>R1,200.00</h2><small>Commission R24</small></div>
-<div class="card kpi"><p style="font-size:11px">DSTV / BETTING</p><h2>R799.00</h2><small>Commission R32</small></div>
-</div>
-<div class="card" style="margin-top:12px"><h4>How to Connect Real Airtime (Flash/Kazang/DT One):</h4><p style="font-size:13px;margin-top:8px">1. Get API from Flash.co.za or Kazang<br>2. Paste API key in Settings → Airtime API<br>3. Customer pays → System auto sends PIN via SMS/printed receipt<br>4. You earn 5-8% instantly!<br><br><b>Current Mode:</b> DEMO - Prints voucher code on receipt. Replace with real API for live.</p></div>
-</div>
-
-<!-- STAFF -->
-<div id="staff" class="page">
-<h3>👥 Staff & Shifts</h3>
-<table style="margin-top:12px;background:#fff;border-radius:12px;overflow:hidden">
-<tr><th>Staff</th><th>Role</th><th>Shift Today</th><th>Sales</th><th>Status</th></tr>
-<tr><td>Sipho M.</td><td>Cashier/Barman</td><td>09:00-22:00</td><td>R1,240</td><td>On Duty</td></tr>
-<tr><td>Lerato</td><td>Waitress</td><td>14:00-22:00</td><td>R560</td><td>On Duty</td></tr>
-<tr><td>Boss - You</td><td>Owner</td><td>All Day</td><td>-</td><td>Admin</td></tr>
-</table>
-<div style="margin-top:12px;display:flex;gap:8px">
-<button class="btn btn-light">+ Add Staff</button>
-<button class="btn btn-light">Clock In/Out</button>
-<button class="btn btn-dark">Payroll Report</button>
-</div>
-</div>
-
-<!-- REPORTS -->
-<div id="reports" class="page">
-<h3>📊 Full Reports - SARS Ready</h3>
-<div class="grid4" style="margin-top:12px">
-<div class="card kpi"><p>TODAY TOTAL</p><h2 id="rToday">R1,240.00</h2></div>
-<div class="card kpi"><p>AIRTIME PROFIT</p><h2>R145.00</h2></div>
-<div class="card kpi"><p>BAR PROFIT (65%)</p><h2>R806.00</h2></div>
-<div class="card kpi"><p>ORDERS</p><h2>12</h2></div>
-</div>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px">
-<div class="card"><h4>Daily Sales</h4><table><tr><th>Date</th><th>Total</th><th>Cash</th><th>Card</th></tr><tr><td>02 Oct 2026</td><td>R1,240</td><td>R800</td><td>R440</td></tr><tr><td>01 Oct 2026</td><td>R2,890</td><td>R1,900</td><td>R990</td></tr></table></div>
-<div class="card"><h4>Top Sellers</h4><table><tr><th>Product</th><th>Qty</th><th>Total</th></tr><tr><td>Castle Lager</td><td>24</td><td>R684</td></tr><tr><td>Black Label</td><td>18</td><td>R486</td></tr><tr><td>Vodacom R50 Airtime</td><td>9</td><td>R450</td></tr></table></div>
-</div>
-<div style="margin-top:12px;display:flex;gap:8px">
-<button class="btn btn-teal" onclick="downloadCSV()">⬇️ Download Excel CSV</button>
-<button class="btn btn-dark" onclick="window.print()">🖨️ Z-Report / SARS</button>
-<button class="btn btn-light" onclick="alert('WhatsApp report sent to 0680361133')">📱 WhatsApp Report to Owner</button>
-</div>
-</div>
-
-<!-- SETTINGS -->
-<div id="settings" class="page">
-<h3>⚙️ Settings - Musina Bar / Tavern POS</h3>
-<div class="grid3" style="margin-top:12px">
-<div class="card"><h4>Business Info</h4><input class="input" value="MUSINA BAR / TAVERN POS" style="margin:6px 0"><input class="input" value="21 Nancefield Rd, Musina, Limpopo"><input class="input" value="068 036 1133" style="margin:6px 0"><input class="input" value="VAT: 4550123456"></div>
-<div class="card"><h4>Airtime API</h4><input class="input" placeholder="Flash/Kazang API Key" style="margin:6px 0"><input class="input" placeholder="DT One API Key"><select class="input" style="margin:6px 0"><option>Vodacom 6%</option><option>MTN 6%</option><option>Telkom 7%</option></select><button class="btn btn-teal" style="width:100%">Save API</button></div>
-<div class="card"><h4>Receipt & Print</h4><label><input type="checkbox" checked> Print VAT</label><br><label><input type="checkbox" checked> Print Airtime PIN</label><br><label><input type="checkbox" checked> Happy Hour 16:00-18:00 10% off</label><br><br><button class="btn btn-light" style="width:100%">Test Print 🖨️</button></div>
-</div>
+<div class="cart">
+  <div class="cart-top"><span>🧾 SALE <span id="cnt" style="color:#22c55e">(0)</span> <span id="today" style="font-size:11px;color:#9ca3af;margin-left:8px"></span></span><span onclick="cart=[];render()" style="background:#2d3748;padding:4px 10px;border-radius:8px;font-size:12px;cursor:pointer">Clear</span></div>
+  <div class="items" id="cartItems"><div style="text-align:center;color:#6b7280;padding:20px;font-weight:800">Tap products above to add 👆<br><br>System shows nice tables for each category</div></div>
+  <div class="totals"><div class="t"><span>Subtotal</span><span id="sub">R0.00</span></div><div class="t"><span>VAT 15%</span><span id="vat">R0.00</span></div><div class="t big"><span>TOTAL</span><span id="total">R0.00</span></div></div>
+  <div class="pay"><button class="cash" onclick="pay('CASH')">💵 CASH</button><button class="card" onclick="pay('CARD')">💳 CARD</button><button class="print" onclick="printR()">🖨️ PRINT</button><button class="clear" onclick="hold()">📋 HOLD TAB</button></div>
 </div>
 
 <script>
-let products=[
-{id:1,n:"Castle Lager 330ml",c:"beer",p:28.5,d:"Lager • Cold",s:12},
-{id:2,n:"Black Label 330ml",c:"beer",p:27,d:"Lager • Cold",s:8},
-{id:3,n:"Windhoek 440ml",c:"beer",p:32,d:"Premium",s:24},
-{id:4,n:"Savanna Dry 330ml",c:"cider",p:30,d:"Cider",s:34},
-{id:5,n:"Hunter's Dry",c:"cider",p:28,d:"Cider",s:20},
-{id:6,n:"Klipdrift 50ml",c:"spirit",p:35,d:"Brandy Shot",s:45},
-{id:7,n:"Amarula 50ml",c:"spirit",p:38,d:"Liqueur",s:30},
-{id:8,n:"Smirnoff Vodka 50ml",c:"spirit",p:40,d:"Vodka Shot",s:25},
-{id:9,n:"Vodacom Airtime R10",c:"airtime",p:10,d:"Instant PIN",b:"VODACOM"},
-{id:10,n:"Vodacom Airtime R50",c:"airtime",p:50,d:"Instant PIN",b:"VODACOM"},
-{id:11,n:"MTN Airtime R30",c:"airtime",p:30,d:"Instant PIN",b:"MTN"},
-{id:12,n:"Telkom Airtime R20",c:"airtime",p:20,d:"Instant PIN",b:"TELKOM"},
-{id:13,n:"Cell C Airtime R15",c:"airtime",p:15,d:"Instant PIN",b:"CELL C"},
-{id:14,n:"Vodacom Data 1GB",c:"data",p:99,d:"30 Days",b:"DATA"},
-{id:15,n:"MTN Data 500MB",c:"data",p:55,d:"30 Days",b:"DATA"},
-{id:16,n:"DSTV Compact",c:"voucher",p:399,d:"1 Month",b:"DSTV"},
-{id:17,n:"Hollywoodbets R50",c:"voucher",p:50,d:"Betting",b:"BET"},
-{id:18,n:"Electricity R100",c:"voucher",p:100,d:"Prepaid",b:"ELEC"},
-{id:19,n:"Electricity R200",c:"voucher",p:200,d:"Prepaid",b:"ELEC"},
-{id:20,n:"Coca-Cola 500ml",c:"cold",p:18,d:"Soft Drink",s:40},
-{id:21,n:"Aqua Water 500ml",c:"cold",p:10,d:"Water",s:50},
+const PRODUCTS = [
+  // BEERS TABLE
+  {name:"Castle Light",price:28,cat:"BEERS",sub:"BEERS",icon:"🍺",color:"#16a34a",text:"#fff"},
+  {name:"Black Label",price:30,cat:"BEERS",sub:"BEERS",icon:"🍻",color:"#000",text:"#fbbf24"},
+  {name:"Castle Lager",price:28,cat:"BEERS",sub:"BEERS",icon:"🍺",color:"#166534",text:"#fff"},
+  {name:"Amstel",price:28,cat:"BEERS",sub:"BEERS",icon:"🍺",color:"#dc2626",text:"#fff"},
+  {name:"Heineken",price:35,cat:"BEERS",sub:"BEERS",icon:"🍺",color:"#15803d",text:"#fff"},
+  {name:"Corona",price:38,cat:"BEERS",sub:"BEERS",icon:"🍺",color:"#e0f2fe",text:"#000"},
+  {name:"Windhoek",price:32,cat:"BEERS",sub:"BEERS",icon:"🍺",color:"#1d4ed8",text:"#fff"},
+  {name:"Stella",price:36,cat:"BEERS",sub:"BEERS",icon:"🍺",color:"#b45309",text:"#fff"},
+  // CIDERS BAR
+  {name:"Savanna Dry",price:32,cat:"CIDERS",sub:"CIDERS",icon:"🍾",color:"#fef3c7",text:"#000"},
+  {name:"Hunters Dry",price:30,cat:"CIDERS",sub:"CIDERS",icon:"🍏",color:"#facc15",text:"#000"},
+  {name:"Brutal Fruit",price:28,cat:"CIDERS",sub:"CIDERS",icon:"🍓",color:"#ec4899",text:"#fff"},
+  {name:"Bernini",price:30,cat:"CIDERS",sub:"CIDERS",icon:"🍷",color:"#a855f7",text:"#fff"},
+  {name:"Smirnoff Spin",price:30,cat:"CIDERS",sub:"CIDERS",icon:"🍹",color:"#06b6d4",text:"#000"},
+  // CLEAR SPIRITS - Bottles
+  {name:"Smirnoff Vodka",price:40,cat:"SPIRITS",sub:"CLEAR SPIRITS",icon:"🍸",color:"#e0f2fe",text:"#000"},
+  {name:"Gordon's Gin",price:38,cat:"SPIRITS",sub:"CLEAR SPIRITS",icon:"🍸",color:"#a7f3d0",text:"#000"},
+  {name:"Bacardi White",price:45,cat:"SPIRITS",sub:"CLEAR SPIRITS",icon:"🥃",color:"#f0f9ff",text:"#000"},
+  // WHISKEY
+  {name:"Jack Daniels",price:45,cat:"SPIRITS",sub:"WHISKEY",icon:"🥃",color:"#292524",text:"#fbbf24"},
+  {name:"Jameson",price:42,cat:"SPIRITS",sub:"WHISKEY",icon:"🥃",color:"#166534",text:"#fff"},
+  {name:"Johnnie Walker",price:50,cat:"SPIRITS",sub:"WHISKEY",icon:"🥃",color:"#000",text:"#fbbf24"},
+  {name:"Bells",price:35,cat:"SPIRITS",sub:"WHISKEY",icon:"🥃",color:"#f59e0b",text:"#000"},
+  // BRANDY
+  {name:"Klipdrift",price:38,cat:"SPIRITS",sub:"BRANDY",icon:"🥃",color:"#7c2d12",text:"#fff"},
+  {name:"Hennessy",price:85,cat:"SPIRITS",sub:"BRANDY",icon:"🥃",color:"#431407",text:"#fbbf24"},
+  {name:"Richelieu",price:40,cat:"SPIRITS",sub:"BRANDY",icon:"🥃",color:"#78350f",text:"#fff"},
+  // FOOD
+  {name:"Chisanyama Plate",price:85,cat:"FOOD",sub:"FOOD",icon:"🍖",color:"#f59e0b",text:"#000"},
+  {name:"Pap & Wors",price:65,cat:"FOOD",sub:"FOOD",icon:"🍛",color:"#78350f",text:"#fff"},
 ];
-let cart=[], pay="Cash";
-function go(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));event.target.classList.add('active')}
-function initCats(){
-let cats=["all","beer","cider","spirit","airtime","data","voucher","cold"];
-let el=document.getElementById('cats');
-el.innerHTML=cats.map(c=>`<button class="btn ${c=='all'?'btn-teal':'btn-light'}" onclick="filterCat('${c}',this)">${c.toUpperCase()}</button>`).join('');
+
+let cart=[]; let sales=parseFloat(localStorage.getItem('sales')||0);
+
+function init(){
+  document.getElementById('today').textContent=`TODAY: R${sales.toFixed(0)}`;
+  renderSections();
 }
-function render(list){let g=document.getElementById('prodGrid');g.innerHTML=list.map(p=>`
-<div class="prod">
-<div style="font-size:28px">${p.c=='airtime'?'📱':p.c=='data'?'📶':p.c=='voucher'?'🎫':p.c=='cold'?'🥤':'🍺'}</div>
-<b style="font-size:12px">${p.n}</b><br><small style="font-size:10px;opacity:0.6">${p.d} ${p.s?`• Stock:${p.s}`:''}</small>
-<div style="font-weight:800;margin:6px 0">R${p.p.toFixed(2)}</div>
-${p.b?`<span style="font-size:9px;background:#FFECB3;padding:2px 6px;border-radius:4px;font-weight:800">${p.b}</span><br>`:''}
-<button class="add" onclick="addToCart(${p.id})">+ Add</button>
-</div>`).join('')}
-function addToCart(id){let p=products.find(x=>x.id==id);let f=cart.find(x=>x.id==id);if(f)f.q++;else cart.push({...p,q:1});upd()}
-function upd(){let el=document.getElementById('cart');if(!cart.length)el.innerHTML="No items";else el.innerHTML=cart.map(i=>`<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dashed #ddd"><span>${i.q}x ${i.n}</span><span>R${(i.p*i.q).toFixed(2)} ${i.c=='airtime'||i.c=='data'||i.c=='voucher'?'<br><small style=\"color:green\">PIN on receipt</small>':''}</span></div>`).join('');let sub=cart.reduce((s,i)=>s+i.p*i.q,0);let vat=sub*0.15;let tot=sub+vat;document.getElementById('sub').innerText='R'+sub.toFixed(2);document.getElementById('vat').innerText='R'+vat.toFixed(2);document.getElementById('tot').innerText='R'+tot.toFixed(2);document.getElementById('charge').innerText='R'+tot.toFixed(2)}
-function filterCat(c,btn){document.querySelectorAll('#cats button').forEach(b=>b.className='btn btn-light');btn.className='btn btn-teal';if(c=='all')render(products);else render(products.filter(p=>p.c==c))}
-function searchProd(){let q=document.getElementById('search').value.toLowerCase();render(products.filter(p=>p.n.toLowerCase().includes(q)))}
-function setPay(m){pay=m;document.getElementById('payM').innerText=m}
-function pay(){if(!cart.length)return alert('Cart empty!');let tot=document.getElementById('tot').innerText;let hasAirtime=cart.some(i=>['airtime','data','voucher'].includes(i.c));let pinMsg=hasAirtime?'\n\n📱 AIRTIME PINS:\nVodacom: 1234 5678 9012 3456\nMTN: 9876 5432 1098 7654\n(Electricity token: 1234-5678-9012-3456-7890)':'';alert(`MUSINA BAR / TAVERN POS\n21 Nancefield Rd, Musina\n068 036 1133\n\n${cart.map(i=>`${i.q}x ${i.n} R${(i.p*i.q).toFixed(2)}`).join('\n')}\n\nTOTAL ${tot} - ${pay}${pinMsg}\n\nThank you! Come again!`);cart=[];upd()}
-function hold(){alert('Order held as Bar Tab - Table 1')}
-function downloadCSV(){let csv="Date,Product,Category,Qty,Price,Total\n02 Oct 2026,Castle Lager,beer,2,28.50,57.00\n02 Oct 2026,Vodacom Airtime,airtime,1,50,50\n";let b=new Blob([csv],{type:'text/csv'});let u=URL.createObjectURL(b);let a=document.createElement('a');a.href=u;a.download='Musina_Bar_Full_Reports.csv';a.click()}
-initCats();render(products);
+
+function renderSections(){
+  const groups = {
+    "BEERS":{id:"sec-beers",title:"🍺 BEERS TABLE - All Beers",class:"beers"},
+    "CIDERS":{id:"sec-ciders",title:"🍏 CIDERS BAR - All Ciders",class:"ciders"},
+    "CLEAR SPIRITS":{id:"sec-clear",title:"🍸 CLEAR SPIRITS - Vodka, Gin",class:"clear"},
+    "WHISKEY":{id:"sec-whiskey",title:"🥃 WHISKEY - Jack, Jameson, Bells",class:"whiskey"},
+    "BRANDY":{id:"sec-brandy",title:"🥃 BRANDY - Klipdrift, Hennessy",class:"brandy"},
+    "FOOD":{id:"sec-food",title:"🍖 FOOD - Chisanyama",class:"food"},
+  };
+  Object.keys(groups).forEach(k=>{
+    let g=groups[k];
+    let list=PRODUCTS.filter(p=>p.sub===k);
+    if(list.length===0) return;
+    document.getElementById(g.id).innerHTML=`
+      <div class="sec-head ${g.class}"><span>${g.title}</span><span style="font-size:11px;opacity:.8">${list.length} items</span></div>
+      <div class="grid">${list.map((p,i)=>`
+        <div class="p-card" onclick="add('${p.name}')">
+          <div style="display:flex;justify-content:space-between"><div class="p-icon" style="background:${p.color};color:${p.text}">${p.icon}</div><div class="add">+</div></div>
+          <div class="p-name">${p.name}</div>
+          <div class="p-price">R${p.price.toFixed(2)}</div>
+          <div class="p-cat">${p.sub}</div>
+        </div>
+      `).join('')}</div>
+    `;
+  });
+}
+
+function add(name){
+  let p=PRODUCTS.find(x=>x.name===name);
+  let f=cart.find(c=>c.name===name);
+  if(f) f.qty++; else cart.push({name:p.name,price:p.price,qty:1});
+  if(navigator.vibrate) navigator.vibrate(30);
+  render();
+}
+function render(){
+  let el=document.getElementById('cartItems');
+  if(cart.length===0) el.innerHTML=`<div style="text-align:center;color:#6b7280;padding:20px;font-weight:800">Tap products above 👆</div>`;
+  else el.innerHTML=cart.map((c,i)=>`<div class="row"><div><div style="font-weight:900;font-size:13px">${c.name}</div><div style="font-size:11px;color:#9ca3af">R${c.price} x ${c.qty} = R${(c.price*c.qty).toFixed(2)}</div></div><div style="display:flex;gap:6px"><div onclick="cart[${i}].qty--;if(cart[${i}].qty<=0)cart.splice(${i},1);render()" style="width:28px;height:28px;background:#2d3748;border-radius:6px;display:flex;align-items:center;justify-content:center;cursor:pointer">-</div><div style="min-width:16px;text-align:center;font-weight:900">${c.qty}</div><div onclick="cart[${i}].qty++;render()" style="width:28px;height:28px;background:#2d3748;border-radius:6px;display:flex;align-items:center;justify-content:center;cursor:pointer">+</div></div></div>`).join('');
+  let sub=cart.reduce((s,c)=>s+c.price*c.qty,0); let vat=sub*0.15; let tot=sub+vat;
+  document.getElementById('sub').textContent=`R${sub.toFixed(2)}`;
+  document.getElementById('vat').textContent=`R${vat.toFixed(2)}`;
+  document.getElementById('total').textContent=`R${tot.toFixed(2)}`;
+  document.getElementById('cnt').textContent=`(${cart.reduce((a,b)=>a+b.qty,0)})`;
+}
+function pay(m){
+  if(cart.length===0){alert("Add items first!");return;}
+  let tot=document.getElementById('total').textContent;
+  sales+=parseFloat(tot.replace('R','')); localStorage.setItem('sales',sales);
+  document.getElementById('today').textContent=`TODAY: R${sales.toFixed(0)}`;
+  alert(`✅ PAID ${m} - ${tot}`);
+  printR(true); cart=[]; render();
+}
+function printR(auto=false){
+  if(cart.length===0&&!auto){alert("No sale");return;}
+  let items=cart.length?cart:[{name:"Sale",price:0,qty:1}];
+  let sub=items.reduce((s,c)=>s+c.price*c.qty,0); let tot=sub*1.15;
+  let w=window.open('','','width=320,height=600'); w.document.write(`<html><head><style>body{font-family:monospace;width:280px;padding:10px}h2{text-align:center}.c{text-align:center;font-size:12px}.row{display:flex;justify-content:space-between;font-size:13px;margin:4px 0}.line{border-top:1px dashed #000;margin:8px 0}</style></head><body><h2>🔥 MOOSETown CHISANYAMA</h2><div class="c">${new Date().toLocaleString()}</div><div class="line"></div>${items.map(c=>`<div class="row"><span>${c.name} x${c.qty}</span><span>R${(c.price*c.qty).toFixed(2)}</span></div>`).join('')}<div class="line"></div><div class="row" style="font-weight:900"><span>TOTAL</span><span>R${tot.toFixed(2)}</span></div></body></html>`); w.document.close(); w.print();
+}
+function hold(){ if(cart.length===0){alert("Cart empty");return;} alert("Tab held! Coming soon - will save table name"); }
+init();
+if('serviceWorker' in navigator){ navigator.serviceWorker.register('data:text/javascript;base64,'+btoa('self.addEventListener("fetch",e=>{e.respondWith(fetch(e.request).catch(()=>caches.match(e.request)))})')); }
 </script>
 </body>
 </html>
