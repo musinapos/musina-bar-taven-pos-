@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>MUSINA BAR & TAVERN - SELLABLE STANDARD</title>
+<title>MUSINA CHISANYAMA BAR - BAR POS</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{--sand:#C19A6B;--sand2:#E6C9A8;--glow:0 0 12px #C19A6B,0 0 28px #C19A6B,0 0 50px rgba(193,154,107,.6)}
@@ -25,9 +25,10 @@ body{background:#000;color:#fff;font-family:Inter,system-ui,sans-serif;-webkit-t
 .card:before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--sand),transparent);opacity:.6}
 .card:active{transform:scale(.96);border-color:var(--sand);box-shadow:var(--glow)}
 .bottle{height:142px;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at 50% 35%,rgba(193,154,107,.5) 0%,rgba(193,154,107,.15) 28%,rgba(0,0,0,0) 70%)}
-.bottle img{height:126px;width:auto;object-fit:contain;filter:drop-shadow(0 10px 18px #000) drop-shadow(0 0 14px var(--sand));transition:.2s}
-.card:active.bottle img{transform:scale(1.15) translateY(-6px);filter:drop-shadow(0 0 22px var(--sand))}
-.emoji{font-size:62px;display:none;text-shadow:var(--glow)}
+.bottle img{height:126px;width:auto;object-fit:contain;filter:drop-shadow(0 10px 18px #000) drop-shadow(0 0 14px var(--sand));animation:spin 3.2s linear infinite, float 2.5s ease-in-out infinite}
+@keyframes spin{from{transform:rotateY(0deg)}to{transform:rotateY(360deg)}}
+@keyframes float{0%,100%{translate:0 0}50%{translate:0 -7px}}
+.emoji{font-size:62px;display:none;text-shadow:var(--glow);animation:spin 3s linear infinite, float 2.5s ease-in-out infinite}
 .info{padding:10px 11px;background:#14120f;border-top:1.5px solid #2e261c}
 .name{font-weight:900;font-size:11.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:.3px}
 .meta{font-size:9px;color:#8a7d5e;margin:3px 0;display:flex;justify-content:space-between}
@@ -42,11 +43,14 @@ body{background:#000;color:#fff;font-family:Inter,system-ui,sans-serif;-webkit-t
 .pay-card{background:#fff;color:#5a3e1f}
 .small-btn{flex:1;background:#1a1812;color:#8a7d5e;border:1px solid #2a2416;padding:9px;border-radius:9px;font-size:10px;font-weight:700;cursor:pointer}
 .count{position:absolute;top:8px;right:8px;background:var(--sand);color:#000;font-size:9px;font-weight:900;padding:3px 7px;border-radius:10px;box-shadow:var(--glow)}
+.banner{margin:10px;background:linear-gradient(90deg,#C19A6B,#E6C9A8,#C19A6B);color:#000;padding:10px;border-radius:14px;text-align:center;font-weight:900;font-size:12px;animation:pop 1.8s ease-in-out infinite}
+@keyframes pop{0%,100%{transform:scale(1)}50%{transform:scale(1.02)}}
 </style>
 </head>
 <body>
-<div class="top"><img src="logo.jpg" onerror="this.style.display='none'"><h1>DARK SAND v8 • SELLABLE STANDARD • #C19A6B</h1></div>
+<div class="top"><img src="logo.jpg" onerror="this.style.display='none'"><h1>CHISANYAMA BAR • DARK SAND • LIQUOR ONLY</h1></div>
 <div class="head"><div class="live" id="clock">--:--</div><div class="btns"><button class="b b-add" onclick="addStock()">+ ADD</button><button class="b b-x" onclick="doX()">X-READ</button><button class="b b-x" onclick="doZ()">Z-READ</button></div></div>
+<div class="banner">🔥 CHISANYAMA BAR • BEER • CIDER • BRANDY • WHISKEY • VODKA • GIN • WINE • CHAMPAGNE • SHOOTERS 🔥</div>
 <div class="nav" id="nav"></div><div class="grid" id="grid"></div>
 <div style="height:360px"></div>
 <div class="cart">
@@ -55,9 +59,9 @@ body{background:#000;color:#fff;font-family:Inter,system-ui,sans-serif;-webkit-t
 <div style="display:flex;gap:7px;margin-top:8px"><button class="small-btn" onclick="clearCart()">CLEAR</button><button class="small-btn" style="color:#ff6b6b;border-color:#3d1a1a;background:#1a0e0e" onclick="voidLast()">VOID LAST</button><button class="small-btn" onclick="holdSale()">HOLD</button></div>
 </div>
 <script>
-let CATS=["ALL","BEERS","CIDERS","WHISKEY","BRANDY","VODKA","GIN","WINES","CHAMPAGNE","SHOOTERS","SOFT","FOOD"];
+let CATS=["ALL","BEERS","CIDERS","WHISKEY","BRANDY","VODKA","GIN","WINES","CHAMPAGNE","SHOOTERS","SOFT"];
 let active="ALL";let cart=[];let sales=parseFloat(localStorage.getItem('m_sales')||0);
-let PRODUCTS=JSON.parse(localStorage.getItem('musina_final_v8')||'null')||[
+let PRODUCTS=JSON.parse(localStorage.getItem('musina_chisanyama_bar')||'null')||[
 {name:"Castle Lite",price:28,cat:"BEERS",stock:120,img:"castle-lite.jpg",emoji:"🍺"},
 {name:"Black Label",price:30,cat:"BEERS",stock:100,img:"black-label.jpg",emoji:"🍻"},
 {name:"Amstel",price:28,cat:"BEERS",stock:100,img:"amstel.jpg",emoji:"🍺"},
@@ -87,7 +91,6 @@ let PRODUCTS=JSON.parse(localStorage.getItem('musina_final_v8')||'null')||[
 {name:"Tequila Rose",price:35,cat:"SHOOTERS",stock:60,img:"tequila-rose.jpg",emoji:"🥃"},
 {name:"Jägermeister",price:38,cat:"SHOOTERS",stock:50,img:"jager.jpg",emoji:"🥃"},
 {name:"Coke 330ml",price:18,cat:"SOFT",stock:120,img:"coke.jpg",emoji:"🥤"},
-{name:"Chips + Meat",price:85,cat:"FOOD",stock:50,img:"food.jpg",emoji:"🍖"},
 ];
 function renderNav(){document.getElementById('nav').innerHTML=CATS.map(c=>`<div class="chip ${active===c?'active':''}" onclick="active='${c}';renderNav();renderGrid()">${c}</div>`).join('')}
 function renderGrid(){
@@ -108,18 +111,18 @@ function editOne(idx){
 let p=PRODUCTS[idx];
 let copy=JSON.parse(JSON.stringify(PRODUCTS));
 let np=prompt(`Edit ONLY ${p.name} (${p.cat})\nCurrent: R${p.price}\nNew price:`,p.price);
-if(np&&!isNaN(np)){copy[idx].price=parseFloat(np);PRODUCTS=copy;localStorage.setItem('musina_final_v8',JSON.stringify(PRODUCTS));renderGrid();}
+if(np&&!isNaN(np)){copy[idx].price=parseFloat(np);PRODUCTS=copy;localStorage.setItem('musina_chisanyama_bar',JSON.stringify(PRODUCTS));renderGrid();}
 }
 function addStock(){
 let n=prompt('Product name:');if(!n)return;
 let pr=prompt('Price:');if(!pr||isNaN(pr))return;
 let cat=prompt('Category: '+CATS.join(', '));if(!CATS.includes(cat))cat="BEERS";
 PRODUCTS.push({name:n,price:parseFloat(pr),cat:cat,stock:100,img:"",emoji:"🍺"});
-localStorage.setItem('musina_final_v8',JSON.stringify(PRODUCTS));renderGrid();
+localStorage.setItem('musina_chisanyama_bar',JSON.stringify(PRODUCTS));renderGrid();
 }
 function doX(){let t=cart.reduce((s,c)=>s+c.price*c.qty,0)*1.15;alert('X-READ\nToday Sales: R'+sales.toFixed(2)+'\nCurrent Cart: R'+t.toFixed(2)+'\nTime: '+new Date().toLocaleString())}
 function doZ(){if(!confirm('Z-READ - Close day & clear sales?'))return;alert('Z-READ REPORT\nTotal Sales: R'+sales.toFixed(2)+'\nClosed: '+new Date().toLocaleString());sales=0;localStorage.setItem('m_sales',0);cart=[];calc();renderGrid()}
-function pay(type){if(cart.length===0)return alert('Cart empty');let sub=cart.reduce((s,c)=>s+c.price*c.qty,0);let total=sub*1.15;sales+=total;localStorage.setItem('m_sales',sales);let w=window.open('','_blank','width=320,height=600');w.document.write(`<pre style="font-family:monospace;text-align:center;font-size:13px"><img src="logo.jpg" style="width:180px"><br><b>MUSINA BAR & TAVERN</b><br>${new Date().toLocaleString()}<br>${type}<br>--------------------------<br>${cart.map(c=>`${c.name} x${c.qty} R${(c.price*c.qty).toFixed(2)}`).join('<br>')}<br>--------------------------<br>SUB R${sub.toFixed(2)}<br>VAT 15% R${(sub*0.15).toFixed(2)}<br><b>TOTAL R${total.toFixed(2)}</b><br>--------------------------<br>THANK YOU<br>SMART SOLUTIONS</pre>`);w.document.close();setTimeout(()=>w.print(),350);cart=[];calc();renderGrid()}
+function pay(type){if(cart.length===0)return alert('Cart empty');let sub=cart.reduce((s,c)=>s+c.price*c.qty,0);let total=sub*1.15;sales+=total;localStorage.setItem('m_sales',sales);let w=window.open('','_blank','width=320,height=600');w.document.write(`<pre style="font-family:monospace;text-align:center;font-size:13px"><img src="logo.jpg" style="width:180px"><br><b>MUSINA CHISANYAMA BAR</b><br>${new Date().toLocaleString()}<br>${type}<br>--------------------------<br>${cart.map(c=>`${c.name} x${c.qty} R${(c.price*c.qty).toFixed(2)}`).join('<br>')}<br>--------------------------<br>SUB R${sub.toFixed(2)}<br>VAT 15% R${(sub*0.15).toFixed(2)}<br><b>TOTAL R${total.toFixed(2)}</b><br>--------------------------<br>THANK YOU<br>SMART SOLUTIONS</pre>`);w.document.close();setTimeout(()=>w.print(),350);cart=[];calc();renderGrid()}
 setInterval(()=>{let d=new Date();document.getElementById('clock').textContent=d.toLocaleDateString()+' • '+d.toLocaleTimeString()},1000);
 renderNav();renderGrid();
 </script>
