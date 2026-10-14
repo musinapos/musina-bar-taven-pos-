@@ -2,127 +2,119 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>MUSINA CHISANYAMA BAR - BAR POS</title>
+<title>MUSINA CHISANYAMA BAR POS</title>
+<link rel="manifest" href="manifest.json">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-:root{--sand:#C19A6B;--sand2:#E6C9A8;--glow:0 0 12px #C19A6B,0 0 28px #C19A6B,0 0 50px rgba(193,154,107,.6)}
-body{background:#000;color:#fff;font-family:Inter,system-ui,sans-serif;-webkit-tap-highlight-color:transparent}
-.top{text-align:center;padding:16px 0 10px;background:#000;border-bottom:3.5px solid var(--sand);box-shadow:0 6px 35px rgba(193,154,107,.7)}
+:root{--sand:#C19A6B;--glow:0 0 12px #C19A6B,0 0 28px #C19A6B}
+body{background:#000;color:#fff;font-family:Inter,system-ui,sans-serif}
+.top{text-align:center;padding:14px;background:#000;border-bottom:3.5px solid var(--sand)}
 .top img{width:92%;max-width:380px;filter:drop-shadow(0 0 20px var(--sand)) drop-shadow(0 0 50px var(--sand))}
-.top h1{color:var(--sand);font-size:12px;letter-spacing:5px;font-weight:900;margin-top:6px;text-shadow:var(--glow)}
-.head{display:flex;justify-content:space-between;align-items:center;padding:11px 12px;background:#080808;border-bottom:1.5px solid var(--sand);position:sticky;top:0;z-index:30;box-shadow:0 2px 18px rgba(193,154,107,.35)}
-.live{color:var(--sand);font-weight:900;font-size:11px;text-shadow:var(--glow)}
-.btns{display:flex;gap:6px}
+.top h1{color:var(--sand);font-size:12px;letter-spacing:4px}
+.head{display:flex;justify-content:space-between;padding:10px;background:#080808;border-bottom:1.5px solid var(--sand);position:sticky;top:0;z-index:30}
 .b{padding:8px 13px;border-radius:22px;border:none;font-weight:900;font-size:11px;cursor:pointer}
-.b-add{background:var(--sand);color:#000;box-shadow:var(--glow)}
+.b-add{background:var(--sand);color:#000}
 .b-x{background:#111;color:var(--sand);border:1.5px solid var(--sand)}
-.nav{display:flex;gap:8px;overflow-x:auto;padding:12px 10px;background:#050505;scrollbar-width:none;border-bottom:1px solid #1a1611}
-.nav::-webkit-scrollbar{display:none}
-.chip{padding:10px 16px;background:#111;border:1.5px solid #2a241c;border-radius:24px;color:var(--sand2);font-weight:900;font-size:10px;white-space:nowrap;cursor:pointer;transition:.15s}
-.chip.active{background:var(--sand);color:#000;box-shadow:var(--glow);border-color:var(--sand);transform:scale(1.05)}
+.nav{display:flex;gap:8px;overflow-x:auto;padding:12px 10px;background:#050505}
+.chip{padding:10px 16px;background:#111;border:1.5px solid #2a241c;border-radius:24px;color:#E6C9A8;font-weight:900;font-size:10px;white-space:nowrap;cursor:pointer}
+.chip.active{background:var(--sand);color:#000;box-shadow:var(--glow)}
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;padding:12px}
-.card{background:linear-gradient(180deg,#1f1c17,#0e0d0b);border:1.8px solid #2e261c;border-radius:20px;overflow:hidden;transition:.18s;cursor:pointer;position:relative}
-.card:before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--sand),transparent);opacity:.6}
-.card:active{transform:scale(.96);border-color:var(--sand);box-shadow:var(--glow)}
-.bottle{height:142px;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at 50% 35%,rgba(193,154,107,.5) 0%,rgba(193,154,107,.15) 28%,rgba(0,0,0,0) 70%)}
-.bottle img{height:126px;width:auto;object-fit:contain;filter:drop-shadow(0 10px 18px #000) drop-shadow(0 0 14px var(--sand));animation:spin 3.2s linear infinite, float 2.5s ease-in-out infinite}
-@keyframes spin{from{transform:rotateY(0deg)}to{transform:rotateY(360deg)}}
-@keyframes float{0%,100%{translate:0 0}50%{translate:0 -7px}}
-.emoji{font-size:62px;display:none;text-shadow:var(--glow);animation:spin 3s linear infinite, float 2.5s ease-in-out infinite}
-.info{padding:10px 11px;background:#14120f;border-top:1.5px solid #2e261c}
-.name{font-weight:900;font-size:11.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:.3px}
+.card{background:linear-gradient(180deg,#1f1c17,#0e0d0b);border:1.8px solid #2e261c;border-radius:20px;overflow:hidden;position:relative}
+.bottle{height:150px;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at 50% 35%,rgba(193,154,107,.5),rgba(0,0,0,0) 70%)}
+.bottle svg{height:120px;filter:drop-shadow(0 0 14px var(--sand));animation:spin 3.5s linear infinite}
+@keyframes spin{from{transform:rotateY(0)}to{transform:rotateY(360deg)}}
+.info{padding:10px;background:#14120f}
+.name{font-weight:900;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .meta{font-size:9px;color:#8a7d5e;margin:3px 0;display:flex;justify-content:space-between}
 .row{display:flex;justify-content:space-between;align-items:center;margin-top:5px}
-.price{color:var(--sand2);font-weight:900;font-size:18px;text-shadow:var(--glow);cursor:pointer}
-.stock{font-size:8.5px;padding:4px 8px;border-radius:11px;background:#000;border:1px solid #332e1a;color:#c9b07a;font-weight:700}
-.cart{position:fixed;bottom:0;left:0;right:0;background:linear-gradient(0deg,#000,#0a0806);border-top:3px solid var(--sand);box-shadow:0 -12px 40px rgba(193,154,107,.5);padding:11px;z-index:40}
-.cart-top{display:flex;justify-content:space-between;font-weight:900;font-size:13px;align-items:center}
-.btn-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:9px}
-.pay{padding:14px;border-radius:13px;border:none;font-weight:900;font-size:13.5px;cursor:pointer;letter-spacing:.5px}
-.pay-cash{background:var(--sand);color:#000;box-shadow:var(--glow)}
+.price{color:#E6C9A8;font-weight:900;font-size:18px;cursor:pointer;border:1px dashed #C19A6B;padding:2px 6px;border-radius:8px}
+.stock{font-size:10px;padding:4px 8px;border-radius:11px;background:#000;border:1px solid #332e1a;color:#c9b07a;font-weight:700;cursor:pointer}
+.editBtn{position:absolute;top:8px;left:8px;background:#fff;color:#000;font-size:9px;padding:4px 7px;border-radius:10px;font-weight:900;border:none;cursor:pointer}
+.cart{position:fixed;bottom:0;left:0;right:0;background:#000;border-top:3px solid var(--sand);padding:11px;z-index:40}
+.pay{padding:14px;border-radius:13px;border:none;font-weight:900;font-size:13.5px;cursor:pointer}
+.pay-cash{background:var(--sand);color:#000}
 .pay-card{background:#fff;color:#5a3e1f}
 .small-btn{flex:1;background:#1a1812;color:#8a7d5e;border:1px solid #2a2416;padding:9px;border-radius:9px;font-size:10px;font-weight:700;cursor:pointer}
-.count{position:absolute;top:8px;right:8px;background:var(--sand);color:#000;font-size:9px;font-weight:900;padding:3px 7px;border-radius:10px;box-shadow:var(--glow)}
-.banner{margin:10px;background:linear-gradient(90deg,#C19A6B,#E6C9A8,#C19A6B);color:#000;padding:10px;border-radius:14px;text-align:center;font-weight:900;font-size:12px;animation:pop 1.8s ease-in-out infinite}
-@keyframes pop{0%,100%{transform:scale(1)}50%{transform:scale(1.02)}}
+.footer{padding:14px;text-align:center;color:#8a7d5e;font-size:10px}
+.footer b{color:var(--sand)}
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.9);z-index:100;align-items:center;justify-content:center;padding:20px}
+.modalBox{background:#1a1712;border:2px solid var(--sand);border-radius:16px;padding:20px;width:100%;max-width:360px;color:#fff}
+.modalBox input,.modalBox select{width:100%;padding:12px;margin:6px 0;border-radius:10px;border:1px solid #444;background:#000;color:#fff}
 </style>
 </head>
 <body>
-<div class="top"><img src="logo.jpg" onerror="this.style.display='none'"><h1>CHISANYAMA BAR • DARK SAND • LIQUOR ONLY</h1></div>
-<div class="head"><div class="live" id="clock">--:--</div><div class="btns"><button class="b b-add" onclick="addStock()">+ ADD</button><button class="b b-x" onclick="doX()">X-READ</button><button class="b b-x" onclick="doZ()">Z-READ</button></div></div>
-<div class="banner">🔥 CHISANYAMA BAR • BEER • CIDER • BRANDY • WHISKEY • VODKA • GIN • WINE • CHAMPAGNE • SHOOTERS 🔥</div>
-<div class="nav" id="nav"></div><div class="grid" id="grid"></div>
-<div style="height:360px"></div>
-<div class="cart">
-<div class="cart-top"><span>SALE (<span id="cnt">0</span>) <small id="list" style="color:#8a7d5e;font-size:9px;font-weight:400"></small></span><span id="tot" style="color:var(--sand);text-shadow:var(--glow)">R0.00</span></div>
-<div class="btn-grid"><button class="pay pay-cash" onclick="pay('CASH')">CASH SALE</button><button class="pay pay-card" onclick="pay('CARD')">CARD PAYMENT</button></div>
-<div style="display:flex;gap:7px;margin-top:8px"><button class="small-btn" onclick="clearCart()">CLEAR</button><button class="small-btn" style="color:#ff6b6b;border-color:#3d1a1a;background:#1a0e0e" onclick="voidLast()">VOID LAST</button><button class="small-btn" onclick="holdSale()">HOLD</button></div>
+<!-- TOP: CLIENT LOGO - YOU WILL REPLACE logo.jpg WITH THEIR LOGO -->
+<div class="top">
+  <img src="logo.jpg" onerror="this.style.display='none';document.getElementById('noLogo').style.display='block'">
+  <div id="noLogo" style="display:none;color:var(--sand);font-size:16px;font-weight:900;padding:10px">🔥 CHISANYAMA BAR 🔥</div>
+  <h1>CHISANYAMA BAR • LIQUOR ONLY • NO FOOD YET</h1>
 </div>
+
+<div class="head"><div id="clock" style="color:var(--sand);font-weight:900;font-size:11px">--:--</div><div style="display:flex;gap:6px"><button class="b b-add" onclick="openAdd()">+ ADD PRODUCT</button><button class="b b-x" onclick="doX()">X-READ</button><button class="b b-x" onclick="doZ()">Z-READ</button></div></div>
+<div class="nav" id="nav"></div><div class="grid" id="grid"></div>
+<div style="height:320px"></div>
+
+<!-- BOTTOM: POWERED BY - OUR LOGO / NAME -->
+<div class="footer">POWERED BY <b>MUSINA POS SYSTEMS</b> • 076 358 4601<br>Designed & Built by Musina</div>
+
+<div class="cart">
+<div style="display:flex;justify-content:space-between;font-weight:900"><span>SALE (<span id="cnt">0</span>) <small id="list" style="color:#8a7d5e;font-weight:400"></small></span><span id="tot" style="color:var(--sand)">R0.00</span></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:9px"><button class="pay pay-cash" onclick="pay('CASH')">CASH SALE</button><button class="pay pay-card" onclick="pay('CARD')">CARD PAYMENT</button></div>
+<div style="display:flex;gap:7px;margin-top:8px"><button class="small-btn" onclick="clearCart()">CLEAR</button><button class="small-btn" onclick="voidLast()">VOID LAST</button><button class="small-btn" onclick="holdSale()">HOLD</button></div>
+</div>
+
+<div id="modal" class="modal"><div class="modalBox">
+<h3 id="modalTitle">Add Product</h3>
+<input id="fName" placeholder="Product name">
+<input id="fPrice" type="number" placeholder="Price">
+<input id="fStock" type="number" placeholder="Stock - Add on top">
+<select id="fCat"><option>BEERS</option><option>CIDERS</option><option>WHISKEY</option><option>BRANDY</option><option>VODKA</option><option>GIN</option><option>WINES</option><option>CHAMPAGNE</option><option>SHOOTERS</option><option>SOFT</option></select>
+<div style="display:flex;gap:8px;margin-top:10px"><button class="pay pay-cash" style="flex:1" onclick="saveProduct()">SAVE</button><button class="small-btn" onclick="closeModal()">CANCEL</button></div>
+</div></div>
+
 <script>
 let CATS=["ALL","BEERS","CIDERS","WHISKEY","BRANDY","VODKA","GIN","WINES","CHAMPAGNE","SHOOTERS","SOFT"];
-let active="ALL";let cart=[];let sales=parseFloat(localStorage.getItem('m_sales')||0);
-let PRODUCTS=JSON.parse(localStorage.getItem('musina_chisanyama_bar')||'null')||[
-{name:"Castle Lite",price:28,cat:"BEERS",stock:120,img:"castle-lite.jpg",emoji:"🍺"},
-{name:"Black Label",price:30,cat:"BEERS",stock:100,img:"black-label.jpg",emoji:"🍻"},
-{name:"Amstel",price:28,cat:"BEERS",stock:100,img:"amstel.jpg",emoji:"🍺"},
-{name:"Heineken",price:35,cat:"BEERS",stock:80,img:"heineken.jpg",emoji:"🍺"},
-{name:"Hansa Pony",price:22,cat:"BEERS",stock:150,img:"hansa.jpg",emoji:"🍺"},
-{name:"Castle Pony",price:22,cat:"BEERS",stock:150,img:"castle-pony.jpg",emoji:"🍺"},
-{name:"Savanna Dry",price:32,cat:"CIDERS",stock:90,img:"savanna.jpg",emoji:"🍾"},
-{name:"Hunters Dry",price:30,cat:"CIDERS",stock:95,img:"hunters.jpg",emoji:"🍏"},
-{name:"Hunters Gold",price:30,cat:"CIDERS",stock:85,img:"hunters-gold.jpg",emoji:"🍎"},
-{name:"Bernini",price:30,cat:"CIDERS",stock:85,img:"bernini.jpg",emoji:"🍹"},
-{name:"Smirnoff Spin",price:28,cat:"CIDERS",stock:90,img:"spin.jpg",emoji:"🍸"},
-{name:"Jameson",price:42,cat:"WHISKEY",stock:40,img:"jameson.jpg",emoji:"🥃"},
-{name:"Jack Daniels",price:45,cat:"WHISKEY",stock:40,img:"jack.jpg",emoji:"🥃"},
-{name:"Johnnie Walker Red",price:48,cat:"WHISKEY",stock:35,img:"jw-red.jpg",emoji:"🥃"},
-{name:"Bells",price:40,cat:"WHISKEY",stock:45,img:"bells.jpg",emoji:"🥃"},
-{name:"Klipdrift",price:38,cat:"BRANDY",stock:40,img:"klipdrift.jpg",emoji:"🥃"},
-{name:"Wellington VO",price:36,cat:"BRANDY",stock:40,img:"wellington.jpg",emoji:"🥃"},
-{name:"Hennessy VS",price:85,cat:"BRANDY",stock:20,img:"hennessy.jpg",emoji:"🥃"},
-{name:"Smirnoff Vodka",price:40,cat:"VODKA",stock:50,img:"smirnoff.jpg",emoji:"🍸"},
-{name:"Absolute Vodka",price:42,cat:"VODKA",stock:40,img:"absolut.jpg",emoji:"🍸"},
-{name:"Gordon's Gin",price:38,cat:"GIN",stock:40,img:"gordons.jpg",emoji:"🍸"},
-{name:"Tanqueray",price:45,cat:"GIN",stock:30,img:"tanqueray.jpg",emoji:"🍸"},
-{name:"4th Street Sweet Red",price:65,cat:"WINES",stock:30,img:"4th-street.jpg",emoji:"🍷"},
-{name:"JC Le Roux",price:75,cat:"WINES",stock:25,img:"jc-leroux.jpg",emoji:"🍷"},
-{name:"Moët & Chandon",price:450,cat:"CHAMPAGNE",stock:10,img:"moet.jpg",emoji:"🍾"},
-{name:"Veuve Clicquot",price:480,cat:"CHAMPAGNE",stock:8,img:"veuve.jpg",emoji:"🍾"},
-{name:"Tequila Rose",price:35,cat:"SHOOTERS",stock:60,img:"tequila-rose.jpg",emoji:"🥃"},
-{name:"Jägermeister",price:38,cat:"SHOOTERS",stock:50,img:"jager.jpg",emoji:"🥃"},
-{name:"Coke 330ml",price:18,cat:"SOFT",stock:120,img:"coke.jpg",emoji:"🥤"},
+let active="ALL";let cart=[];let sales=parseFloat(localStorage.getItem('m_sales')||0);let editingIdx=-1;
+let PRODUCTS=JSON.parse(localStorage.getItem('musina_chisanyama_v9')||'null')||[
+{name:"Castle Lite",price:28,cat:"BEERS",stock:120,color:"#f4c542"},
+{name:"Black Label",price:30,cat:"BEERS",stock:100,color:"#222"},
+{name:"Heineken",price:35,cat:"BEERS",stock:80,color:"#0a7a2e"},
+{name:"Savanna Dry",price:32,cat:"CIDERS",stock:90,color:"#d4e157"},
+{name:"Hunters Dry",price:30,cat:"CIDERS",stock:95,color:"#8bc34a"},
+{name:"Jameson",price:42,cat:"WHISKEY",stock:40,color:"#c67b1a"},
+{name:"Jack Daniels",price:45,cat:"WHISKEY",stock:40,color:"#333"},
+{name:"Klipdrift",price:38,cat:"BRANDY",stock:40,color:"#8b4513"},
+{name:"Smirnoff Vodka",price:40,cat:"VODKA",stock:50,color:"#e3f2fd"},
+{name:"Gordon's Gin",price:38,cat:"GIN",stock:40,color:"#2e7d32"},
+{name:"4th Street Sweet Red",price:65,cat:"WINES",stock:30,color:"#7b0000"},
+{name:"Moët & Chandon",price:450,cat:"CHAMPAGNE",stock:10,color:"#d4af37"},
+{name:"Jägermeister",price:38,cat:"SHOOTERS",stock:50,color:"#2e7d32"},
+{name:"Coke 330ml",price:18,cat:"SOFT",stock:120,color:"#c62828"},
 ];
+function bottleSVG(color){ return `<svg viewBox="0 0 60 120"><rect x="24" y="5" width="12" height="20" rx="3" fill="${color}"/><rect x="20" y="22" width="20" height="12" rx="3" fill="${color}"/><path d="M15 40 Q30 30 45 40 L48 110 Q48 115 42 115 L18 115 Q12 115 12 110 Z" fill="${color}"/><text x="30" y="80" text-anchor="middle" font-size="9" fill="#fff" font-weight="900">🍺</text></svg>`;}
 function renderNav(){document.getElementById('nav').innerHTML=CATS.map(c=>`<div class="chip ${active===c?'active':''}" onclick="active='${c}';renderNav();renderGrid()">${c}</div>`).join('')}
 function renderGrid(){
-let list=active==="ALL"?PRODUCTS:PRODUCTS.filter(p=>p.cat===active);
-if(list.length===0){document.getElementById('grid').innerHTML=`<div style="grid-column:1/3;text-align:center;padding:40px;color:#8a7d5e"><div style="font-size:40px">🍺</div><div style="margin-top:10px;font-weight:900;color:var(--sand)">No ${active} yet</div><div style="font-size:11px;margin-top:5px">Tap + ADD to add ${active}</div></div>`;return}
-document.getElementById('grid').innerHTML=list.map(p=>{
-let idx=PRODUCTS.indexOf(p);
-let inCart=cart.find(c=>c.idx===idx);
-return `<div class="card"><div class="bottle" onclick="add(${idx})"><img src="${p.img}" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><div class="emoji">${p.emoji}</div>${inCart?`<div class="count">x${inCart.qty}</div>`:''}</div><div class="info"><div class="name">${p.name}</div><div class="meta"><span>${p.cat}</span><span>${p.stock} left</span></div><div class="row"><div class="price" onclick="editOne(${idx})">R${p.price}</div><div class="stock">${p.stock>20?'IN STOCK':'LOW'}</div></div></div></div>`;
-}).join('');
+ let list=active==="ALL"?PRODUCTS:PRODUCTS.filter(p=>p.cat===active);
+ document.getElementById('grid').innerHTML=list.map(p=>{
+  let idx=PRODUCTS.indexOf(p);
+  return `<div class="card"><button class="editBtn" onclick="openEdit(${idx})">✏️ EDIT</button><div class="bottle" onclick="add(${idx})">${bottleSVG(p.color||'#C19A6B')}</div><div class="info"><div class="name">${p.name}</div><div class="meta"><span>${p.cat}</span><span>${p.stock} left</span></div><div class="row"><div class="price" onclick="editPrice(${idx})">R${p.price} ✏️</div><div class="stock" onclick="editStock(${idx})">STOCK: ${p.stock} +</div></div></div></div>`;
+ }).join('');
 }
+function editPrice(idx){let np=prompt(`Edit PRICE for ${PRODUCTS[idx].name}\nCurrent: R${PRODUCTS[idx].price}`,PRODUCTS[idx].price);if(np&&!isNaN(np)){PRODUCTS[idx].price=parseFloat(np);save();renderGrid();}}
+function editStock(idx){let add=prompt(`Add STOCK for ${PRODUCTS[idx].name}\nCurrent: ${PRODUCTS[idx].stock}\nAdd on top:`,24);if(add&&!isNaN(add)){PRODUCTS[idx].stock+=parseInt(add);save();renderGrid();alert('New stock: '+PRODUCTS[idx].stock)}}
+function openAdd(){editingIdx=-1;document.getElementById('modalTitle').innerText='Add Product';document.getElementById('fName').value='';document.getElementById('fPrice').value='';document.getElementById('fStock').value='';document.getElementById('modal').style.display='flex';}
+function openEdit(idx){editingIdx=idx;let p=PRODUCTS[idx];document.getElementById('modalTitle').innerText='Edit '+p.name;document.getElementById('fName').value=p.name;document.getElementById('fPrice').value=p.price;document.getElementById('fStock').value=p.stock;document.getElementById('fCat').value=p.cat;document.getElementById('modal').style.display='flex';}
+function closeModal(){document.getElementById('modal').style.display='none';}
+function saveProduct(){let n=document.getElementById('fName').value,pr=document.getElementById('fPrice').value,st=document.getElementById('fStock').value,cat=document.getElementById('fCat').value;if(!n||!pr)return alert('Fill name and price');if(editingIdx>=0){PRODUCTS[editingIdx]={name:n,price:parseFloat(pr),cat:cat,stock:parseInt(st),color:"#C19A6B"}}else{PRODUCTS.push({name:n,price:parseFloat(pr),cat:cat,stock:parseInt(st)||0,color:"#C19A6B"})}save();renderGrid();closeModal();}
+function save(){localStorage.setItem('musina_chisanyama_v9',JSON.stringify(PRODUCTS))}
 function add(i){let p=PRODUCTS[i];let f=cart.find(c=>c.idx===i);if(f)f.qty++;else cart.push({idx:i,name:p.name,price:p.price,qty:1});calc();renderGrid()}
 function calc(){let sub=cart.reduce((s,c)=>s+c.price*c.qty,0);let tot=sub*1.15;document.getElementById('tot').textContent='R'+tot.toFixed(2);document.getElementById('cnt').textContent=cart.reduce((a,b)=>a+b.qty,0);document.getElementById('list').textContent=cart.map(c=>c.name.substring(0,4)).join(', ')}
 function clearCart(){cart=[];calc();renderGrid()}
 function voidLast(){cart.pop();calc();renderGrid()}
-function holdSale(){alert('Sale Held: '+cart.length+' items')}
-function editOne(idx){
-let p=PRODUCTS[idx];
-let copy=JSON.parse(JSON.stringify(PRODUCTS));
-let np=prompt(`Edit ONLY ${p.name} (${p.cat})\nCurrent: R${p.price}\nNew price:`,p.price);
-if(np&&!isNaN(np)){copy[idx].price=parseFloat(np);PRODUCTS=copy;localStorage.setItem('musina_chisanyama_bar',JSON.stringify(PRODUCTS));renderGrid();}
-}
-function addStock(){
-let n=prompt('Product name:');if(!n)return;
-let pr=prompt('Price:');if(!pr||isNaN(pr))return;
-let cat=prompt('Category: '+CATS.join(', '));if(!CATS.includes(cat))cat="BEERS";
-PRODUCTS.push({name:n,price:parseFloat(pr),cat:cat,stock:100,img:"",emoji:"🍺"});
-localStorage.setItem('musina_chisanyama_bar',JSON.stringify(PRODUCTS));renderGrid();
-}
-function doX(){let t=cart.reduce((s,c)=>s+c.price*c.qty,0)*1.15;alert('X-READ\nToday Sales: R'+sales.toFixed(2)+'\nCurrent Cart: R'+t.toFixed(2)+'\nTime: '+new Date().toLocaleString())}
-function doZ(){if(!confirm('Z-READ - Close day & clear sales?'))return;alert('Z-READ REPORT\nTotal Sales: R'+sales.toFixed(2)+'\nClosed: '+new Date().toLocaleString());sales=0;localStorage.setItem('m_sales',0);cart=[];calc();renderGrid()}
-function pay(type){if(cart.length===0)return alert('Cart empty');let sub=cart.reduce((s,c)=>s+c.price*c.qty,0);let total=sub*1.15;sales+=total;localStorage.setItem('m_sales',sales);let w=window.open('','_blank','width=320,height=600');w.document.write(`<pre style="font-family:monospace;text-align:center;font-size:13px"><img src="logo.jpg" style="width:180px"><br><b>MUSINA CHISANYAMA BAR</b><br>${new Date().toLocaleString()}<br>${type}<br>--------------------------<br>${cart.map(c=>`${c.name} x${c.qty} R${(c.price*c.qty).toFixed(2)}`).join('<br>')}<br>--------------------------<br>SUB R${sub.toFixed(2)}<br>VAT 15% R${(sub*0.15).toFixed(2)}<br><b>TOTAL R${total.toFixed(2)}</b><br>--------------------------<br>THANK YOU<br>SMART SOLUTIONS</pre>`);w.document.close();setTimeout(()=>w.print(),350);cart=[];calc();renderGrid()}
+function holdSale(){alert('Sale Held')}
+function doX(){let t=cart.reduce((s,c)=>s+c.price*c.qty,0)*1.15;alert('X-READ\nToday: R'+sales.toFixed(2)+'\nCart: R'+t.toFixed(2))}
+function doZ(){if(!confirm('Z-READ Close day?'))return;alert('Z-READ Total: R'+sales.toFixed(2));sales=0;localStorage.setItem('m_sales',0);cart=[];calc();renderGrid()}
+function pay(type){if(cart.length===0)return alert('Cart empty');let sub=cart.reduce((s,c)=>s+c.price*c.qty,0);let total=sub*1.15;sales+=total;localStorage.setItem('m_sales',sales);let w=window.open('','_blank','width=320,height=600');w.document.write(`<pre style="font-family:monospace;text-align:center"><b>CHISANYAMA BAR</b><br>${new Date().toLocaleString()}<br>${type}<br>---<br>${cart.map(c=>`${c.name} x${c.qty} R${(c.price*c.qty).toFixed(2)}`).join('<br>')}<br>---<br>TOTAL R${total.toFixed(2)}<br>Powered by MUSINA POS SYSTEMS</pre>`);w.document.close();setTimeout(()=>w.print(),350);cart=[];calc();renderGrid()}
 setInterval(()=>{let d=new Date();document.getElementById('clock').textContent=d.toLocaleDateString()+' • '+d.toLocaleTimeString()},1000);
 renderNav();renderGrid();
 </script>
