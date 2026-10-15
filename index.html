@@ -74,6 +74,7 @@ body{background:#F5F5F5;color:#111B21;font-family:Inter,system-ui,sans-serif}
 .previewImg{width:100px;height:100px;object-fit:contain;background:#ECE5DD;border:1px solid var(--green);border-radius:10px;display:block;margin:8px auto}
 .tableCard{background:#fff;border:1.5px solid #D9D9D9;border-radius:12px;padding:12px;margin:6px 0}
 .tableCard.open{border-color:var(--green);background:#E8F5E9}
+.outOfStock{opacity:0.55}
 </style>
 </head>
 <body>
@@ -172,7 +173,6 @@ if(PRODUCTS && PRODUCTS.length>0){
   let hasCider = PRODUCTS.some(p=>p.cat==="CIDERS");
   if(!hasCider){ let ciders = DEFAULT_PRODUCTS.filter(p=>p.cat==="CIDERS"); PRODUCTS = PRODUCTS.concat(ciders); localStorage.setItem('musina_hollywood', JSON.stringify(PRODUCTS)); }
 } else { PRODUCTS = JSON.parse(JSON.stringify(DEFAULT_PRODUCTS)); localStorage.setItem('musina_hollywood', JSON.stringify(PRODUCTS)); }
-// ADD MISSING CATEGORIES - READY FOR PICTURES, manager can edit price/picture anytime, does not delete old
 let _mustHave = DEFAULT_PRODUCTS.filter(p=>["WHISKEY","BRANDY","SOFT","VODKA","GIN","WINES","CHAMPAGNE","SHOOTERS"].includes(p.cat));
 _mustHave.forEach(m=>{ if(!PRODUCTS.some(p=>p.name===m.name)){ PRODUCTS.push(m); }});
 localStorage.setItem('musina_hollywood', JSON.stringify(PRODUCTS));
@@ -183,7 +183,7 @@ function renderTableBar(){
     let key='T'+i; let t=tables[key];
     let total=t.items.reduce((s,c)=>s+c.price*c.qty,0)*1.15;
     if(t.items.length>0) open++;
-    html+=`<div class="tableBtn ${t.items.length>0?'occupied':''} ${currentTable===key?'selected':''}" onclick="selectTable('${key}')">T${i}${t.items.length>0?`<span class="amt">R${total.toFixed(0)}</span>`:`<span class="amt">FREE</span>`}</div>`;
+    html+='<div class="tableBtn '+(t.items.length>0?'occupied':'')+' '+(currentTable===key?'selected':'')+'" onclick="selectTable(\''+key+'\')">T'+i+(t.items.length>0?'<span class="amt">R'+total.toFixed(0)+'</span>':'<span class="amt">FREE</span>')+'</div>';
   }
   document.getElementById('tableBar').innerHTML=html;
   document.getElementById('openCount').textContent=open;
@@ -223,6 +223,12 @@ function sendToTable(){
   saveTables(); renderTableBar();
   alert(currentTable+' tab saved! '+cart.reduce((a,b)=>a+b.qty,0)+' items - R'+(cart.reduce((s,c)=>s+c.price*c.qty,0)*1.15).toFixed(2));
 }
+function deductStock(){
+  cart.forEach(c=>{
+    if(PRODUCTS[c.idx]) PRODUCTS[c.idx].stock = Math.max(0, PRODUCTS[c.idx].stock - c.qty);
+  });
+  save();
+}
 function payTableCash(){
   if(!currentTable) return alert('Select a table');
   if(cart.length===0) return alert('This table has no tab');
@@ -230,7 +236,7 @@ function payTableCash(){
   let tendered=prompt(currentTable+' TOTAL: R'+total.toFixed(2)+'\nHow much cash when they go?',total.toFixed(2));
   if(!tendered) return; tendered=parseFloat(tendered); if(tendered<total) return alert('Not enough cash');
   let change=tendered-total; document.getElementById('changeShow').textContent='R'+change.toFixed(2);
-  recordSale(total,'CASH'); showTill(change,total,tendered);
+  deductStock(); recordSale(total,'CASH'); showTill(change,total,tendered);
   tables[currentTable].items=[]; saveTables(); cart=[]; currentTable=null; updateTableUI(); renderTableBar(); calc(); renderGrid();
   alert('Paid! Table is now FREE');
 }
@@ -238,7 +244,7 @@ function payTableCard(){
   if(!currentTable) return alert('Select a table');
   if(cart.length===0) return alert('This table has no tab');
   let total=cart.reduce((s,c)=>s+c.price*c.qty,0)*1.15;
-  recordSale(total,'CARD');
+  deductStock(); recordSale(total,'CARD');
   tables[currentTable].items=[]; saveTables(); cart=[]; currentTable=null; updateTableUI(); renderTableBar(); calc(); renderGrid();
   alert('Paid by CARD! Table is now FREE');
 }
@@ -254,9 +260,9 @@ function openTables(){
     let total=t.items.reduce((s,c)=>s+c.price*c.qty,0)*1.15;
     let count=t.items.reduce((a,b)=>a+b.qty,0);
     if(t.items.length===0){
-      html+=`<div class="tableCard"><b>${key} - FREE</b><br><small>Tap T${i} at top to open tab</small><br><button onclick="selectTable('${key}');closeTables()" style="margin-top:6px;background:#00A884;color:#fff;padding:8px 12px;border:none;border-radius:8px;font-weight:900">OPEN TAB</button></div>`;
+      html+='<div class="tableCard"><b>'+key+' - FREE</b><br><small>Tap T'+i+' at top to open tab</small><br><button onclick="selectTable(\''+key+'\');closeTables()" style="margin-top:6px;background:#00A884;color:#fff;padding:8px 12px;border:none;border-radius:8px;font-weight:900">OPEN TAB</button></div>';
     } else {
-      html+=`<div class="tableCard open"><b>${key} - TAB OPEN - R${total.toFixed(2)}</b><br><small>${count} items • Opened ${t.openedAt?new Date(t.openedAt).toLocaleTimeString():''}</small><br><small>${t.items.map(x=>x.name+' x'+x.qty).join(', ')}</small><br><div style="display:flex;gap:6px;margin-top:8px"><button onclick="selectTable('${key}');closeTables()" style="flex:1;background:#111B21;color:#fff;padding:8px;border:none;border-radius:8px;font-weight:900">ADD MORE</button><button onclick="selectTable('${key}');closeTables();setTimeout(()=>payTableCash(),200)" style="flex:1;background:#00A884;color:#fff;padding:8px;border:none;border-radius:8px;font-weight:900">PAY NOW</button></div></div>`;
+      html+='<div class="tableCard open"><b>'+key+' - TAB OPEN - R'+total.toFixed(2)+'</b><br><small>'+count+' items • Opened '+(t.openedAt?new Date(t.openedAt).toLocaleTimeString():'')+'</small><br><small>'+t.items.map(x=>x.name+' x'+x.qty).join(', ')+'</small><br><div style="display:flex;gap:6px;margin-top:8px"><button onclick="selectTable(\''+key+'\');closeTables()" style="flex:1;background:#111B21;color:#fff;padding:8px;border:none;border-radius:8px;font-weight:900">ADD MORE</button><button onclick="selectTable(\''+key+'\');closeTables();setTimeout(()=>payTableCash(),200)" style="flex:1;background:#00A884;color:#fff;padding:8px;border:none;border-radius:8px;font-weight:900">PAY NOW</button></div></div>';
     }
   }
   document.getElementById('tablesList').innerHTML=html;
@@ -279,32 +285,50 @@ function renameProduct(idx){let code=prompt('RENAME - Enter Manager PIN to renam
 function deleteProduct(idx){let code=prompt('DELETE - Enter Manager PIN to delete '+PRODUCTS[idx].name);if(!isManager(code))return alert('ACCESS DENIED');if(!confirm('Delete '+PRODUCTS[idx].name+'?'))return;PRODUCTS.splice(idx,1);save();renderGrid();alert('Deleted!');}
 function deleteCurrent(){if(editingIdx<0)return;deleteProduct(editingIdx);closeModal();}
 function checkManager(type){let code=prompt('MANAGER CODE REQUIRED for '+type+'-READ');if(isManager(code)){if(type==='X')doX();else doZ()}else{alert('ACCESS DENIED - Manager Only')}}
-function openBackOffice(){let code=prompt('BACK OFFICE - Enter YOUR Manager PIN:');if(!isManager(code))return alert('ACCESS DENIED');document.getElementById('boSales').textContent='R'+sales.toFixed(2);document.getElementById('boCash').textContent='R'+cashTotal.toFixed(2);document.getElementById('boCard').textContent='R'+cardTotal.toFixed(2);document.getElementById('boTrans').textContent=transCount;document.getElementById('boCashiers').innerHTML=Object.keys(cashierData).map(k=>{let d=cashierData[k];return `<div class="cashRow"><span><b>${k}</b><br><small>${d.trans} sales • Cash R${d.cash.toFixed(2)} • Card R${d.card.toFixed(2)}</small></span><b style="color:#00A884">R${d.sales.toFixed(2)}</b></div>`}).join('');document.getElementById('boStock').innerHTML=PRODUCTS.map((p,idx)=>`<div class="stockRow"><span><b>${p.name}</b><br><small>${p.cat} - R${p.price} - ${p.stock} left</small></span><span><button onclick="renameProduct(${idx})" style="background:#111B21;color:#fff;border:1px solid #00A884;padding:4px 7px;border-radius:7px;font-size:10px;font-weight:900">RENAME</button> <button onclick="deleteProduct(${idx})" style="background:#E53935;color:#fff;border:none;padding:4px 7px;border-radius:7px;font-size:10px;font-weight:900">DELETE</button></span></div>`).join('');document.getElementById('pin1').value=PINS.c1;document.getElementById('pin2').value=PINS.c2;document.getElementById('pinM').value=PINS.manager;document.getElementById('backOffice').style.display='flex'}
+function openBackOffice(){let code=prompt('BACK OFFICE - Enter YOUR Manager PIN:');if(!isManager(code))return alert('ACCESS DENIED');document.getElementById('boSales').textContent='R'+sales.toFixed(2);document.getElementById('boCash').textContent='R'+cashTotal.toFixed(2);document.getElementById('boCard').textContent='R'+cardTotal.toFixed(2);document.getElementById('boTrans').textContent=transCount;document.getElementById('boCashiers').innerHTML=Object.keys(cashierData).map(k=>{let d=cashierData[k];return '<div class="cashRow"><span><b>'+k+'</b><br><small>'+d.trans+' sales • Cash R'+d.cash.toFixed(2)+' • Card R'+d.card.toFixed(2)+'</small></span><b style="color:#00A884">R'+d.sales.toFixed(2)+'</b></div>'}).join('');document.getElementById('boStock').innerHTML=PRODUCTS.map((p,idx)=>'<div class="stockRow"><span><b>'+p.name+'</b><br><small>'+p.cat+' - R'+p.price+' - '+p.stock+' left</small></span><span><button onclick="renameProduct('+idx+')" style="background:#111B21;color:#fff;border:1px solid #00A884;padding:4px 7px;border-radius:7px;font-size:10px;font-weight:900">RENAME</button> <button onclick="deleteProduct('+idx+')" style="background:#E53935;color:#fff;border:none;padding:4px 7px;border-radius:7px;font-size:10px;font-weight:900">DELETE</button></span></div>').join('');document.getElementById('pin1').value=PINS.c1;document.getElementById('pin2').value=PINS.c2;document.getElementById('pinM').value=PINS.manager;document.getElementById('backOffice').style.display='flex'}
 function closeBackOffice(){document.getElementById('backOffice').style.display='none'}
 function savePins(){let n1=document.getElementById('pin1').value,n2=document.getElementById('pin2').value,nm=document.getElementById('pinM').value;if(n1.length!==4||n2.length!==4||nm.length!==4)return alert('All PINs must be 4 digits');PINS={c1:n1,c2:n2,manager:nm};localStorage.setItem('musina_pins',JSON.stringify(PINS));alert('New PINs saved.');closeBackOffice()}
 function cashUp(){let d=cashierData[currentCashier]||{sales:0,cash:0,card:0,trans:0};if(d.trans===0)return alert(currentCashier+' has no sales to cash up yet.');alert(currentCashier+' cashed up!');sales-=d.sales;cashTotal-=d.cash;cardTotal-=d.card;transCount-=d.trans;cashierData[currentCashier]={sales:0,cash:0,card:0,trans:0};saveCashierData();localStorage.setItem('m_sales',sales);localStorage.setItem('m_cash',cashTotal);localStorage.setItem('m_card',cardTotal);localStorage.setItem('m_trans',transCount);updateMyCashUp()}
 function openTillDrawer(){try{let w=window.open('','_blank','width=1,height=1');if(w){w.document.write('<pre>\x1B\x70\x00\x19\xFA</pre>');w.document.close();setTimeout(()=>w.close(),500)}}catch(e){}}
 function closeTill(){document.getElementById('tillAlert').style.display='none'}
-function showTill(change,total,tendered){document.getElementById('tillChangeText').textContent='CHANGE: R'+change.toFixed(2);document.getElementById('tillDetail').textContent=`Total R${total.toFixed(2)} | Paid R${tendered.toFixed(2)}`;document.getElementById('tillAlert').style.display='flex';openTillDrawer()}
-function renderNav(){document.getElementById('nav').innerHTML=CATS.map(c=>`<div class="chip ${active===c?'active':''}" onclick="setCat('${c}')">${c}</div>`).join('')}
+function showTill(change,total,tendered){document.getElementById('tillChangeText').textContent='CHANGE: R'+change.toFixed(2);document.getElementById('tillDetail').textContent='Total R'+total.toFixed(2)+' | Paid R'+tendered.toFixed(2);document.getElementById('tillAlert').style.display='flex';openTillDrawer()}
+function renderNav(){document.getElementById('nav').innerHTML=CATS.map(c=>'<div class="chip '+(active===c?'active':'')+'" onclick="setCat(\''+c+'\')">'+c+'</div>').join('')}
 function setCat(c){active=c;document.querySelector('.catTitle').innerHTML=c+' <span>— SELECT PRODUCT</span>';renderNav();renderGrid()}
-function renderGrid(){let list=active==="ALL"?PRODUCTS:PRODUCTS.filter(p=>p.cat===active);if(list.length===0){document.getElementById('grid').innerHTML='<p style="text-align:center;color:#111B21;padding:20px">No products in '+active+'</p>';calc();return;}document.getElementById('grid').innerHTML=list.map(p=>{let idx=PRODUCTS.indexOf(p);let inCart=cart.find(c=>c.idx===idx);return `<div class="card"><div class="bottleBox" onclick="add(${idx})">${p.img&&p.img.startsWith('data:')?`<img src="${p.img}">`:`<img src="${p.img}" onerror="this.parentElement.innerHTML='<span style=font-size:40px>🍺</span>'">`}<button class="addBtn" onclick="event.stopPropagation();add(${idx})">+</button>${inCart?`<div class="count">x${inCart.qty}</div>`:''}</div><div class="info"><div class="name">${p.name}</div><div class="price" onclick="editPrice(${idx})">R${p.price}</div><div class="stock" onclick="addStockOnly(${idx})">Stock ${p.stock} • + ADD</div><div class="actionRow"><button class="miniBtn" onclick="renameProduct(${idx})">RENAME</button><button class="miniBtn" onclick="openEdit(${idx})">EDIT</button><button class="miniBtn del" onclick="deleteProduct(${idx})">DELETE</button></div></div></div>`}).join('');calc()}
+function renderGrid(){
+  let list=active==="ALL"?PRODUCTS:PRODUCTS.filter(p=>p.cat===active);
+  if(list.length===0){document.getElementById('grid').innerHTML='<p style="text-align:center;color:#111B21;padding:20px">No products in '+active+'</p>';calc();return;}
+  document.getElementById('grid').innerHTML=list.map(p=>{
+    let idx=PRODUCTS.indexOf(p);
+    let inCart=cart.find(c=>c.idx===idx);
+    let out = p.stock<=0;
+    return '<div class="card '+(out?'outOfStock':'')+'"><div class="bottleBox" onclick="add('+idx+')">'+(p.img&&p.img.startsWith('data:')?'<img src="'+p.img+'">':'<img src="'+p.img+'" onerror="this.onerror=null;this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">')+'<div style="display:none;font-size:50px">🍺</div><button class="addBtn" onclick="event.stopPropagation();add('+idx+')">+</button>'+(inCart?'<div class="count">x'+inCart.qty+'</div>':'')+'</div><div class="info"><div class="name">'+p.name+'</div><div class="price" onclick="editPrice('+idx+')">R'+p.price+'</div><div class="stock" onclick="addStockOnly('+idx+')">'+(out?'OUT OF STOCK':'Stock '+p.stock+' • + ADD')+'</div><div class="actionRow"><button class="miniBtn" onclick="renameProduct('+idx+')">RENAME</button><button class="miniBtn" onclick="openEdit('+idx+')">EDIT</button><button class="miniBtn del" onclick="deleteProduct('+idx+')">DELETE</button></div></div></div>'
+  }).join('');calc()
+}
 function editPrice(idx){let code=prompt('PRICE - Manager PIN for '+PRODUCTS[idx].name);if(!isManager(code))return alert('ACCESS DENIED');let np=prompt('New Price',PRODUCTS[idx].price);if(np){PRODUCTS[idx].price=parseFloat(np);save();renderGrid()}}
 function addStockOnly(idx){let a=prompt('Add Stock for '+PRODUCTS[idx].name+'\nCurrent: '+PRODUCTS[idx].stock,24);if(a){PRODUCTS[idx].stock+=parseInt(a);save();renderGrid()}}
 function openEdit(idx){let code=prompt('EDIT PRODUCT - Manager PIN required');if(!isManager(code))return alert('ACCESS DENIED');editingIdx=idx;tempImg="";let p=PRODUCTS[idx];document.getElementById('modalTitle').innerText='Edit '+p.name;document.getElementById('fName').value=p.name;document.getElementById('fPrice').value=p.price;document.getElementById('fStock').value=p.stock;document.getElementById('fImg').value=p.img&&p.img.startsWith('data:')?'PHOTO SAVED':p.img||'';document.getElementById('fCat').value=p.cat;let pv=document.getElementById('preview');if(p.img&&p.img.startsWith('data:')){pv.src=p.img;pv.style.display='block'}else{pv.style.display='none'}document.getElementById('photoFile').value='';document.getElementById('modal').style.display='flex'}
 function closeModal(){document.getElementById('modal').style.display='none'}
 function saveProduct(){let n=document.getElementById('fName').value,pr=document.getElementById('fPrice').value,st=document.getElementById('fStock').value,img=document.getElementById('fImg').value,cat=document.getElementById('fCat').value;if(!n||!pr)return alert('Fill name and price');let finalImg=tempImg?tempImg:(editingIdx>=0?PRODUCTS[editingIdx].img:img);if(!finalImg) finalImg=img;if(editingIdx>=0){PRODUCTS[editingIdx]={name:n,price:parseFloat(pr),cat:cat,stock:parseInt(st),img:finalImg}}else{PRODUCTS.push({name:n,price:parseFloat(pr),cat:cat,stock:parseInt(st)||0,img:finalImg})}save();renderGrid();closeModal()}
 function save(){localStorage.setItem('musina_hollywood',JSON.stringify(PRODUCTS))}
-function add(i){let p=PRODUCTS[i];let f=cart.find(c=>c.idx===i);if(f)f.qty++;else cart.push({idx:i,name:p.name,price:p.price,qty:1});if(currentTable){tables[currentTable].items=JSON.parse(JSON.stringify(cart));saveTables();renderTableBar();}calc();renderGrid()}
-function calc(){let sub=cart.reduce((s,c)=>s+c.price*c.qty,0);let tot=sub*1.15;document.getElementById('tot').textContent='R'+tot.toFixed(2);document.getElementById('sub').textContent='R'+sub.toFixed(2);document.getElementById('subBottom').textContent='R'+sub.toFixed(2);document.getElementById('vat').textContent='R'+(sub*0.15).toFixed(2);document.getElementById('cnt').textContent=cart.reduce((a,b)=>a+b.qty,0);document.getElementById('cntBottom').textContent=cart.reduce((a,b)=>a+b.qty,0);document.getElementById('receiptDate').textContent=new Date().toLocaleString();document.getElementById('receiptItems').innerHTML=cart.length===0?'<p style="text-align:center;color:#888;padding:20px">Cart empty<br>Tap + to add</p>':cart.map(c=>`<div class="receiptLine"><b>${c.name} <span>x${c.qty}</span></b><b>R${(c.price*c.qty).toFixed(2)}</b></div>`).join('')}
+function add(i){
+  let p=PRODUCTS[i];
+  if(p.stock<=0) return alert('OUT OF STOCK: '+p.name);
+  let f=cart.find(c=>c.idx===i);
+  if(f){
+    if(f.qty>=p.stock) return alert('Only '+p.stock+' left in stock for '+p.name);
+    f.qty++;
+  } else cart.push({idx:i,name:p.name,price:p.price,qty:1});
+  if(currentTable){tables[currentTable].items=JSON.parse(JSON.stringify(cart));saveTables();renderTableBar();}calc();renderGrid()
+}
+function calc(){let sub=cart.reduce((s,c)=>s+c.price*c.qty,0);let tot=sub*1.15;document.getElementById('tot').textContent='R'+tot.toFixed(2);document.getElementById('sub').textContent='R'+sub.toFixed(2);document.getElementById('subBottom').textContent='R'+sub.toFixed(2);document.getElementById('vat').textContent='R'+(sub*0.15).toFixed(2);document.getElementById('cnt').textContent=cart.reduce((a,b)=>a+b.qty,0);document.getElementById('cntBottom').textContent=cart.reduce((a,b)=>a+b.qty,0);document.getElementById('receiptDate').textContent=new Date().toLocaleString();document.getElementById('receiptItems').innerHTML=cart.length===0?'<p style="text-align:center;color:#888;padding:20px">Cart empty<br>Tap + to add</p>':cart.map(c=>'<div class="receiptLine"><b>'+c.name+' <span>x'+c.qty+'</span></b><b>R'+(c.price*c.qty).toFixed(2)+'</b></div>').join('')}
 function clearCart(){cart=[];if(currentTable){tables[currentTable].items=[];saveTables();renderTableBar();}document.getElementById('changeShow').textContent='R0.00';calc();renderGrid()}
 function voidLast(){cart.pop();if(currentTable){tables[currentTable].items=JSON.parse(JSON.stringify(cart));saveTables();renderTableBar();}calc();renderGrid()}
 function holdSale(){if(currentTable){sendToTable();}else{alert('Sale Held - Tap TABLES to switch')}}
 function doX(){alert('X-READ\nTotal Sales: R'+sales.toFixed(2)+'\nCash: R'+cashTotal.toFixed(2)+'\nCard: R'+cardTotal.toFixed(2)+'\nTrans: '+transCount)}
 function doZ(){if(!confirm('Z-READ - Close day?'))return;sales=0;cashTotal=0;cardTotal=0;transCount=0;cashierData={"Cashier 1":{sales:0,cash:0,card:0,trans:0},"Cashier 2":{sales:0,cash:0,card:0,trans:0},"Manager":{sales:0,cash:0,card:0,trans:0}};saveCashierData();localStorage.setItem('m_sales',0);localStorage.setItem('m_cash',0);localStorage.setItem('m_card',0);localStorage.setItem('m_trans',0);cart=[];calc();renderGrid();updateMyCashUp()}
 function recordSale(total,type){sales+=total;transCount++;if(type==='CASH')cashTotal+=total;else cardTotal+=total;if(!cashierData[currentCashier])cashierData[currentCashier]={sales:0,cash:0,card:0,trans:0};cashierData[currentCashier].sales+=total;cashierData[currentCashier].trans++;if(type==='CASH')cashierData[currentCashier].cash+=total;else cashierData[currentCashier].card+=total;saveCashierData();localStorage.setItem('m_sales',sales);localStorage.setItem('m_cash',cashTotal);localStorage.setItem('m_card',cardTotal);localStorage.setItem('m_trans',transCount);updateMyCashUp()}
-function payCash(){if(cart.length===0)return alert('Cart empty');let sub=cart.reduce((s,c)=>s+c.price*c.qty,0);let total=sub*1.15;let tendered=prompt(`TOTAL: R${total.toFixed(2)}\nHow much cash?`,total.toFixed(2));if(!tendered)return;tendered=parseFloat(tendered);if(tendered<total)return alert('Not enough cash');let change=tendered-total;document.getElementById('changeShow').textContent='R'+change.toFixed(2);recordSale(total,'CASH');showTill(change,total,tendered);cart=[];calc();renderGrid()}
-function pay(type){if(cart.length===0)return alert('Cart empty');let sub=cart.reduce((s,c)=>s+c.price*c.qty,0);let total=sub*1.15;recordSale(total,'CARD');cart=[];calc();renderGrid()}
+function payCash(){if(cart.length===0)return alert('Cart empty');let sub=cart.reduce((s,c)=>s+c.price*c.qty,0);let total=sub*1.15;let tendered=prompt('TOTAL: R'+total.toFixed(2)+'\nHow much cash?',total.toFixed(2));if(!tendered)return;tendered=parseFloat(tendered);if(tendered<total)return alert('Not enough cash');let change=tendered-total;document.getElementById('changeShow').textContent='R'+change.toFixed(2);deductStock();recordSale(total,'CASH');showTill(change,total,tendered);cart=[];calc();renderGrid()}
+function pay(type){if(cart.length===0)return alert('Cart empty');let sub=cart.reduce((s,c)=>s+c.price*c.qty,0);let total=sub*1.15;deductStock();recordSale(total,'CARD');cart=[];calc();renderGrid()}
 setInterval(()=>{let d=new Date();document.getElementById('clock').textContent=d.toLocaleDateString()+' • '+d.toLocaleTimeString()},1000);renderNav();renderGrid();renderTableBar();updateTableUI();calc();checkSetup();
 </script>
 </body>
