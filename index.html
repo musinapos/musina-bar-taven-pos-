@@ -139,6 +139,32 @@ let DEFAULT_PRODUCTS=[
 {name:"Black Crown 330ml",price:30,cat:"CIDERS",stock:80,img:"crown.jpg"},
 {name:"Flying Fish 330ml",price:30,cat:"CIDERS",stock:80,img:"flying.jpg"},
 {name:"Brutal Fruit 275ml",price:30,cat:"CIDERS",stock:80,img:"brutal.jpg"},
+{name:"Jameson Select Reserve",price:45,cat:"WHISKEY",stock:100,img:"jameson-select.jpg"},
+{name:"Johnnie Walker Black",price:50,cat:"WHISKEY",stock:100,img:"johnnie-black.jpg"},
+{name:"Jack Daniel's",price:55,cat:"WHISKEY",stock:80,img:"jack-daniels.jpg"},
+{name:"J&B Rare",price:40,cat:"WHISKEY",stock:100,img:"jb.jpg"},
+{name:"Hennessy VSOP",price:80,cat:"BRANDY",stock:80,img:"hennessy-vsop.jpg"},
+{name:"Coca-Cola 330ml",price:15,cat:"SOFT",stock:200,img:"coca.jpg"},
+{name:"Sprite 330ml",price:15,cat:"SOFT",stock:200,img:"sprite.jpg"},
+{name:"Fanta Orange 330ml",price:15,cat:"SOFT",stock:200,img:"fanta.jpg"},
+{name:"Stoney Ginger Beer 330ml",price:15,cat:"SOFT",stock:200,img:"stoney.jpg"},
+{name:"Ginger Beer",price:18,cat:"SOFT",stock:100,img:"ginger.jpg"},
+{name:"Tonic Water",price:18,cat:"SOFT",stock:100,img:"tonic.jpg"},
+{name:"Soda Water",price:15,cat:"SOFT",stock:100,img:"soda.jpg"},
+{name:"Still Water 500ml",price:10,cat:"SOFT",stock:200,img:"water.jpg"},
+{name:"Red Bull",price:30,cat:"SOFT",stock:100,img:"redbull.jpg"},
+{name:"Smirnoff Vodka",price:35,cat:"VODKA",stock:100,img:"smirnoff.jpg"},
+{name:"Absolut Vodka",price:40,cat:"VODKA",stock:80,img:"absolut.jpg"},
+{name:"Pushkin Vodka",price:30,cat:"VODKA",stock:100,img:"pushkin.jpg"},
+{name:"Gordon's Gin",price:35,cat:"GIN",stock:100,img:"gordons.jpg"},
+{name:"Bombay Sapphire Gin",price:45,cat:"GIN",stock:80,img:"bombay.jpg"},
+{name:"Moët & Chandon",price:850,cat:"CHAMPAGNE",stock:20,img:"moet.jpg"},
+{name:"J.C. Le Roux",price:120,cat:"CHAMPAGNE",stock:50,img:"jcleroux.jpg"},
+{name:"Four Cousins Sweet Red",price:110,cat:"WINES",stock:50,img:"fourcousins.jpg"},
+{name:"Carlo Rossi",price:95,cat:"WINES",stock:50,img:"carlo.jpg"},
+{name:"Nederburg",price:130,cat:"WINES",stock:50,img:"nederburg.jpg"},
+{name:"Jagermeister",price:35,cat:"SHOOTERS",stock:100,img:"jager.jpg"},
+{name:"Tequila Gold",price:35,cat:"SHOOTERS",stock:100,img:"tequila.jpg"},
 ];
 let PRODUCTS=null;
 try{ PRODUCTS=JSON.parse(localStorage.getItem('musina_hollywood')||'null'); }catch(e){PRODUCTS=null;}
@@ -146,6 +172,10 @@ if(PRODUCTS && PRODUCTS.length>0){
   let hasCider = PRODUCTS.some(p=>p.cat==="CIDERS");
   if(!hasCider){ let ciders = DEFAULT_PRODUCTS.filter(p=>p.cat==="CIDERS"); PRODUCTS = PRODUCTS.concat(ciders); localStorage.setItem('musina_hollywood', JSON.stringify(PRODUCTS)); }
 } else { PRODUCTS = JSON.parse(JSON.stringify(DEFAULT_PRODUCTS)); localStorage.setItem('musina_hollywood', JSON.stringify(PRODUCTS)); }
+// ADD MISSING CATEGORIES - READY FOR PICTURES, manager can edit price/picture anytime, does not delete old
+let _mustHave = DEFAULT_PRODUCTS.filter(p=>["WHISKEY","BRANDY","SOFT","VODKA","GIN","WINES","CHAMPAGNE","SHOOTERS"].includes(p.cat));
+_mustHave.forEach(m=>{ if(!PRODUCTS.some(p=>p.name===m.name)){ PRODUCTS.push(m); }});
+localStorage.setItem('musina_hollywood', JSON.stringify(PRODUCTS));
 function renderTableBar(){
   let open=0;
   let html='';
