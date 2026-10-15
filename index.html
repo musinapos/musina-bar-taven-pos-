@@ -5,102 +5,91 @@
 <title>MUSINA CHISANYAMA BAR POS</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-:root{--red:#E60000;--redDark:#B00000;--white:#FFFFFF;--black:#000000;--dark:#0A0A0A;--grey:#111111}
-body{background:var(--black);color:var(--white);font-family:Inter,system-ui,sans-serif}
-.topBanner{margin:0;background:linear-gradient(180deg,#1A0000,#000000);border-bottom:3px solid var(--red);text-align:center;padding:22px 10px 16px;position:relative}
-.topBanner:before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#E60000,#FFFFFF,#E60000)}
-.topBanner h1{font-size:32px;letter-spacing:3px;color:var(--white);font-weight:900;line-height:1}
-.topBanner h1 span{color:var(--red)}
-.topBanner h2{font-size:16px;letter-spacing:6px;color:var(--red);font-weight:900;margin-top:4px}
-.topBanner p{font-size:11px;color:#fff;font-weight:700;margin-top:8px;letter-spacing:1px}
-.topBanner p b{color:var(--red)}
-.topActions{display:flex;gap:8px;flex-wrap:wrap;padding:12px;background:#0A0A0A;border-bottom:1px solid #222}
-.b{padding:10px 14px;border-radius:25px;border:1.5px solid var(--red);background:#111;color:#fff;font-weight:900;font-size:11px;cursor:pointer}
-.b-cashup{background:var(--red);color:#fff;border-color:var(--red)}.b-office{background:#fff;color:#000;border-color:#fff}
-.catTitle{padding:14px 14px 4px;font-size:16px;color:var(--white);font-weight:900;border-bottom:3px solid var(--red);display:inline-block;margin-left:14px}
-.catTitle span{color:var(--red)}
+:root{--gold:#D8B98A;--gold2:#C9A86A;--beige:#E8D5B5;--red:#C00000}
+body{background:#0A0A0A;color:#fff;font-family:Inter,system-ui,sans-serif}
+.topBanner{margin:10px;border-radius:18px;background:linear-gradient(180deg,#1A140A,#0A0A0A);border:1.5px solid var(--gold2);text-align:center;padding:18px 10px}
+.logoBox{display:inline-flex;align-items:center;gap:12px;border:1.5px solid var(--gold2);padding:10px 18px;border-radius:14px;background:rgba(0,0,0,0.7)}
+.logoIcon{width:56px;height:56px;border:1.5px solid var(--gold2);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:28px}
+.topBanner h1{font-size:28px;letter-spacing:3px;color:var(--gold);font-weight:900}
+.topBanner h2{font-size:15px;letter-spacing:4px;color:#E8C98A}
+.topBanner p{font-size:11px;color:#fff;font-weight:700;margin-top:6px}
+.topActions{display:flex;gap:6px;flex-wrap:wrap;padding:8px 12px}
+.b{padding:9px 13px;border-radius:22px;border:1.5px solid var(--gold2);background:#111;color:var(--gold);font-weight:900;font-size:11px;cursor:pointer}
+.b-cashup{background:#1A9A2E;color:#fff;border-color:#1A9A2E}.b-office{background:#000;color:#FFD700}
+.catTitle{padding:14px 14px 4px;font-size:15px;color:var(--gold);font-weight:900;border-bottom:2px solid var(--gold2);display:inline-block;margin-left:14px}
 .nav{display:flex;gap:8px;overflow-x:auto;padding:12px}
-.chip{padding:10px 18px;background:#111;border:1.5px solid #333;border-radius:25px;color:#fff;font-weight:800;font-size:11px;white-space:nowrap;cursor:pointer}
-.chip.active{background:var(--red);color:#fff;border-color:var(--red)}
-.main{display:flex}.left{flex:1}.right{width:340px;background:#000;border-left:2px solid var(--red);padding:12px;position:sticky;top:0;height:100vh;overflow-y:auto}
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;padding:14px}
+.chip{padding:9px 16px;background:#111;border:1.5px solid #333;border-radius:22px;color:#fff;font-weight:800;font-size:10px;white-space:nowrap;cursor:pointer}
+.chip.active{background:var(--gold);color:#000;border-color:var(--gold)}
+.main{display:flex}.left{flex:1}.right{width:340px;background:#0A0A0A;border-left:1px solid var(--gold2);padding:12px;position:sticky;top:0;height:100vh;overflow-y:auto}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;padding:12px}
 @media(min-width:768px){.grid{grid-template-columns:repeat(3,1fr)}}
-.card{background:#111;border:1.5px solid #333;border-radius:16px;overflow:hidden;position:relative;box-shadow:0 4px 15px rgba(230,0,0,0.15)}
-.card:active{border-color:var(--red)}
-.bottleBox{height:150px;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at 50% 90%,rgba(230,0,0,0.35),transparent 70%),#000;position:relative}
+.card{background:#121212;border:1.5px solid rgba(216,185,138,0.55);border-radius:16px;overflow:hidden;position:relative}
+.bottleBox{height:150px;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at 50% 90%,rgba(216,185,138,0.45),transparent 70%),#0A0A0A;position:relative}
 .bottleBox img{height:130px;object-fit:contain}
-.addBtn{position:absolute;top:10px;right:10px;width:30px;height:30px;border:none;border-radius:50%;background:var(--red);color:#fff;font-size:20px;font-weight:900;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:5;box-shadow:0 2px 8px rgba(230,0,0,0.6)}
-.count{position:absolute;bottom:8px;right:8px;background:var(--red);color:#fff;font-size:11px;font-weight:900;padding:4px 9px;border-radius:12px}
-.info{padding:12px;text-align:center;background:#000}
-.name{font-weight:800;font-size:13px;color:#fff}
-.price{color:var(--red);font-weight:900;font-size:19px;margin-top:4px;cursor:pointer}
+.addBtn{position:absolute;top:10px;right:10px;width:28px;height:28px;border:1.5px solid var(--gold2);border-radius:50%;background:rgba(0,0,0,0.7);color:var(--gold);font-size:18px;font-weight:900;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:5}
+.count{position:absolute;bottom:8px;right:8px;background:var(--gold);color:#000;font-size:10px;font-weight:900;padding:3px 8px;border-radius:12px}
+.info{padding:10px;text-align:center;background:#000}
+.name{font-weight:800;font-size:12px;color:#fff}
+.price{color:var(--gold);font-weight:900;font-size:17px;margin-top:4px;cursor:pointer}
 .stock{font-size:10px;color:#999;margin-top:3px;cursor:pointer}
-.actionRow{display:flex;gap:5px;justify-content:center;margin-top:8px}
-.miniBtn{padding:7px 8px;border-radius:8px;border:1px solid #444;background:#111;color:#fff;font-size:9px;font-weight:900;cursor:pointer;flex:1}
-.miniBtn.del{background:var(--red);color:#fff;border-color:var(--red)}
-.receipt{background:#FFFFFF;color:#000;border-radius:14px;padding:14px;border:2px solid var(--red)}
-.receipt h3{text-align:center;font-size:14px;letter-spacing:2px;margin:8px 0 2px;color:#000}
-.receipt h3 span{color:var(--red)}
+.actionRow{display:flex;gap:5px;justify-content:center;margin-top:7px}
+.miniBtn{padding:6px 8px;border-radius:8px;border:1px solid var(--gold2);background:#111;color:var(--gold);font-size:9px;font-weight:900;cursor:pointer;flex:1}
+.miniBtn.del{background:#DE0000;color:#fff;border-color:#DE0000}
+.receipt{background:#FFFDF8;color:#000;border-radius:14px;padding:14px;border:2px solid var(--gold2)}
+.receipt h3{text-align:center;font-size:13px;letter-spacing:2px;margin:8px 0 2px}
 .receipt.subt{text-align:center;font-size:10px;color:#777;border-bottom:1px dashed #999;padding-bottom:8px;margin-bottom:8px}
 .receiptItems{max-height:250px;overflow-y:auto}
 .receiptLine{display:flex;justify-content:space-between;font-size:12px;padding:6px 0;border-bottom:1px dotted #ddd}
 .receiptTotals{margin-top:10px;font-size:13px}.receiptTotals div{display:flex;justify-content:space-between;padding:3px 0}
-.receiptTotals.total{font-size:19px;font-weight:900;color:var(--red);border-top:2px solid #000;padding-top:8px;margin-top:8px}
+.receiptTotals.total{font-size:18px;font-weight:900;color:#8C6D3F;border-top:2px solid #000;padding-top:8px;margin-top:8px}
 .receiptFooter{text-align:center;margin-top:14px;padding-top:10px;border-top:1px solid #ddd;font-size:10px;color:#888}
 .pay{width:100%;padding:14px;border-radius:13px;border:none;font-weight:900;font-size:13.5px;cursor:pointer;margin-top:8px}
-.pay-cash{background:var(--red);color:#fff}.pay-card{background:#111;color:#fff;border:1.5px solid #111}
+.pay-cash{background:#1A9A2E;color:#fff}.pay-card{background:#1A5C9A;color:#fff}
 .small-btn{flex:1;background:#eee;color:#000;border:1px solid #ccc;padding:9px;border-radius:9px;font-size:10px;font-weight:700;cursor:pointer}
-.cartBar{background:#111;border:1.5px solid var(--red);border-radius:14px;padding:13px 14px;display:flex;justify-content:space-between;margin:10px 14px;color:#fff;font-weight:800;font-size:13px}
-.cartBar span:last-child{color:var(--red)}
-.cashSaleBtn{background:var(--red);color:#fff;font-size:26px;letter-spacing:2px;font-weight:900;padding:20px;border-radius:16px;border:none;width:calc(100% - 28px);margin:0 14px 14px;cursor:pointer;box-shadow:0 6px 20px rgba(230,0,0,0.4)}
+.cartBar{background:#14100A;border:1.5px solid var(--gold2);border-radius:14px;padding:13px 14px;display:flex;justify-content:space-between;margin:10px 14px;color:var(--gold);font-weight:800;font-size:13px}
+.cashSaleBtn{background:var(--beige);color:#1A1205;font-size:26px;letter-spacing:2px;font-weight:900;padding:20px;border-radius:16px;border:none;width:calc(100% - 28px);margin:0 14px 14px;cursor:pointer}
 .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:100;align-items:center;justify-content:center;padding:20px;overflow-y:auto}
-.modalBox{background:#111;border:2px solid var(--red);border-radius:16px;padding:20px;width:100%;max-width:440px;color:#fff}
+.modalBox{background:#111;border:2px solid var(--gold2);border-radius:16px;padding:20px;width:100%;max-width:440px;color:#fff}
 .modalBox input,.modalBox select{width:100%;padding:12px;margin:6px 0;border-radius:10px;border:1px solid #444;background:#000;color:#fff}
 #lock{position:fixed;inset:0;background:#000;z-index:999;display:flex;align-items:center;justify-content:center;flex-direction:column;padding:20px;text-align:center}
-#lock:before{content:"";position:absolute;top:0;left:0;right:0;height:5px;background:var(--red)}
-.pin-display{font-size:28px;letter-spacing:10px;background:#111;border:1.5px solid var(--red);border-radius:12px;padding:12px 20px;margin-bottom:14px;min-width:220px;color:#fff}
+.pin-display{font-size:28px;letter-spacing:10px;background:#111;border:1.5px solid var(--gold2);border-radius:12px;padding:12px 20px;margin-bottom:14px;min-width:220px;color:var(--gold)}
 .keypad{display:grid;grid-template-columns:repeat(3,70px);gap:10px}
 .key{height:60px;border-radius:50%;background:#111;border:1.5px solid #444;color:#fff;font-size:20px;font-weight:900;cursor:pointer}
-.key:active{background:var(--red);color:#fff}
+.key:active{background:var(--gold);color:#000}
 .tillAlert{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:500;align-items:center;justify-content:center;text-align:center}
-.tillBox{background:var(--red);color:#fff;padding:30px;border-radius:20px;max-width:340px}
-@media(max-width:767px){.main{flex-direction:column}.right{width:100%;position:static;height:auto;border-left:none;border-top:2px solid var(--red)}}
+.tillBox{background:#1A9A2E;color:#fff;padding:30px;border-radius:20px;max-width:340px}
+@media(max-width:767px){.main{flex-direction:column}.right{width:100%;position:static;height:auto;border-left:none;border-top:1.5px solid var(--gold2)}}
 .stockRow{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #333;font-size:12px}
 .cashRow{display:flex;justify-content:space-between;padding:9px;background:#000;border-radius:10px;margin:5px 0;font-size:12px;border:1px solid #333}
-.setupBox{background:#111;border:2px solid var(--red);padding:16px;border-radius:14px;margin-top:10px}
-.footerBrand{text-align:center;padding:20px 10px;background:#000;border-top:2px solid var(--red);margin-top:20px}
-.footerBrand h4{color:#fff;letter-spacing:2px;font-size:13px}
-.footerBrand h4 span{color:var(--red)}
-.footerBrand p{color:#888;font-size:10px;margin-top:6px}
+.setupBox{background:#1A140A;border:2px solid var(--gold2);padding:16px;border-radius:14px;margin-top:10px}
 </style>
 </head>
 <body>
 <div id="setup" style="display:none;position:fixed;inset:0;background:#000;z-index:1000;align-items:center;justify-content:center;flex-direction:column;padding:20px;text-align:center">
-<h2 style="color:#fff;letter-spacing:3px;font-size:28px">MUSINA <span style="color:#E60000">CHISANYAMA</span></h2><p style="color:#E60000;letter-spacing:6px;font-weight:900">BAR POS</p>
-<div class="setupBox" style="max-width:360px;width:100%;margin-top:16px"><h3 style="color:#E60000">MANAGER SETUP</h3><p style="color:#ccc;font-size:12px;margin:8px 0">Manager, create your own PIN.</p>
-<label style="font-size:11px;color:#fff">CREATE MANAGER PIN</label><input id="setupManager" maxlength="4" inputmode="numeric" style="width:100%;padding:12px;margin:6px 0;border-radius:10px;border:1px solid #444;background:#000;color:#fff">
-<label style="font-size:11px;color:#fff">CREATE CASHIER 1 PIN</label><input id="setupC1" maxlength="4" inputmode="numeric" style="width:100%;padding:12px;margin:6px 0;border-radius:10px;border:1px solid #444;background:#000;color:#fff">
-<label style="font-size:11px;color:#fff">CREATE CASHIER 2 PIN</label><input id="setupC2" maxlength="4" inputmode="numeric" style="width:100%;padding:12px;margin:6px 0;border-radius:10px;border:1px solid #444;background:#000;color:#fff">
-<button onclick="saveSetup()" style="width:100%;background:#E60000;color:#fff;padding:14px;border:none;border-radius:12px;font-weight:900;margin-top:10px">SAVE MY PINS</button></div></div>
-<div id="lock"><h2 style="color:#fff;letter-spacing:3px;font-size:26px">MUSINA <span style="color:#E60000">CHISANYAMA</span></h2><p style="color:#E60000;letter-spacing:5px;font-weight:900">BAR POS</p><p style="margin-top:14px;color:#999">MUSINA POS • ENTER PIN TO UNLOCK</p><div class="pin-display" id="pinShow">••••</div><div class="keypad"><button class="key" onclick="pressPin('1')">1</button><button class="key" onclick="pressPin('2')">2</button><button class="key" onclick="pressPin('3')">3</button><button class="key" onclick="pressPin('4')">4</button><button class="key" onclick="pressPin('5')">5</button><button class="key" onclick="pressPin('6')">6</button><button class="key" onclick="pressPin('7')">7</button><button class="key" onclick="pressPin('8')">8</button><button class="key" onclick="pressPin('9')">9</button><button class="key" onclick="clearPin()">C</button><button class="key" onclick="pressPin('0')">0</button><button class="key" style="background:#E60000;color:#fff" onclick="unlock()">✓</button></div><p id="pinHint" style="color:#999">Enter your PIN</p></div>
+<div class="logoBox"><div class="logoIcon">🍻</div><div style="text-align:left"><div style="font-size:24px;color:var(--gold);font-weight:900">MUSINA</div><div style="font-size:12px;color:#E8C98A">CHISANYAMA BAR</div></div></div>
+<div class="setupBox" style="max-width:360px;width:100%;margin-top:16px"><h3 style="color:var(--gold)">MANAGER SETUP</h3><p style="color:#ccc;font-size:12px;margin:8px 0">Manager, create your own PIN.</p>
+<label style="font-size:11px">CREATE MANAGER PIN</label><input id="setupManager" maxlength="4" inputmode="numeric" style="width:100%;padding:12px;margin:6px 0;border-radius:10px;border:1px solid #444;background:#000;color:#fff">
+<label style="font-size:11px">CREATE CASHIER 1 PIN</label><input id="setupC1" maxlength="4" inputmode="numeric" style="width:100%;padding:12px;margin:6px 0;border-radius:10px;border:1px solid #444;background:#000;color:#fff">
+<label style="font-size:11px">CREATE CASHIER 2 PIN</label><input id="setupC2" maxlength="4" inputmode="numeric" style="width:100%;padding:12px;margin:6px 0;border-radius:10px;border:1px solid #444;background:#000;color:#fff">
+<button onclick="saveSetup()" style="width:100%;background:var(--gold);color:#000;padding:14px;border:none;border-radius:12px;font-weight:900;margin-top:10px">SAVE MY PINS</button></div></div>
+<div id="lock"><div class="logoBox"><div class="logoIcon">🍻</div><div style="text-align:left"><div style="font-size:22px;color:var(--gold);font-weight:900">MUSINA</div><div style="font-size:11px;color:#E8C98A">CHISANYAMA BAR</div></div></div><p style="margin-top:14px;color:#999">MUSINA POS • ENTER PIN TO UNLOCK</p><div class="pin-display" id="pinShow">••••</div><div class="keypad"><button class="key" onclick="pressPin('1')">1</button><button class="key" onclick="pressPin('2')">2</button><button class="key" onclick="pressPin('3')">3</button><button class="key" onclick="pressPin('4')">4</button><button class="key" onclick="pressPin('5')">5</button><button class="key" onclick="pressPin('6')">6</button><button class="key" onclick="pressPin('7')">7</button><button class="key" onclick="pressPin('8')">8</button><button class="key" onclick="pressPin('9')">9</button><button class="key" onclick="clearPin()">C</button><button class="key" onclick="pressPin('0')">0</button><button class="key" style="background:var(--gold);color:#000" onclick="unlock()">✓</button></div><p id="pinHint" style="color:#999">Enter your PIN</p></div>
 <div id="tillAlert" class="tillAlert"><div class="tillBox"><h2>TILL OPENED</h2><div id="tillChangeText" style="font-size:42px;font-weight:900">R0.00</div><div id="tillDetail" style="font-size:14px"></div><p style="margin-top:10px;font-size:12px">Give change to customer</p><button onclick="closeTill()" style="margin-top:16px;background:#fff;color:#000;padding:12px 22px;border-radius:12px;border:none;font-weight:900">CLOSE TILL</button></div></div>
-<div class="topBanner"><h1>MUSINA <span>CHISANYAMA</span></h1><h2>BAR POS</h2><p>FAST • SECURE • <b>PROFESSIONAL TILL</b></p><p id="debugInfo" style="color:#FFD700;font-size:12px;margin-top:8px">Loading...</p></div>
-<div style="display:flex;justify-content:space-between;align-items:center;padding:12px 14px;background:#0A0A0A;border-bottom:1px solid #222"><span style="color:#fff;font-weight:700">POS • New Sale • <span id="cashierLabel" style="color:#E60000">Not Logged In</span></span></div>
+<div class="topBanner"><div class="logoBox"><div class="logoIcon">🍻</div><div style="text-align:left"><h1 style="margin:0">MUSINA</h1><h2 style="margin:0">CHISANYAMA BAR POS</h2></div></div><p>MUSINA POS SYSTEMS • 068 036 1133 / 072 566 0255</p></div>
+<div style="display:flex;justify-content:space-between;align-items:center;padding:12px 14px;background:#0F0F0F;border-bottom:1px solid #222"><span style="font-size:13px;color:var(--gold);font-weight:700">POS • New Sale • <span id="cashierLabel" style="color:#FFD700">Not Logged In</span></span></div>
 <div class="topActions"><button class="b b-cashup" onclick="cashUp()">CASH UP</button><button class="b b-office" onclick="openBackOffice()">STOCK / BACK OFFICE</button><button class="b" onclick="checkManager('X')">X-READ</button><button class="b" onclick="checkManager('Z')">Z-READ</button><button class="b" onclick="lockNow()">LOCK</button><span style="font-size:11px;color:#999;align-self:center" id="clock">--:--</span></div>
 <div class="main">
 <div class="left">
-<div class="catTitle">ALL <span>— SELECT PRODUCT</span></div>
+<div class="catTitle" id="catTitle">ALL — SELECT PRODUCT</div>
 <div class="nav" id="nav"></div>
 <div class="grid" id="grid"></div>
 <div class="cartBar"><span>Cart • <span id="cntBottom">0</span> items</span><span>Subtotal: <span id="subBottom">R0.00</span></span></div>
 <button class="cashSaleBtn" onclick="payCash()">CASH SALE</button>
 <div style="padding:0 14px 20px"><button class="pay pay-card" style="margin:0" onclick="pay('CARD')">CARD SALE</button></div>
-<div class="footerBrand"><h4>POWERED BY <span>MUSINA POS SYSTEMS</span></h4><p>Designed by Musina POS Systems • 068 036 1133 / 072 566 0255</p><p>For Sales & Support Call Musina POS Systems</p></div>
 </div>
-<div class="right"><div class="receipt"><h3>MUSINA <span>CHISANYAMA</span> BAR</h3><div class="subt"><span id="receiptDate">Loading...</span><br><span id="receiptCashier" style="font-weight:900">Cashier: -</span></div><div class="receiptItems" id="receiptItems"><p style="text-align:center;color:#888;padding:20px">Cart empty<br>Tap + to add</p></div><div class="receiptTotals"><div><span>Items:</span><span id="cnt">0</span></div><div><span>Subtotal:</span><span id="sub">R0.00</span></div><div><span>VAT 15%:</span><span id="vat">R0.00</span></div><div class="total"><span>TOTAL</span><span id="tot">R0.00</span></div><div><span style="color:#1A9A2E;font-weight:900">CHANGE:</span><span id="changeShow" style="color:#1A9A2E;font-weight:900">R0.00</span></div><div><span style="color:#333;font-size:11px">Your Cash-Up So Far:</span><span id="myCashUp" style="font-size:11px">R0.00</span></div></div><div style="display:flex;gap:7px;margin-top:8px"><button class="small-btn" onclick="clearCart()">CLEAR</button><button class="small-btn" onclick="voidLast()">VOID LAST</button><button class="small-btn" onclick="holdSale()">HOLD</button></div><div class="receiptFooter">THANK YOU<br><b>MUSINA CHISANYAMA BAR</b><br><div style="font-size:11px;font-weight:900;color:#E60000;margin-top:6px">POWERED BY MUSINA POS SYSTEMS</div><div style="font-size:10px;color:#333">Designed by Musina POS Systems • 068 036 1133 / 072 566 0255</div></div></div></div>
+<div class="right"><div class="receipt"><h3>MUSINA CHISANYAMA BAR</h3><div class="subt"><span id="receiptDate">Loading...</span><br><span id="receiptCashier" style="font-weight:900">Cashier: -</span></div><div class="receiptItems" id="receiptItems"><p style="text-align:center;color:#888;padding:20px">Cart empty<br>Tap + to add</p></div><div class="receiptTotals"><div><span>Items:</span><span id="cnt">0</span></div><div><span>Subtotal:</span><span id="sub">R0.00</span></div><div><span>VAT 15%:</span><span id="vat">R0.00</span></div><div class="total"><span>TOTAL</span><span id="tot">R0.00</span></div><div><span style="color:#1A9A2E;font-weight:900">CHANGE:</span><span id="changeShow" style="color:#1A9A2E;font-weight:900">R0.00</span></div><div><span style="color:#333;font-size:11px">Your Cash-Up So Far:</span><span id="myCashUp" style="font-size:11px">R0.00</span></div></div><div style="display:flex;gap:7px;margin-top:8px"><button class="small-btn" onclick="clearCart()">CLEAR</button><button class="small-btn" onclick="voidLast()">VOID LAST</button><button class="small-btn" onclick="holdSale()">HOLD</button></div><div class="receiptFooter">THANK YOU<br><b>MUSINA CHISANYAMA BAR</b><br><div style="font-size:11px;font-weight:900;color:#000;margin-top:6px">POWERED BY MUSINA POS SYSTEMS</div><div style="font-size:10px;color:#333">Designed by Musina POS Systems • 068 036 1133 / 072 566 0255</div></div></div></div>
 </div>
-<div id="modal" class="modal"><div class="modalBox"><h3 id="modalTitle">Add Product</h3><input id="fName" placeholder="Name"><input id="fPrice" type="number" placeholder="Price"><input id="fStock" type="number" placeholder="Stock"><input id="fImg" placeholder="Photo name e.g. castle-lite.jpg"><select id="fCat"><option>BEERS</option><option>CIDERS</option><option>WHISKEY</option><option>BRANDY</option><option>VODKA</option><option>GIN</option><option>WINES</option><option>CHAMPAGNE</option><option>SHOOTERS</option><option>SOFT</option></select><div style="display:flex;gap:8px;margin-top:10px"><button class="pay pay-cash" style="flex:1" onclick="saveProduct()">SAVE</button><button class="small-btn" onclick="closeModal()">CANCEL</button></div><button onclick="deleteCurrent()" style="width:100%;background:#E60000;color:#fff;padding:12px;border:none;border-radius:10px;font-weight:900;margin-top:8px">DELETE THIS PRODUCT</button></div></div>
-<div id="backOffice" class="modal"><div class="modalBox"><h3 style="color:#E60000">BACK OFFICE - MANAGER ONLY</h3><div style="background:#000;padding:12px;border-radius:12px;margin:10px 0"><b>Total Sales: <span id="boSales" style="color:#E60000">R0.00</span></b><br>Cash: <span id="boCash">R0.00</span> | Card: <span id="boCard">R0.00</span> | Transactions: <span id="boTrans">0</span></div><h4>CASH UP PER CASHIER</h4><div id="boCashiers"></div><h4 style="margin-top:12px">STOCK</h4><div id="boStock" style="max-height:220px;overflow-y:auto"></div><button onclick="restoreAll()" style="width:100%;background:#E60000;color:#fff;padding:12px;border:none;border-radius:10px;font-weight:900;margin-top:10px">RESTORE MY BEERS + CIDERS</button><h4 style="margin-top:14px">CHANGE YOUR PINS</h4><label style="font-size:11px">Cashier 1 PIN</label><input id="pin1" maxlength="4"><label style="font-size:11px">Cashier 2 PIN</label><input id="pin2" maxlength="4"><label style="font-size:11px">Manager PIN</label><input id="pinM" maxlength="4"><div style="display:flex;gap:8px;margin-top:12px"><button class="pay pay-cash" style="flex:1" onclick="savePins()">SAVE MY NEW PINS</button><button class="small-btn" onclick="closeBackOffice()">CLOSE</button></div></div></div>
+<div id="modal" class="modal"><div class="modalBox"><h3 id="modalTitle">Add Product</h3><input id="fName" placeholder="Name"><input id="fPrice" type="number" placeholder="Price"><input id="fStock" type="number" placeholder="Stock"><input id="fImg" placeholder="Photo name e.g. castle.jpg"><select id="fCat"><option>BEERS</option><option>CIDERS</option><option>WHISKEY</option><option>BRANDY</option><option>VODKA</option><option>GIN</option><option>WINES</option><option>CHAMPAGNE</option><option>SHOOTERS</option><option>SOFT</option></select><div style="display:flex;gap:8px;margin-top:10px"><button class="pay pay-cash" style="flex:1" onclick="saveProduct()">SAVE</button><button class="small-btn" onclick="closeModal()">CANCEL</button></div><button onclick="deleteCurrent()" style="width:100%;background:#DE0000;color:#fff;padding:12px;border:none;border-radius:10px;font-weight:900;margin-top:8px">DELETE THIS PRODUCT</button></div></div>
+<div id="backOffice" class="modal"><div class="modalBox"><h3 style="color:var(--gold)">BACK OFFICE - MANAGER ONLY</h3><div style="background:#000;padding:12px;border-radius:12px;margin:10px 0"><b>Total Sales: <span id="boSales" style="color:#FFD700">R0.00</span></b><br>Cash: <span id="boCash">R0.00</span> | Card: <span id="boCard">R0.00</span> | Transactions: <span id="boTrans">0</span></div><h4>CASH UP PER CASHIER</h4><div id="boCashiers"></div><h4 style="margin-top:12px">STOCK - Tap RENAME / DELETE</h4><div id="boStock" style="max-height:220px;overflow-y:auto"></div><button onclick="restoreAll()" style="width:100%;background:#1A9A2E;color:#fff;padding:12px;border:none;border-radius:10px;font-weight:900;margin-top:10px">RESTORE PRODUCTS</button><h4 style="margin-top:14px">CHANGE YOUR PINS</h4><label style="font-size:11px">Cashier 1 PIN</label><input id="pin1" maxlength="4"><label style="font-size:11px">Cashier 2 PIN</label><input id="pin2" maxlength="4"><label style="font-size:11px">Manager PIN</label><input id="pinM" maxlength="4"><div style="display:flex;gap:8px;margin-top:12px"><button class="pay pay-cash" style="flex:1" onclick="savePins()">SAVE MY NEW PINS</button><button class="small-btn" onclick="closeBackOffice()">CLOSE</button></div></div></div>
 <script>
 let CATS=["ALL","BEERS","CIDERS","WHISKEY","BRANDY","VODKA","GIN","WINES","CHAMPAGNE","SHOOTERS","SOFT"];
 let active="ALL";let cart=[];let editingIdx=-1;let currentCashier="Cashier 1";
@@ -108,27 +97,45 @@ let sales=parseFloat(localStorage.getItem('m_sales')||0);let cashTotal=parseFloa
 let PINS=JSON.parse(localStorage.getItem('musina_pins')||'null');
 let cashierData=JSON.parse(localStorage.getItem('musina_cashier_data')||'null')||{"Cashier 1":{sales:0,cash:0,card:0,trans:0},"Cashier 2":{sales:0,cash:0,card:0,trans:0},"Manager":{sales:0,cash:0,card:0,trans:0}};
 let DEFAULT_PRODUCTS=[
-{name:"Castle Lite",price:28,cat:"BEERS",stock:120,img:"castle-lite.jpg"},
-{name:"Black Label",price:30,cat:"BEERS",stock:100,img:"black-label.jpg"},
+{name:"Castle Lite",price:28,cat:"BEERS",stock:120,img:"castle.jpg"},
+{name:"Black Label",price:30,cat:"BEERS",stock:100,img:"black.jpg"},
 {name:"Hansa",price:28,cat:"BEERS",stock:100,img:"hansa.jpg"},
 {name:"Stella Artois",price:35,cat:"BEERS",stock:80,img:"stella.jpg"},
-{name:"Savanna Dry 330ml",price:35,cat:"CIDERS",stock:100,img:"savanna-dry.jpg"},
+{name:"Savanna Dry 330ml",price:35,cat:"CIDERS",stock:100,img:"savanna.jpg"},
 {name:"Savanna Light 330ml",price:35,cat:"CIDERS",stock:100,img:"savanna-light.jpg"},
 {name:"Savanna Black 330ml",price:38,cat:"CIDERS",stock:80,img:"savanna-black.jpg"},
-{name:"Hunters Dry 330ml",price:30,cat:"CIDERS",stock:100,img:"hunters-dry.jpg"},
+{name:"Hunters Dry 330ml",price:30,cat:"CIDERS",stock:100,img:"hunters.jpg"},
 {name:"Hunters Gold 330ml",price:30,cat:"CIDERS",stock:100,img:"hunters-gold.jpg"},
-{name:"Strongbow Gold 330ml",price:32,cat:"CIDERS",stock:80,img:"strongbow-gold.jpg"},
+{name:"Strongbow Gold 330ml",price:32,cat:"CIDERS",stock:80,img:"strong.jpg"},
 {name:"Redds 330ml",price:32,cat:"CIDERS",stock:80,img:"redds.jpg"},
-{name:"Black Crown 330ml",price:30,cat:"CIDERS",stock:80,img:"black-crown.jpg"},
-{name:"Flying Fish 330ml",price:30,cat:"CIDERS",stock:80,img:"flying-fish.jpg"},
-{name:"Brutal Fruit 275ml",price:30,cat:"CIDERS",stock:80,img:"brutal-fruit.jpg"},
+{name:"Black Crown 330ml",price:30,cat:"CIDERS",stock:80,img:"crown.jpg"},
+{name:"Flying Fish 330ml",price:30,cat:"CIDERS",stock:80,img:"flying.jpg"},
+{name:"Brutal Fruit 275ml",price:30,cat:"CIDERS",stock:80,img:"brutal.jpg"},
 ];
+// YOUR ORIGINAL SAVE NAME - so beers come back exactly as you saved them
 let PRODUCTS=null;
 try{ PRODUCTS=JSON.parse(localStorage.getItem('musina_hollywood')||'null'); }catch(e){PRODUCTS=null;}
 if(PRODUCTS && PRODUCTS.length>0){
+  // Update old long names to your short names automatically
+  PRODUCTS.forEach(p=>{
+    if(p.name==="Castle Lite") p.img="castle.jpg";
+    if(p.name==="Black Label") p.img="black.jpg";
+    if(p.name==="Hansa") p.img="hansa.jpg";
+    if(p.name==="Stella Artois") p.img="stella.jpg";
+    if(p.name==="Savanna Dry 330ml") p.img="savanna.jpg";
+    if(p.name==="Hunters Dry 330ml") p.img="hunters.jpg";
+    if(p.name==="Strongbow Gold 330ml") p.img="strong.jpg";
+    if(p.name==="Black Crown 330ml") p.img="crown.jpg";
+    if(p.name==="Flying Fish 330ml") p.img="flying.jpg";
+    if(p.name==="Brutal Fruit 275ml") p.img="brutal.jpg";
+  });
   let hasCider = PRODUCTS.some(p=>p.cat==="CIDERS");
-  if(!hasCider){ let ciders = DEFAULT_PRODUCTS.filter(p=>p.cat==="CIDERS"); PRODUCTS = PRODUCTS.concat(ciders); localStorage.setItem('musina_hollywood', JSON.stringify(PRODUCTS)); }
-} else { PRODUCTS = JSON.parse(JSON.stringify(DEFAULT_PRODUCTS)); localStorage.setItem('musina_hollywood', JSON.stringify(PRODUCTS)); }
+  if(!hasCider){ let ciders = DEFAULT_PRODUCTS.filter(p=>p.cat==="CIDERS"); PRODUCTS = PRODUCTS.concat(ciders); }
+  localStorage.setItem('musina_hollywood', JSON.stringify(PRODUCTS));
+} else {
+  PRODUCTS = JSON.parse(JSON.stringify(DEFAULT_PRODUCTS));
+  localStorage.setItem('musina_hollywood', JSON.stringify(PRODUCTS));
+}
 function restoreAll(){ PRODUCTS = JSON.parse(JSON.stringify(DEFAULT_PRODUCTS)); localStorage.setItem('musina_hollywood', JSON.stringify(PRODUCTS)); active="ALL"; renderNav(); renderGrid(); closeBackOffice(); alert('Restored!'); }
 let currentPin="";
 function saveSetup(){let m=document.getElementById('setupManager').value,c1=document.getElementById('setupC1').value,c2=document.getElementById('setupC2').value;if(m.length!==4||c1.length!==4||c2.length!==4)return alert('All PINs must be 4 numbers');PINS={c1:c1,c2:c2,manager:m};localStorage.setItem('musina_pins',JSON.stringify(PINS));document.getElementById('setup').style.display='none';alert('PINs saved.');}
@@ -144,7 +151,7 @@ function renameProduct(idx){let code=prompt('RENAME - Enter Manager PIN to renam
 function deleteProduct(idx){let code=prompt('DELETE - Enter Manager PIN to delete '+PRODUCTS[idx].name);if(!isManager(code))return alert('ACCESS DENIED');if(!confirm('Delete '+PRODUCTS[idx].name+'?'))return;PRODUCTS.splice(idx,1);save();renderGrid();alert('Deleted!');}
 function deleteCurrent(){if(editingIdx<0)return;deleteProduct(editingIdx);closeModal();}
 function checkManager(type){let code=prompt('MANAGER CODE REQUIRED for '+type+'-READ');if(isManager(code)){if(type==='X')doX();else doZ()}else{alert('ACCESS DENIED - Manager Only')}}
-function openBackOffice(){let code=prompt('BACK OFFICE - Enter YOUR Manager PIN:');if(!isManager(code))return alert('ACCESS DENIED');document.getElementById('boSales').textContent='R'+sales.toFixed(2);document.getElementById('boCash').textContent='R'+cashTotal.toFixed(2);document.getElementById('boCard').textContent='R'+cardTotal.toFixed(2);document.getElementById('boTrans').textContent=transCount;document.getElementById('boCashiers').innerHTML=Object.keys(cashierData).map(k=>{let d=cashierData[k];return `<div class="cashRow"><span><b>${k}</b><br><small>${d.trans} sales • Cash R${d.cash.toFixed(2)} • Card R${d.card.toFixed(2)}</small></span><b style="color:#E60000">R${d.sales.toFixed(2)}</b></div>`}).join('');document.getElementById('boStock').innerHTML=PRODUCTS.map((p,idx)=>`<div class="stockRow"><span><b>${p.name}</b><br><small>${p.cat} - R${p.price} - ${p.stock} left - ${p.img}</small></span><span><button onclick="renameProduct(${idx})" style="background:#111;color:#fff;border:1px solid #E60000;padding:4px 7px;border-radius:7px;font-size:10px;font-weight:900">RENAME</button> <button onclick="deleteProduct(${idx})" style="background:#E60000;color:#fff;border:none;padding:4px 7px;border-radius:7px;font-size:10px;font-weight:900">DELETE</button></span></div>`).join('');document.getElementById('pin1').value=PINS.c1;document.getElementById('pin2').value=PINS.c2;document.getElementById('pinM').value=PINS.manager;document.getElementById('backOffice').style.display='flex'}
+function openBackOffice(){let code=prompt('BACK OFFICE - Enter YOUR Manager PIN:');if(!isManager(code))return alert('ACCESS DENIED');document.getElementById('boSales').textContent='R'+sales.toFixed(2);document.getElementById('boCash').textContent='R'+cashTotal.toFixed(2);document.getElementById('boCard').textContent='R'+cardTotal.toFixed(2);document.getElementById('boTrans').textContent=transCount;document.getElementById('boCashiers').innerHTML=Object.keys(cashierData).map(k=>{let d=cashierData[k];return `<div class="cashRow"><span><b>${k}</b><br><small>${d.trans} sales • Cash R${d.cash.toFixed(2)} • Card R${d.card.toFixed(2)}</small></span><b style="color:#FFD700">R${d.sales.toFixed(2)}</b></div>`}).join('');document.getElementById('boStock').innerHTML=PRODUCTS.map((p,idx)=>`<div class="stockRow"><span><b>${p.name}</b><br><small>${p.cat} - R${p.price} - ${p.stock} left - ${p.img}</small></span><span><button onclick="renameProduct(${idx})" style="background:#111;color:#D8B98A;border:1px solid #D8B98A;padding:4px 7px;border-radius:7px;font-size:10px;font-weight:900">RENAME</button> <button onclick="deleteProduct(${idx})" style="background:#DE0000;color:#fff;border:none;padding:4px 7px;border-radius:7px;font-size:10px;font-weight:900">DELETE</button></span></div>`).join('');document.getElementById('pin1').value=PINS.c1;document.getElementById('pin2').value=PINS.c2;document.getElementById('pinM').value=PINS.manager;document.getElementById('backOffice').style.display='flex'}
 function closeBackOffice(){document.getElementById('backOffice').style.display='none'}
 function savePins(){let n1=document.getElementById('pin1').value,n2=document.getElementById('pin2').value,nm=document.getElementById('pinM').value;if(n1.length!==4||n2.length!==4||nm.length!==4)return alert('All PINs must be 4 digits');PINS={c1:n1,c2:n2,manager:nm};localStorage.setItem('musina_pins',JSON.stringify(PINS));alert('New PINs saved.');closeBackOffice()}
 function cashUp(){let d=cashierData[currentCashier]||{sales:0,cash:0,card:0,trans:0};if(d.trans===0)return alert(currentCashier+' has no sales to cash up yet.');alert(currentCashier+' cashed up!');sales-=d.sales;cashTotal-=d.cash;cardTotal-=d.card;transCount-=d.trans;cashierData[currentCashier]={sales:0,cash:0,card:0,trans:0};saveCashierData();localStorage.setItem('m_sales',sales);localStorage.setItem('m_cash',cashTotal);localStorage.setItem('m_card',cardTotal);localStorage.setItem('m_trans',transCount);updateMyCashUp()}
@@ -152,8 +159,8 @@ function openTillDrawer(){try{let w=window.open('','_blank','width=1,height=1');
 function closeTill(){document.getElementById('tillAlert').style.display='none'}
 function showTill(change,total,tendered){document.getElementById('tillChangeText').textContent='CHANGE: R'+change.toFixed(2);document.getElementById('tillDetail').textContent=`Total R${total.toFixed(2)} | Paid R${tendered.toFixed(2)}`;document.getElementById('tillAlert').style.display='flex';openTillDrawer()}
 function renderNav(){document.getElementById('nav').innerHTML=CATS.map(c=>`<div class="chip ${active===c?'active':''}" onclick="setCat('${c}')">${c}</div>`).join('')}
-function setCat(c){active=c;document.querySelector('.catTitle').innerHTML=c+' <span>— SELECT PRODUCT</span>';renderNav();renderGrid()}
-function renderGrid(){let list=active==="ALL"?PRODUCTS:PRODUCTS.filter(p=>p.cat===active);let debugEl=document.getElementById('debugInfo');if(debugEl) debugEl.textContent='LOADED: '+PRODUCTS.length+' | BEERS: '+PRODUCTS.filter(p=>p.cat==='BEERS').length+' | CIDERS: '+PRODUCTS.filter(p=>p.cat==='CIDERS').length;if(list.length===0){document.getElementById('grid').innerHTML='<p style="text-align:center;color:#fff;padding:20px">No products in '+active+'</p>';calc();return;}document.getElementById('grid').innerHTML=list.map(p=>{let idx=PRODUCTS.indexOf(p);let inCart=cart.find(c=>c.idx===idx);return `<div class="card"><div class="bottleBox" onclick="add(${idx})"><img src="${p.img}" onerror="this.style.display='none'"><button class="addBtn" onclick="event.stopPropagation();add(${idx})">+</button>${inCart?`<div class="count">x${inCart.qty}</div>`:''}</div><div class="info"><div class="name">${p.name}</div><div style="font-size:9px;color:#666">${p.img}</div><div class="price" onclick="editPrice(${idx})">R${p.price}</div><div class="stock" onclick="addStockOnly(${idx})">Stock ${p.stock} • + ADD</div><div class="actionRow"><button class="miniBtn" onclick="renameProduct(${idx})">RENAME</button><button class="miniBtn" onclick="openEdit(${idx})">EDIT</button><button class="miniBtn del" onclick="deleteProduct(${idx})">DELETE</button></div></div></div>`}).join('');calc()}
+function setCat(c){active=c;document.getElementById('catTitle').textContent=c+' — SELECT PRODUCT';renderNav();renderGrid()}
+function renderGrid(){let list=active==="ALL"?PRODUCTS:PRODUCTS.filter(p=>p.cat===active);if(list.length===0){document.getElementById('grid').innerHTML='<p style="text-align:center;color:#fff;padding:20px">No products in '+active+'</p>';calc();return;}document.getElementById('grid').innerHTML=list.map(p=>{let idx=PRODUCTS.indexOf(p);let inCart=cart.find(c=>c.idx===idx);return `<div class="card"><div class="bottleBox" onclick="add(${idx})"><img src="${p.img}" onerror="this.style.display='none'"><button class="addBtn" onclick="event.stopPropagation();add(${idx})">+</button>${inCart?`<div class="count">x${inCart.qty}</div>`:''}</div><div class="info"><div class="name">${p.name}</div><div class="price" onclick="editPrice(${idx})">R${p.price}</div><div class="stock" onclick="addStockOnly(${idx})">Stock ${p.stock} • + ADD</div><div class="actionRow"><button class="miniBtn" onclick="renameProduct(${idx})">RENAME</button><button class="miniBtn" onclick="openEdit(${idx})">EDIT</button><button class="miniBtn del" onclick="deleteProduct(${idx})">DELETE</button></div></div></div>`}).join('');calc()}
 function editPrice(idx){let code=prompt('PRICE - Manager PIN for '+PRODUCTS[idx].name);if(!isManager(code))return alert('ACCESS DENIED');let np=prompt('New Price',PRODUCTS[idx].price);if(np){PRODUCTS[idx].price=parseFloat(np);save();renderGrid()}}
 function addStockOnly(idx){let a=prompt('Add Stock for '+PRODUCTS[idx].name+'\nCurrent: '+PRODUCTS[idx].stock,24);if(a){PRODUCTS[idx].stock+=parseInt(a);save();renderGrid()}}
 function openEdit(idx){let code=prompt('EDIT PRODUCT - Manager PIN required');if(!isManager(code))return alert('ACCESS DENIED');editingIdx=idx;let p=PRODUCTS[idx];document.getElementById('modalTitle').innerText='Edit '+p.name;document.getElementById('fName').value=p.name;document.getElementById('fPrice').value=p.price;document.getElementById('fStock').value=p.stock;document.getElementById('fImg').value=p.img||'';document.getElementById('fCat').value=p.cat;document.getElementById('modal').style.display='flex'}
