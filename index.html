@@ -22,17 +22,21 @@ body{background:#F5F5F5;color:#111B21;font-family:Inter,system-ui,sans-serif;ove
 .tableBtn.amt{font-size:9px;font-weight:800;display:block;margin-top:2px}
 .catTitle{padding:14px 14px 4px;font-size:15px;color:#111B21;font-weight:900;border-bottom:3px solid var(--green);display:inline-block;margin-left:14px}
 .catTitle span{color:var(--green)}
-.nav{display:flex;gap:8px;overflow-x:auto;padding:12px;background:#ECE5DD}
+.nav{display:flex;gap:8px;overflow-x:auto;padding:12px;background:#ECE5DD;flex-shrink:0}
 .chip{padding:9px 16px;background:#fff;border:1.5px solid #D9D9D9;border-radius:22px;color:#111B21;font-weight:800;font-size:10px;white-space:nowrap;cursor:pointer}
 .chip.active{background:var(--green);color:#fff;border-color:var(--green)}
-.main{display:flex;flex:1;overflow:hidden}
-.left{flex:1;background:#ECE5DD;overflow-y:auto;height:100%;padding-bottom:30px;overscroll-behavior:contain}
+.main{display:flex;flex:1;overflow:hidden;min-height:0}
+.left{flex:1;background:#ECE5DD;display:flex;flex-direction:column;overflow:hidden;min-height:0}
+.leftHeader{flex-shrink:0;background:#ECE5DD;z-index:10}
+.gridWrap{flex:1;overflow-y:auto;overscroll-behavior:contain;padding-bottom:20px}
 .right{width:340px;background:#ECE5DD;border-left:2px solid #D9D9D9;padding:12px;overflow-y:auto;height:100%;flex-shrink:0}
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;padding:12px}
 @media(min-width:768px){.grid{grid-template-columns:repeat(3,1fr)}}
 .card{background:#fff;border:1.5px solid #D9D9D9;border-radius:16px;overflow:hidden;position:relative;box-shadow:0 2px 8px rgba(0,0,0,0.06)}
 .bottleBox{height:150px;display:flex;align-items:center;justify-content:center;background:#fff;position:relative}
 .bottleBox img{height:130px;object-fit:contain;max-width:90%}
+@keyframes spinBottle{0%{transform:rotate(0deg) scale(1)}50%{transform:rotate(180deg) scale(1.1)}100%{transform:rotate(360deg) scale(1)}}
+.bottleBox img.spinning{animation:spinBottle 0.6s ease-in-out}
 .addBtn{position:absolute;top:10px;right:10px;width:30px;height:30px;border:none;border-radius:50%;background:var(--green);color:#fff;font-size:20px;font-weight:900;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:5}
 .count{position:absolute;bottom:8px;right:8px;background:var(--green);color:#fff;font-size:10px;font-weight:900;padding:4px 9px;border-radius:12px}
 .info{padding:10px;text-align:center;background:#fff;border-top:1px solid #ECE5DD}
@@ -71,7 +75,7 @@ body{background:#F5F5F5;color:#111B21;font-family:Inter,system-ui,sans-serif;ove
 .key-clear{background:#E53935;color:#fff;border-color:#E53935}
 .tillAlert{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:500;align-items:center;justify-content:center;text-align:center}
 .tillBox{background:var(--green);color:#fff;padding:30px;border-radius:20px;max-width:340px}
-@media(max-width:767px){body{overflow:auto;height:auto;display:block}.main{flex-direction:column;overflow:visible}.left{overflow:visible;height:auto}.right{width:100%;position:static;height:auto;border-left:none;border-top:2px solid var(--green)}}
+@media(max-width:767px){body{overflow:auto;height:auto;display:block}.main{flex-direction:column;overflow:visible}.left{overflow:visible;height:auto;display:block}.gridWrap{overflow:visible}.right{width:100%;position:static;height:auto;border-left:none;border-top:2px solid var(--green)}}
 .stockRow{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #D9D9D9;font-size:12px}
 .cashRow{display:flex;justify-content:space-between;padding:9px;background:#ECE5DD;border-radius:10px;margin:5px 0;font-size:12px;border:1px solid #D9D9D9}
 .setupBox{background:#fff;border:2px solid var(--green);padding:16px;border-radius:14px;margin-top:10px}
@@ -100,10 +104,8 @@ body{background:#F5F5F5;color:#111B21;font-family:Inter,system-ui,sans-serif;ove
 <div class="tableBar" id="tableBar"></div>
 <div class="main">
 <div class="left">
-<div class="catTitle">ALL <span>— SELECT PRODUCT</span></div>
-<div class="nav" id="nav"></div>
-<div class="grid" id="grid"></div>
-<div class="cartBar"><span>Cart • <span id="cntBottom">0</span> items</span><span>Subtotal: <span id="subBottom">R0.00</span></span></div>
+<div class="leftHeader"><div class="catTitle">ALL <span>— SELECT PRODUCT</span></div><div class="nav" id="nav"></div></div>
+<div class="gridWrap"><div class="grid" id="grid"></div><div class="cartBar"><span>Cart • <span id="cntBottom">0</span> items</span><span>Subtotal: <span id="subBottom">R0.00</span></span></div></div>
 </div>
 <div class="right">
 <div class="receipt"><h3>MUSINA <span>CHISANYAMA</span> 🇿🇦 BAR</h3><div class="subt"><span id="receiptDate">Loading...</span><br><span id="receiptCashier" style="font-weight:900">Cashier: -</span><br><span id="receiptTable" style="font-weight:900;color:#00A884">Table: WALK-IN</span></div><div class="receiptItems" id="receiptItems"><p style="text-align:center;color:#888;padding:20px">Cart empty<br>Tap + to add</p></div><div class="receiptTotals"><div><span>Items:</span><span id="cnt">0</span></div><div><span>Subtotal:</span><span id="sub">R0.00</span></div><div><span>VAT 15%:</span><span id="vat">R0.00</span></div><div class="total"><span>TOTAL</span><span id="tot">R0.00</span></div><div><span style="color:#00A884;font-weight:900">CHANGE:</span><span id="changeShow" style="color:#00A884;font-weight:900">R0.00</span></div><div><span style="color:#333;font-size:11px">Your Cash-Up So Far:</span><span id="myCashUp" style="font-size:11px">R0.00</span></div></div><div style="display:flex;gap:7px;margin-top:8px"><button class="small-btn" onclick="clearCart()">CLEAR</button><button class="small-btn" onclick="voidLast()">VOID LAST</button><button class="small-btn" onclick="holdSale()">HOLD</button></div><div class="receiptFooter">THANK YOU<br><b>MUSINA CHISANYAMA BAR</b><br><div style="font-size:11px;font-weight:900;color:#00A884;margin-top:6px">POWERED BY MUSINA POS SYSTEMS</div><div style="font-size:10px;color:#333">Designed by Musina POS Systems • 068 036 1133 / 072 566 0255</div></div></div>
@@ -305,7 +307,7 @@ function openEdit(idx){let code=prompt('EDIT PRODUCT - Manager PIN required');if
 function closeModal(){document.getElementById('modal').style.display='none'}
 function saveProduct(){let n=document.getElementById('fName').value,pr=document.getElementById('fPrice').value,st=document.getElementById('fStock').value,img=document.getElementById('fImg').value,cat=document.getElementById('fCat').value,bc=document.getElementById('fBarcode').value;if(!n||!pr)return alert('Fill name and price');let finalImg=tempImg?tempImg:(editingIdx>=0?PRODUCTS[editingIdx].img:img);if(!finalImg) finalImg=img;if(editingIdx>=0){PRODUCTS[editingIdx]={name:n,price:parseFloat(pr),cat:cat,stock:parseInt(st),img:finalImg,barcode:bc}}else{PRODUCTS.push({name:n,price:parseFloat(pr),cat:cat,stock:parseInt(st)||0,img:finalImg,barcode:bc})}save();renderGrid();closeModal()}
 function save(){localStorage.setItem('musina_hollywood',JSON.stringify(PRODUCTS))}
-function add(i){ playTick(); let p=PRODUCTS[i]; if(p.stock<=0) return alert('OUT OF STOCK: '+p.name); let f=cart.find(c=>c.idx===i); if(f){ if(f.qty>=p.stock) return alert('Only '+p.stock+' left in stock for '+p.name); f.qty++; } else cart.push({idx:i,name:p.name,price:p.price,qty:1}); if(currentTable){tables[currentTable].items=JSON.parse(JSON.stringify(cart));saveTables();renderTableBar();}calc();renderGrid() }
+function add(i){ playTick(); let imgs=document.querySelectorAll('.bottleBox img'); let img=imgs[i]; if(img){ img.classList.remove('spinning'); void img.offsetWidth; img.classList.add('spinning'); setTimeout(()=>img.classList.remove('spinning'),700); } let p=PRODUCTS[i]; if(p.stock<=0) return alert('OUT OF STOCK: '+p.name); let f=cart.find(c=>c.idx===i); if(f){ if(f.qty>=p.stock) return alert('Only '+p.stock+' left in stock for '+p.name); f.qty++; } else cart.push({idx:i,name:p.name,price:p.price,qty:1}); if(currentTable){tables[currentTable].items=JSON.parse(JSON.stringify(cart));saveTables();renderTableBar();}calc();renderGrid() }
 function calc(){let sub=cart.reduce((s,c)=>s+c.price*c.qty,0);let tot=sub*1.15;document.getElementById('tot').textContent='R'+tot.toFixed(2);document.getElementById('sub').textContent='R'+sub.toFixed(2);document.getElementById('subBottom').textContent='R'+sub.toFixed(2);document.getElementById('vat').textContent='R'+(sub*0.15).toFixed(2);document.getElementById('cnt').textContent=cart.reduce((a,b)=>a+b.qty,0);document.getElementById('cntBottom').textContent=cart.reduce((a,b)=>a+b.qty,0);document.getElementById('receiptDate').textContent=new Date().toLocaleString();document.getElementById('receiptItems').innerHTML=cart.length===0?'<p style="text-align:center;color:#888;padding:20px">Cart empty<br>Tap + to add</p>':cart.map(c=>'<div class="receiptLine"><b>'+c.name+' <span>x'+c.qty+'</span></b><b>R'+(c.price*c.qty).toFixed(2)+'</b></div>').join('')}
 function clearCart(){cart=[];if(currentTable){tables[currentTable].items=[];saveTables();renderTableBar();}document.getElementById('changeShow').textContent='R0.00';calc();renderGrid()}
 function voidLast(){cart.pop();if(currentTable){tables[currentTable].items=JSON.parse(JSON.stringify(cart));saveTables();renderTableBar();}calc();renderGrid()}
