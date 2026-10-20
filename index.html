@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>MUSINA CHISANYAMA BAR POS</title>
+<title>MUSINA CHISANYAMA BAR POS - HD</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{--green:#00A884;--green2:#25D366;--greenDark:#075E54;--grey:#ECE5DD;--greyDark:#D9D9D9;--black:#111B21;--white:#FFFFFF}
@@ -78,6 +78,32 @@ body{background:#F5F5F5;color:#111B21;font-family:Inter,system-ui,sans-serif}
 .tableCard{background:#fff;border:1.5px solid #D9D9D9;border-radius:12px;padding:12px;margin:6px 0}
 .tableCard.open{border-color:var(--green);background:#E8F5E9}
 .outOfStock{opacity:0.55}
+/* --- HD FIX FOR TAB A9+ / 1920x1080 --- */
+@media(min-width:1200px){
+  .grid{grid-template-columns:repeat(5,1fr) !important}
+  .right{width:430px !important}
+  .bottleBox{height:190px !important}
+  .bottleBox img{height:170px !important}
+  .name{font-size:15px !important}
+  .price{font-size:22px !important}
+  .b{font-size:14px !important;padding:12px 16px !important}
+  .chip{font-size:13px !important;padding:11px 18px !important}
+  .topBanner h1{font-size:36px !important}
+  .addBtn{width:38px;height:38px;font-size:24px !important}
+  .cashSaleBtn{font-size:28px !important;padding:20px !important}
+}
+@media(min-width:768px) and (max-width:1199px){
+  .grid{grid-template-columns:repeat(4,1fr) !important}
+  .right{width:380px !important}
+  .bottleBox{height:170px !important}
+  .bottleBox img{height:150px !important}
+}
+@media print{
+  body *{visibility:hidden}
+  #printArea, #printArea *{visibility:visible}
+  #printArea{position:absolute;left:0;top:0;width:80mm;font-family:monospace;font-size:12px}
+  @page{size:80mm auto;margin:0}
+}
 </style>
 </head>
 <body>
@@ -89,7 +115,7 @@ body{background:#F5F5F5;color:#111B21;font-family:Inter,system-ui,sans-serif}
 <label style="font-size:11px">CREATE CASHIER 2 PIN</label><input id="setupC2" maxlength="4" inputmode="numeric">
 <button onclick="saveSetup()" style="width:100%;background:#00A884;color:#fff;padding:14px;border:none;border-radius:12px;font-weight:900;margin-top:10px">SAVE MY PINS</button></div></div>
 <div id="lock"><h2 style="color:#111B21;letter-spacing:3px">MUSINA <span style="color:#00A884">CHISANYAMA</span> 🇿🇦</h2><p style="color:#00A884;letter-spacing:5px;font-weight:900">BAR POS</p><p style="margin-top:14px;color:#999">MUSINA POS • ENTER PIN TO UNLOCK</p><div class="pin-display" id="pinShow">----</div><div class="keypad"><button class="key" onclick="pressPin('1')">1</button><button class="key" onclick="pressPin('2')">2</button><button class="key" onclick="pressPin('3')">3</button><button class="key" onclick="pressPin('4')">4</button><button class="key" onclick="pressPin('5')">5</button><button class="key" onclick="pressPin('6')">6</button><button class="key" onclick="pressPin('7')">7</button><button class="key" onclick="pressPin('8')">8</button><button class="key" onclick="pressPin('9')">9</button><button class="key key-clear" onclick="clearPin()">CLEAR</button><button class="key" onclick="pressPin('0')">0</button><button class="key" onclick="clearPin()">⌫</button><button class="key-enter" onclick="unlock()">ENTER → UNLOCK</button></div><p id="pinHint" style="color:#999;margin-top:12px">Enter your PIN like ATM</p></div>
-<div id="tillAlert" class="tillAlert"><div class="tillBox"><h2>TILL OPENED</h2><div id="tillChangeText" style="font-size:42px;font-weight:900">R0.00</div><div id="tillDetail" style="font-size:14px"></div><p style="margin-top:10px;font-size:12px">Give change to customer</p><button onclick="closeTill();printReceipt()" style="margin-top:16px;background:#fff;color:#000;padding:12px 22px;border-radius:12px;border:none;font-weight:900">PRINT RECEIPT</button><button onclick="closeTill()" style="margin-top:8px;background:#111B21;color:#fff;padding:12px 22px;border-radius:12px;border:none;font-weight:900">CLOSE TILL</button></div></div>
+<div id="tillAlert" class="tillAlert"><div class="tillBox"><h2>TILL OPENED</h2><div id="tillChangeText" style="font-size:42px;font-weight:900">R0.00</div><div id="tillDetail" style="font-size:14px"></div><p style="margin-top:10px;font-size:12px">Give change to customer</p><button onclick="closeTill();printReceipt()" style="margin-top:16px;background:#fff;color:#000;padding:12px 22px;border-radius:12px;border:none;font-weight:900">PRINT RECEIPT</button><button onclick="closeTill()" style="margin-top:8px;background:#111B21;color:#fff;padding:12px 22px;border:none;border-radius:12px;border:none;font-weight:900">CLOSE TILL</button></div></div>
 <div class="topBanner"><h1>MUSINA <span>CHISANYAMA</span> 🇿🇦</h1><h2>BAR POS</h2><p>MUSINA POS SYSTEMS</p></div>
 <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 14px;background:#fff;border-bottom:1px solid #D9D9D9"><span style="color:#111B21;font-weight:700">POS • <span id="tableLabel" style="color:#00A884;font-weight:900">WALK-IN SALE</span> • <span id="cashierLabel" style="color:#00A884">Not Logged In</span></span></div>
 <div class="topActions"><button class="b b-tables" onclick="openTables()">🪑 TABLES (<span id="openCount">0</span>)</button><button class="b b-cashup" onclick="cashUp()">CASH UP</button><button class="b b-office" onclick="openBackOffice()">STOCK / BACK OFFICE</button><button class="b" onclick="checkManager('X')">X-READ</button><button class="b" onclick="checkManager('Z')">Z-READ</button><button class="b" onclick="lockNow()">LOCK</button><button class="b" onclick="printReceipt()">🖨 PRINT RECEIPT</button><span style="font-size:11px;color:#999;align-self:center" id="clock">--:--</span></div>
@@ -116,15 +142,24 @@ body{background:#F5F5F5;color:#111B21;font-family:Inter,system-ui,sans-serif}
 </div>
 </div>
 </div>
+<div id="printArea" style="display:none"></div>
 <div id="tablesModal" class="modal"><div class="modalBox"><h3 style="color:#00A884">🪑 TABLES - OPEN TABS</h3><p style="font-size:11px;color:#666">Green = Customer sitting, owes money. White = Free.</p><div id="tablesList"></div><div style="display:flex;gap:8px;margin-top:12px"><button class="pay pay-cash" style="flex:1" onclick="closeTables()">CLOSE</button></div></div></div>
-<div id="modal" class="modal"><div class="modalBox"><h3 id="modalTitle">Add Product</h3><input id="fName" placeholder="Name"><input id="fPrice" type="number" placeholder="Price"><input id="fStock" type="number" placeholder="Stock"><input id="fImg" placeholder="Photo name e.g. savanna.jpg"><select id="fCat"><option>BEERS</option><option>CIDERS</option><option>WHISKEY</option><option>BRANDY</option><option>VODKA</option><option>GIN</option><option>WINES</option><option>CHAMPAGNE</option><option>SHOOTERS</option><option>SOFT</option></select><div style="margin-top:10px;text-align:center"><img id="preview" class="previewImg" style="display:none"><button onclick="document.getElementById('photoFile').click()" style="width:100%;background:#111B21;color:#fff;padding:12px;border:none;border-radius:10px;font-weight:900">📸 CHOOSE PHOTO FROM PHONE</button><input type="file" id="photoFile" accept="image/*" style="display:none" onchange="onPhoto(this)"><p style="font-size:10px;color:#666;margin-top:6px">Tap to choose photo - it will be saved INSIDE the POS</p></div><div style="display:flex;gap:8px;margin-top:10px"><button class="pay pay-cash" style="flex:1" onclick="saveProduct()">SAVE</button><button class="small-btn" onclick="closeModal()">CANCEL</button></div><button onclick="deleteCurrent()" style="width:100%;background:#E53935;color:#fff;padding:12px;border:none;border-radius:10px;font-weight:900;margin-top:8px">DELETE THIS PRODUCT</button></div></div>
+<div id="modal" class="modal"><div class="modalBox"><h3 id="modalTitle">Add Product</h3><input id="fName" placeholder="Name"><input id="fPrice" type="number" placeholder="Price"><input id="fStock" type="number" placeholder="Stock"><input id="fImg" placeholder="Photo name e.g. savanna.jpg"><input id="fBarcode" placeholder="Barcode (scan or type) e.g. 6001234567890"><select id="fCat"><option>BEERS</option><option>CIDERS</option><option>WHISKEY</option><option>BRANDY</option><option>VODKA</option><option>GIN</option><option>WINES</option><option>CHAMPAGNE</option><option>SHOOTERS</option><option>SOFT</option></select><div style="margin-top:10px;text-align:center"><img id="preview" class="previewImg" style="display:none"><button onclick="document.getElementById('photoFile').click()" style="width:100%;background:#111B21;color:#fff;padding:12px;border:none;border-radius:10px;font-weight:900">📸 CHOOSE PHOTO FROM PHONE</button><input type="file" id="photoFile" accept="image/*" style="display:none" onchange="onPhoto(this)"><p style="font-size:10px;color:#666;margin-top:6px">Tap to choose photo - it will be saved INSIDE the POS</p></div><div style="display:flex;gap:8px;margin-top:10px"><button class="pay pay-cash" style="flex:1" onclick="saveProduct()">SAVE</button><button class="small-btn" onclick="closeModal()">CANCEL</button></div><button onclick="deleteCurrent()" style="width:100%;background:#E53935;color:#fff;padding:12px;border:none;border-radius:10px;font-weight:900;margin-top:8px">DELETE THIS PRODUCT</button></div></div>
 <div id="backOffice" class="modal"><div class="modalBox"><h3 style="color:#00A884">BACK OFFICE - MANAGER ONLY</h3><div style="background:#ECE5DD;padding:12px;border-radius:12px;margin:10px 0"><b>Total Sales: <span id="boSales" style="color:#00A884">R0.00</span></b><br>Cash: <span id="boCash">R0.00</span> | Card: <span id="boCard">R0.00</span> | Transactions: <span id="boTrans">0</span></div><h4>CASH UP PER CASHIER</h4><div id="boCashiers"></div><h4 style="margin-top:12px">STOCK</h4><div id="boStock" style="max-height:220px;overflow-y:auto"></div><button onclick="restoreAll()" style="width:100%;background:#00A884;color:#fff;padding:12px;border:none;border-radius:10px;font-weight:900;margin-top:10px">RESTORE PRODUCTS</button><h4 style="margin-top:14px">CHANGE YOUR PINS</h4><label style="font-size:11px">Cashier 1 PIN</label><input id="pin1" maxlength="4"><label style="font-size:11px">Cashier 2 PIN</label><input id="pin2" maxlength="4"><label style="font-size:11px">Manager PIN</label><input id="pinM" maxlength="4"><div style="display:flex;gap:8px;margin-top:12px"><button class="pay pay-cash" style="flex:1" onclick="savePins()">SAVE MY NEW PINS</button><button class="small-btn" onclick="closeBackOffice()">CLOSE</button></div></div></div>
 <script>
 let CATS=["ALL","BEERS","CIDERS","WHISKEY","BRANDY","VODKA","GIN","WINES","CHAMPAGNE","SHOOTERS","SOFT"];
 let active="ALL";let cart=[];let editingIdx=-1;let currentCashier="Cashier 1";let tempImg="";
 let currentTable=null;
 function playTick(){try{let ctx=new (window.AudioContext||window.webkitAudioContext)();let osc=ctx.createOscillator();let gain=ctx.createGain();osc.connect(gain);gain.connect(ctx.destination);osc.frequency.value=1200;osc.type='square';gain.gain.setValueAtTime(0.15,ctx.currentTime);gain.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+0.08);osc.start();osc.stop(ctx.currentTime+0.08);}catch(e){}}
-function printReceipt(){window.print();}
+// HD FIX: 80mm Receipt + Drawer Kick
+function openDrawer(){try{let i=document.createElement('iframe');i.style.display='none';document.body.appendChild(i);let d=i.contentWindow.document;d.open();d.write('<pre>\x1b\x70\x00\x19\xfa</pre>');d.close();i.contentWindow.print();setTimeout(()=>i.remove(),500)}catch(e){}}
+function printReceipt(){
+  if(cart.length===0 && !document.getElementById('lastTotal')) return alert('Cart empty');
+  let lines = cart.map(c=>`${c.name} x${c.qty} - R${(c.price*c.qty).toFixed(2)}`).join('<br>');
+  let sub = cart.reduce((s,c)=>s+c.price*c.qty,0); let tot=sub*1.15;
+  let html=`<div style="text-align:center"><b>MUSINA CHISANYAMA BAR</b><br>${new Date().toLocaleString()}<br>${currentCashier} | ${currentTable||'WALK-IN'}</div><hr>${lines}<hr><b>TOTAL: R${tot.toFixed(2)}</b><br>VAT 15% incl<br><br>THANK YOU!`;
+  let pa=document.getElementById('printArea'); pa.innerHTML=html; pa.style.display='block'; openDrawer(); window.print(); setTimeout(()=>pa.style.display='none',500);
+}
 let tables=JSON.parse(localStorage.getItem('musina_tables')||'null')||{};
 for(let i=1;i<=10;i++){ if(!tables['T'+i]) tables['T'+i]={items:[],openedAt:null}; }
 function saveTables(){localStorage.setItem('musina_tables',JSON.stringify(tables))}
@@ -132,51 +167,51 @@ let sales=parseFloat(localStorage.getItem('m_sales')||0);let cashTotal=parseFloa
 let PINS=JSON.parse(localStorage.getItem('musina_pins')||'null');
 let cashierData=JSON.parse(localStorage.getItem('musina_cashier_data')||'null')||{"Cashier 1":{sales:0,cash:0,card:0,trans:0},"Cashier 2":{sales:0,cash:0,card:0,trans:0},"Manager":{sales:0,cash:0,card:0,trans:0}};
 let DEFAULT_PRODUCTS=[
-{name:"Castle Lite",price:28,cat:"BEERS",stock:120,img:"castle.jpg"},
-{name:"Black Label",price:30,cat:"BEERS",stock:100,img:"black.jpg"},
-{name:"Hansa",price:28,cat:"BEERS",stock:100,img:"hansa.jpg"},
-{name:"Stella Artois",price:35,cat:"BEERS",stock:80,img:"stella.jpg"},
-{name:"Savanna Dry 330ml",price:35,cat:"CIDERS",stock:100,img:"savanna.jpg"},
-{name:"Savanna Light 330ml",price:35,cat:"CIDERS",stock:100,img:"savanna-light.jpg"},
-{name:"Savanna Black 330ml",price:38,cat:"CIDERS",stock:80,img:"savanna-black.jpg"},
-{name:"Hunters Dry 330ml",price:30,cat:"CIDERS",stock:100,img:"hunters.jpg"},
-{name:"Hunters Gold 330ml",price:30,cat:"CIDERS",stock:100,img:"hunters-gold.jpg"},
-{name:"Strongbow Gold 330ml",price:32,cat:"CIDERS",stock:80,img:"strong.jpg"},
-{name:"Redds 330ml",price:32,cat:"CIDERS",stock:80,img:"redds.jpg"},
-{name:"Black Crown 330ml",price:30,cat:"CIDERS",stock:80,img:"crown.jpg"},
-{name:"Flying Fish 330ml",price:30,cat:"CIDERS",stock:80,img:"flying.jpg"},
-{name:"Brutal Fruit 275ml",price:30,cat:"CIDERS",stock:80,img:"brutal.jpg"},
-{name:"Jameson Select Reserve",price:45,cat:"WHISKEY",stock:100,img:"jameson-select.jpg"},
-{name:"Johnnie Walker Black",price:50,cat:"WHISKEY",stock:100,img:"johnnie-black.jpg"},
-{name:"Jack Daniel's",price:55,cat:"WHISKEY",stock:80,img:"jack-daniels.jpg"},
-{name:"J&B Rare",price:40,cat:"WHISKEY",stock:100,img:"jb.jpg"},
-{name:"Hennessy VSOP",price:80,cat:"BRANDY",stock:80,img:"hennessy-vsop.jpg"},
-{name:"Klipdrift Premium",price:35,cat:"BRANDY",stock:100,img:"klipdrift.jpg"},
-{name:"Viceroy",price:30,cat:"BRANDY",stock:100,img:"viceroy.jpg"},
-{name:"Richelieu",price:35,cat:"BRANDY",stock:100,img:"richelieu.jpg"},
-{name:"Courvoisier",price:60,cat:"BRANDY",stock:80,img:"courvoisier.jpg"},
-{name:"Hennessy VS",price:65,cat:"BRANDY",stock:80,img:"hennessy-vs.jpg"},
-{name:"Coca-Cola 330ml",price:15,cat:"SOFT",stock:200,img:"coca.jpg"},
-{name:"Sprite 330ml",price:15,cat:"SOFT",stock:200,img:"sprite.jpg"},
-{name:"Fanta Orange 330ml",price:15,cat:"SOFT",stock:200,img:"fanta.jpg"},
-{name:"Stoney Ginger Beer 330ml",price:15,cat:"SOFT",stock:200,img:"stoney.jpg"},
-{name:"Ginger Beer",price:18,cat:"SOFT",stock:100,img:"ginger.jpg"},
-{name:"Tonic Water",price:18,cat:"SOFT",stock:100,img:"tonic.jpg"},
-{name:"Soda Water",price:15,cat:"SOFT",stock:100,img:"soda.jpg"},
-{name:"Still Water 500ml",price:10,cat:"SOFT",stock:200,img:"water.jpg"},
-{name:"Red Bull",price:30,cat:"SOFT",stock:100,img:"redbull.jpg"},
-{name:"Smirnoff Vodka",price:35,cat:"VODKA",stock:100,img:"smirnoff.jpg"},
-{name:"Absolut Vodka",price:40,cat:"VODKA",stock:80,img:"absolut.jpg"},
-{name:"Pushkin Vodka",price:30,cat:"VODKA",stock:100,img:"pushkin.jpg"},
-{name:"Gordon's Gin",price:35,cat:"GIN",stock:100,img:"gordons.jpg"},
-{name:"Bombay Sapphire Gin",price:45,cat:"GIN",stock:80,img:"bombay.jpg"},
-{name:"Moët & Chandon",price:850,cat:"CHAMPAGNE",stock:20,img:"moet.jpg"},
-{name:"J.C. Le Roux",price:120,cat:"CHAMPAGNE",stock:50,img:"jcleroux.jpg"},
-{name:"Four Cousins Sweet Red",price:110,cat:"WINES",stock:50,img:"fourcousins.jpg"},
-{name:"Carlo Rossi",price:95,cat:"WINES",stock:50,img:"carlo.jpg"},
-{name:"Nederburg",price:130,cat:"WINES",stock:50,img:"nederburg.jpg"},
-{name:"Jagermeister",price:35,cat:"SHOOTERS",stock:100,img:"jager.jpg"},
-{name:"Tequila Gold",price:35,cat:"SHOOTERS",stock:100,img:"tequila.jpg"},
+{name:"Castle Lite",price:28,cat:"BEERS",stock:120,img:"castle.jpg",barcode:"6001108001234"},
+{name:"Black Label",price:30,cat:"BEERS",stock:100,img:"black.jpg",barcode:"6001108001235"},
+{name:"Hansa",price:28,cat:"BEERS",stock:100,img:"hansa.jpg",barcode:"6001108001236"},
+{name:"Stella Artois",price:35,cat:"BEERS",stock:80,img:"stella.jpg",barcode:"6001108001237"},
+{name:"Savanna Dry 330ml",price:35,cat:"CIDERS",stock:100,img:"savanna.jpg",barcode:"6001234567890"},
+{name:"Savanna Light 330ml",price:35,cat:"CIDERS",stock:100,img:"savanna-light.jpg",barcode:"6001234567891"},
+{name:"Savanna Black 330ml",price:38,cat:"CIDERS",stock:80,img:"savanna-black.jpg",barcode:"6001234567892"},
+{name:"Hunters Dry 330ml",price:30,cat:"CIDERS",stock:100,img:"hunters.jpg",barcode:"6001234567893"},
+{name:"Hunters Gold 330ml",price:30,cat:"CIDERS",stock:100,img:"hunters-gold.jpg",barcode:"6001234567894"},
+{name:"Strongbow Gold 330ml",price:32,cat:"CIDERS",stock:80,img:"strong.jpg",barcode:"6001234567895"},
+{name:"Redds 330ml",price:32,cat:"CIDERS",stock:80,img:"redds.jpg",barcode:"6001234567896"},
+{name:"Black Crown 330ml",price:30,cat:"CIDERS",stock:80,img:"crown.jpg",barcode:"6001234567897"},
+{name:"Flying Fish 330ml",price:30,cat:"CIDERS",stock:80,img:"flying.jpg",barcode:"6001234567898"},
+{name:"Brutal Fruit 275ml",price:30,cat:"CIDERS",stock:80,img:"brutal.jpg",barcode:"6001234567899"},
+{name:"Jameson Select Reserve",price:45,cat:"WHISKEY",stock:100,img:"jameson-select.jpg",barcode:"501100700001"},
+{name:"Johnnie Walker Black",price:50,cat:"WHISKEY",stock:100,img:"johnnie-black.jpg",barcode:"500026710001"},
+{name:"Jack Daniel's",price:55,cat:"WHISKEY",stock:80,img:"jack-daniels.jpg",barcode:"509987300001"},
+{name:"J&B Rare",price:40,cat:"WHISKEY",stock:100,img:"jb.jpg",barcode:"500026710002"},
+{name:"Hennessy VSOP",price:80,cat:"BRANDY",stock:80,img:"hennessy-vsop.jpg",barcode:"304289001001"},
+{name:"Klipdrift Premium",price:35,cat:"BRANDY",stock:100,img:"klipdrift.jpg",barcode:"6001108002001"},
+{name:"Viceroy",price:30,cat:"BRANDY",stock:100,img:"viceroy.jpg",barcode:"6001108002002"},
+{name:"Richelieu",price:35,cat:"BRANDY",stock:100,img:"richelieu.jpg",barcode:"6001108002003"},
+{name:"Courvoisier",price:60,cat:"BRANDY",stock:80,img:"courvoisier.jpg",barcode:"6001108002004"},
+{name:"Hennessy VS",price:65,cat:"BRANDY",stock:80,img:"hennessy-vs.jpg",barcode:"6001108002005"},
+{name:"Coca-Cola 330ml",price:15,cat:"SOFT",stock:200,img:"coca.jpg",barcode:"6001108003001"},
+{name:"Sprite 330ml",price:15,cat:"SOFT",stock:200,img:"sprite.jpg",barcode:"6001108003002"},
+{name:"Fanta Orange 330ml",price:15,cat:"SOFT",stock:200,img:"fanta.jpg",barcode:"6001108003003"},
+{name:"Stoney Ginger Beer 330ml",price:15,cat:"SOFT",stock:200,img:"stoney.jpg",barcode:"6001108003004"},
+{name:"Ginger Beer",price:18,cat:"SOFT",stock:100,img:"ginger.jpg",barcode:"6001108003005"},
+{name:"Tonic Water",price:18,cat:"SOFT",stock:100,img:"tonic.jpg",barcode:"6001108003006"},
+{name:"Soda Water",price:15,cat:"SOFT",stock:100,img:"soda.jpg",barcode:"6001108003007"},
+{name:"Still Water 500ml",price:10,cat:"SOFT",stock:200,img:"water.jpg",barcode:"6001108003008"},
+{name:"Red Bull",price:30,cat:"SOFT",stock:100,img:"redbull.jpg",barcode:"6001108003009"},
+{name:"Smirnoff Vodka",price:35,cat:"VODKA",stock:100,img:"smirnoff.jpg",barcode:"6001108004001"},
+{name:"Absolut Vodka",price:40,cat:"VODKA",stock:80,img:"absolut.jpg",barcode:"6001108004002"},
+{name:"Pushkin Vodka",price:30,cat:"VODKA",stock:100,img:"pushkin.jpg",barcode:"6001108004003"},
+{name:"Gordon's Gin",price:35,cat:"GIN",stock:100,img:"gordons.jpg",barcode:"6001108004004"},
+{name:"Bombay Sapphire Gin",price:45,cat:"GIN",stock:80,img:"bombay.jpg",barcode:"6001108004005"},
+{name:"Moët & Chandon",price:850,cat:"CHAMPAGNE",stock:20,img:"moet.jpg",barcode:"304508001001"},
+{name:"J.C. Le Roux",price:120,cat:"CHAMPAGNE",stock:50,img:"jcleroux.jpg",barcode:"6001108005001"},
+{name:"Four Cousins Sweet Red",price:110,cat:"WINES",stock:50,img:"fourcousins.jpg",barcode:"6001108006001"},
+{name:"Carlo Rossi",price:95,cat:"WINES",stock:50,img:"carlo.jpg",barcode:"6001108006002"},
+{name:"Nederburg",price:130,cat:"WINES",stock:50,img:"nederburg.jpg",barcode:"6001108006003"},
+{name:"Jagermeister",price:35,cat:"SHOOTERS",stock:100,img:"jager.jpg",barcode:"6001108007001"},
+{name:"Tequila Gold",price:35,cat:"SHOOTERS",stock:100,img:"tequila.jpg",barcode:"6001108007002"},
 ];
 let PRODUCTS=null;
 try{ PRODUCTS=JSON.parse(localStorage.getItem('musina_hollywood')||'null'); }catch(e){PRODUCTS=null;}
@@ -187,6 +222,18 @@ if(PRODUCTS && PRODUCTS.length>0){
 let _mustHave = DEFAULT_PRODUCTS.filter(p=>["WHISKEY","BRANDY","SOFT","VODKA","GIN","WINES","CHAMPAGNE","SHOOTERS"].includes(p.cat));
 _mustHave.forEach(m=>{ if(!PRODUCTS.some(p=>p.name===m.name)){ PRODUCTS.push(m); }});
 localStorage.setItem('musina_hollywood', JSON.stringify(PRODUCTS));
+// BARCODE SCANNER FIX - Scanner types fast + Enter
+let scanBuffer=""; let scanTimer=null;
+document.addEventListener('keydown', e=>{
+  if(document.activeElement && (document.activeElement.tagName==='INPUT' || document.activeElement.tagName==='SELECT')) return;
+  if(e.key==='Enter' && scanBuffer.length>=3){
+    let code=scanBuffer.trim();
+    let idx=PRODUCTS.findIndex(p=>p.barcode===code);
+    if(idx>=0){ add(idx); playTick(); } else { alert('Barcode not found: '+code+' - Add it in Back Office'); }
+    scanBuffer=""; return;
+  }
+  if(e.key.length===1){ scanBuffer+=e.key; clearTimeout(scanTimer); scanTimer=setTimeout(()=>scanBuffer="",400); }
+});
 function renderTableBar(){
   let open=0;
   let html='';
@@ -257,7 +304,7 @@ function payTableCard(){
   let total=cart.reduce((s,c)=>s+c.price*c.qty,0)*1.15;
   deductStock(); recordSale(total,'CARD');
   tables[currentTable].items=[]; saveTables(); cart=[]; currentTable=null; updateTableUI(); renderTableBar(); calc(); renderGrid();
-  alert('Paid by CARD! Table is now FREE');
+  alert('Paid by CARD! Table is now FREE - Charge R'+total.toFixed(2)+' on card machine');
 }
 function freeTable(){
   if(!currentTable) return;
@@ -296,7 +343,7 @@ function renameProduct(idx){let code=prompt('RENAME - Enter Manager PIN to renam
 function deleteProduct(idx){let code=prompt('DELETE - Enter Manager PIN to delete '+PRODUCTS[idx].name);if(!isManager(code))return alert('ACCESS DENIED');if(!confirm('Delete '+PRODUCTS[idx].name+'?'))return;PRODUCTS.splice(idx,1);save();renderGrid();alert('Deleted!');}
 function deleteCurrent(){if(editingIdx<0)return;deleteProduct(editingIdx);closeModal();}
 function checkManager(type){let code=prompt('MANAGER CODE REQUIRED for '+type+'-READ');if(isManager(code)){if(type==='X')doX();else doZ()}else{alert('ACCESS DENIED - Manager Only')}}
-function openBackOffice(){let code=prompt('BACK OFFICE - Enter YOUR Manager PIN:');if(!isManager(code))return alert('ACCESS DENIED');document.getElementById('boSales').textContent='R'+sales.toFixed(2);document.getElementById('boCash').textContent='R'+cashTotal.toFixed(2);document.getElementById('boCard').textContent='R'+cardTotal.toFixed(2);document.getElementById('boTrans').textContent=transCount;document.getElementById('boCashiers').innerHTML=Object.keys(cashierData).map(k=>{let d=cashierData[k];return '<div class="cashRow"><span><b>'+k+'</b><br><small>'+d.trans+' sales • Cash R'+d.cash.toFixed(2)+' • Card R'+d.card.toFixed(2)+'</small></span><b style="color:#00A884">R'+d.sales.toFixed(2)+'</b></div>'}).join('');document.getElementById('boStock').innerHTML=PRODUCTS.map((p,idx)=>'<div class="stockRow"><span><b>'+p.name+'</b><br><small>'+p.cat+' - R'+p.price+' - '+p.stock+' left</small></span><span><button onclick="renameProduct('+idx+')" style="background:#111B21;color:#fff;border:1px solid #00A884;padding:4px 7px;border-radius:7px;font-size:10px;font-weight:900">RENAME</button> <button onclick="deleteProduct('+idx+')" style="background:#E53935;color:#fff;border:none;padding:4px 7px;border-radius:7px;font-size:10px;font-weight:900">DELETE</button></span></div>').join('');document.getElementById('pin1').value=PINS.c1;document.getElementById('pin2').value=PINS.c2;document.getElementById('pinM').value=PINS.manager;document.getElementById('backOffice').style.display='flex'}
+function openBackOffice(){let code=prompt('BACK OFFICE - Enter YOUR Manager PIN:');if(!isManager(code))return alert('ACCESS DENIED');document.getElementById('boSales').textContent='R'+sales.toFixed(2);document.getElementById('boCash').textContent='R'+cashTotal.toFixed(2);document.getElementById('boCard').textContent='R'+cardTotal.toFixed(2);document.getElementById('boTrans').textContent=transCount;document.getElementById('boCashiers').innerHTML=Object.keys(cashierData).map(k=>{let d=cashierData[k];return '<div class="cashRow"><span><b>'+k+'</b><br><small>'+d.trans+' sales • Cash R'+d.cash.toFixed(2)+' • Card R'+d.card.toFixed(2)+'</small></span><b style="color:#00A884">R'+d.sales.toFixed(2)+'</b></div>'}).join('');document.getElementById('boStock').innerHTML=PRODUCTS.map((p,idx)=>'<div class="stockRow"><span><b>'+p.name+'</b><br><small>'+p.cat+' - R'+p.price+' - '+p.stock+' left'+(p.barcode?' • '+p.barcode:'')+'</small></span><span><button onclick="renameProduct('+idx+')" style="background:#111B21;color:#fff;border:1px solid #00A884;padding:4px 7px;border-radius:7px;font-size:10px;font-weight:900">RENAME</button> <button onclick="deleteProduct('+idx+')" style="background:#E53935;color:#fff;border:none;padding:4px 7px;border-radius:7px;font-size:10px;font-weight:900">DELETE</button></span></div>').join('');document.getElementById('pin1').value=PINS.c1;document.getElementById('pin2').value=PINS.c2;document.getElementById('pinM').value=PINS.manager;document.getElementById('backOffice').style.display='flex'}
 function closeBackOffice(){document.getElementById('backOffice').style.display='none'}
 function savePins(){let n1=document.getElementById('pin1').value,n2=document.getElementById('pin2').value,nm=document.getElementById('pinM').value;if(n1.length!==4||n2.length!==4||nm.length!==4)return alert('All PINs must be 4 digits');PINS={c1:n1,c2:n2,manager:nm};localStorage.setItem('musina_pins',JSON.stringify(PINS));alert('New PINs saved.');closeBackOffice()}
 function cashUp(){let d=cashierData[currentCashier]||{sales:0,cash:0,card:0,trans:0};if(d.trans===0)return alert(currentCashier+' has no sales to cash up yet.');alert(currentCashier+' cashed up!');sales-=d.sales;cashTotal-=d.cash;cardTotal-=d.card;transCount-=d.trans;cashierData[currentCashier]={sales:0,cash:0,card:0,trans:0};saveCashierData();localStorage.setItem('m_sales',sales);localStorage.setItem('m_cash',cashTotal);localStorage.setItem('m_card',cardTotal);localStorage.setItem('m_trans',transCount);updateMyCashUp()}
@@ -316,9 +363,9 @@ function renderGrid(){
 }
 function editPrice(idx){let code=prompt('PRICE - Manager PIN for '+PRODUCTS[idx].name);if(!isManager(code))return alert('ACCESS DENIED');let np=prompt('New Price',PRODUCTS[idx].price);if(np){PRODUCTS[idx].price=parseFloat(np);save();renderGrid()}}
 function addStockOnly(idx){let a=prompt('Add Stock for '+PRODUCTS[idx].name+'\nCurrent: '+PRODUCTS[idx].stock,24);if(a){PRODUCTS[idx].stock+=parseInt(a);save();renderGrid()}}
-function openEdit(idx){let code=prompt('EDIT PRODUCT - Manager PIN required');if(!isManager(code))return alert('ACCESS DENIED');editingIdx=idx;tempImg="";let p=PRODUCTS[idx];document.getElementById('modalTitle').innerText='Edit '+p.name;document.getElementById('fName').value=p.name;document.getElementById('fPrice').value=p.price;document.getElementById('fStock').value=p.stock;document.getElementById('fImg').value=p.img&&p.img.startsWith('data:')?'PHOTO SAVED':p.img||'';document.getElementById('fCat').value=p.cat;let pv=document.getElementById('preview');if(p.img&&p.img.startsWith('data:')){pv.src=p.img;pv.style.display='block'}else{pv.style.display='none'}document.getElementById('photoFile').value='';document.getElementById('modal').style.display='flex'}
+function openEdit(idx){let code=prompt('EDIT PRODUCT - Manager PIN required');if(!isManager(code))return alert('ACCESS DENIED');editingIdx=idx;tempImg="";let p=PRODUCTS[idx];document.getElementById('modalTitle').innerText='Edit '+p.name;document.getElementById('fName').value=p.name;document.getElementById('fPrice').value=p.price;document.getElementById('fStock').value=p.stock;document.getElementById('fImg').value=p.img&&p.img.startsWith('data:')?'PHOTO SAVED':p.img||'';document.getElementById('fBarcode').value=p.barcode||'';document.getElementById('fCat').value=p.cat;let pv=document.getElementById('preview');if(p.img&&p.img.startsWith('data:')){pv.src=p.img;pv.style.display='block'}else{pv.style.display='none'}document.getElementById('photoFile').value='';document.getElementById('modal').style.display='flex'}
 function closeModal(){document.getElementById('modal').style.display='none'}
-function saveProduct(){let n=document.getElementById('fName').value,pr=document.getElementById('fPrice').value,st=document.getElementById('fStock').value,img=document.getElementById('fImg').value,cat=document.getElementById('fCat').value;if(!n||!pr)return alert('Fill name and price');let finalImg=tempImg?tempImg:(editingIdx>=0?PRODUCTS[editingIdx].img:img);if(!finalImg) finalImg=img;if(editingIdx>=0){PRODUCTS[editingIdx]={name:n,price:parseFloat(pr),cat:cat,stock:parseInt(st),img:finalImg}}else{PRODUCTS.push({name:n,price:parseFloat(pr),cat:cat,stock:parseInt(st)||0,img:finalImg})}save();renderGrid();closeModal()}
+function saveProduct(){let n=document.getElementById('fName').value,pr=document.getElementById('fPrice').value,st=document.getElementById('fStock').value,img=document.getElementById('fImg').value,cat=document.getElementById('fCat').value,bc=document.getElementById('fBarcode').value;if(!n||!pr)return alert('Fill name and price');let finalImg=tempImg?tempImg:(editingIdx>=0?PRODUCTS[editingIdx].img:img);if(!finalImg) finalImg=img;if(editingIdx>=0){PRODUCTS[editingIdx]={name:n,price:parseFloat(pr),cat:cat,stock:parseInt(st),img:finalImg,barcode:bc}}else{PRODUCTS.push({name:n,price:parseFloat(pr),cat:cat,stock:parseInt(st)||0,img:finalImg,barcode:bc})}save();renderGrid();closeModal()}
 function save(){localStorage.setItem('musina_hollywood',JSON.stringify(PRODUCTS))}
 function add(i){
   playTick();
@@ -338,8 +385,8 @@ function holdSale(){if(currentTable){sendToTable();}else{alert('Sale Held - Tap 
 function doX(){alert('X-READ\nTotal Sales: R'+sales.toFixed(2)+'\nCash: R'+cashTotal.toFixed(2)+'\nCard: R'+cardTotal.toFixed(2)+'\nTrans: '+transCount)}
 function doZ(){if(!confirm('Z-READ - Close day?'))return;sales=0;cashTotal=0;cardTotal=0;transCount=0;cashierData={"Cashier 1":{sales:0,cash:0,card:0,trans:0},"Cashier 2":{sales:0,cash:0,card:0,trans:0},"Manager":{sales:0,cash:0,card:0,trans:0}};saveCashierData();localStorage.setItem('m_sales',0);localStorage.setItem('m_cash',0);localStorage.setItem('m_card',0);localStorage.setItem('m_trans',0);cart=[];calc();renderGrid();updateMyCashUp()}
 function recordSale(total,type){sales+=total;transCount++;if(type==='CASH')cashTotal+=total;else cardTotal+=total;if(!cashierData[currentCashier])cashierData[currentCashier]={sales:0,cash:0,card:0,trans:0};cashierData[currentCashier].sales+=total;cashierData[currentCashier].trans++;if(type==='CASH')cashierData[currentCashier].cash+=total;else cashierData[currentCashier].card+=total;saveCashierData();localStorage.setItem('m_sales',sales);localStorage.setItem('m_cash',cashTotal);localStorage.setItem('m_card',cardTotal);localStorage.setItem('m_trans',transCount);updateMyCashUp()}
-function payCash(){if(cart.length===0)return alert('Cart empty');let sub=cart.reduce((s,c)=>s+c.price*c.qty,0);let total=sub*1.15;let tendered=prompt('TOTAL: R'+total.toFixed(2)+'\nHow much cash?',total.toFixed(2));if(!tendered)return;tendered=parseFloat(tendered);if(tendered<total)return alert('Not enough cash');let change=tendered-total;document.getElementById('changeShow').textContent='R'+change.toFixed(2);deductStock();recordSale(total,'CASH');showTill(change,total,tendered);cart=[];calc();renderGrid()}
-function pay(type){if(cart.length===0)return alert('Cart empty');let sub=cart.reduce((s,c)=>s+c.price*c.qty,0);let total=sub*1.15;deductStock();recordSale(total,'CARD');cart=[];calc();renderGrid();if(confirm('Print receipt?')){printReceipt();}}
+function payCash(){if(cart.length===0)return alert('Cart empty');let sub=cart.reduce((s,c)=>s+c.price*c.qty,0);let total=sub*1.15;let tendered=prompt('TOTAL: R'+total.toFixed(2)+'\nHow much cash?',total.toFixed(2));if(!tendered)return;tendered=parseFloat(tendered);if(tendered<total)return alert('Not enough cash');let change=tendered-total;document.getElementById('changeShow').textContent='R'+change.toFixed(2);deductStock();recordSale(total,'CASH');showTill(change,total,tendered);cart=[];calc();renderGrid(); printReceipt();}
+function pay(type){if(cart.length===0)return alert('Cart empty');let sub=cart.reduce((s,c)=>s+c.price*c.qty,0);let total=sub*1.15;deductStock();recordSale(total,'CARD');cart=[];calc();renderGrid();alert('Charge R'+total.toFixed(2)+' on card machine');if(confirm('Print receipt?')){printReceipt();}}
 setInterval(()=>{let d=new Date();document.getElementById('clock').textContent=d.toLocaleDateString()+' • '+d.toLocaleTimeString()},1000);renderNav();renderGrid();renderTableBar();updateTableUI();calc();checkSetup();
 </script>
 </body>
