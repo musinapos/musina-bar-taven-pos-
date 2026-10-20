@@ -6,16 +6,16 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{--green:#00A884;--green2:#25D366;--greenDark:#075E54;--grey:#ECE5DD;--greyDark:#D9D9D9;--black:#111B21;--white:#FFFFFF}
-body{background:#F5F5F5;color:#111B21;font-family:Inter,system-ui,sans-serif}
-.topBanner{margin:10px;border-radius:18px;background:#FFFFFF;border:2px solid var(--green);text-align:center;padding:20px 10px;box-shadow:0 4px 15px rgba(0,0,0,0.08)}
+body{background:#F5F5F5;color:#111B21;font-family:Inter,system-ui,sans-serif;overflow:hidden;height:100vh;display:flex;flex-direction:column}
+.topBanner{margin:10px;border-radius:18px;background:#FFFFFF;border:2px solid var(--green);text-align:center;padding:20px 10px;box-shadow:0 4px 15px rgba(0,0,0,0.08);flex-shrink:0}
 .topBanner h1{font-size:30px;letter-spacing:3px;color:#111B21;font-weight:900}
 .topBanner h1 span{color:var(--green)}
 .topBanner h2{font-size:15px;letter-spacing:5px;color:var(--green);font-weight:900}
 .topBanner p{font-size:11px;color:#8A8A8A;font-weight:700;margin-top:6px}
-.topActions{display:flex;gap:6px;flex-wrap:wrap;padding:10px 12px;background:#FFFFFF;border-bottom:1px solid var(--greyDark)}
+.topActions{display:flex;gap:6px;flex-wrap:wrap;padding:10px 12px;background:#FFFFFF;border-bottom:1px solid var(--greyDark);flex-shrink:0}
 .b{padding:9px 13px;border-radius:22px;border:1.5px solid var(--green);background:#FFFFFF;color:#111B21;font-weight:900;font-size:11px;cursor:pointer}
 .b-cashup{background:var(--green);color:#fff;border-color:var(--green)}.b-office{background:#111B21;color:#fff;border-color:#111B21}.b-tables{background:var(--green2);color:#fff;border-color:var(--green2)}
-.tableBar{display:flex;gap:8px;overflow-x:auto;padding:10px 12px;background:#ECE5DD;border-bottom:1px solid #D9D9D9}
+.tableBar{display:flex;gap:8px;overflow-x:auto;padding:10px 12px;background:#ECE5DD;border-bottom:1px solid #D9D9D9;flex-shrink:0}
 .tableBtn{min-width:52px;padding:10px 6px;border-radius:12px;border:1.5px solid #D9D9D9;background:#fff;color:#111B21;font-weight:900;font-size:11px;cursor:pointer;text-align:center}
 .tableBtn.occupied{background:var(--green);color:#fff;border-color:var(--green)}
 .tableBtn.selected{border:2px solid #111B21;box-shadow:0 0 0 2px var(--green)}
@@ -25,7 +25,9 @@ body{background:#F5F5F5;color:#111B21;font-family:Inter,system-ui,sans-serif}
 .nav{display:flex;gap:8px;overflow-x:auto;padding:12px;background:#ECE5DD}
 .chip{padding:9px 16px;background:#fff;border:1.5px solid #D9D9D9;border-radius:22px;color:#111B21;font-weight:800;font-size:10px;white-space:nowrap;cursor:pointer}
 .chip.active{background:var(--green);color:#fff;border-color:var(--green)}
-.main{display:flex}.left{flex:1;background:#ECE5DD}.right{width:340px;background:#ECE5DD;border-left:2px solid #D9D9D9;padding:12px;position:sticky;top:0;height:100vh;overflow-y:auto}
+.main{display:flex;flex:1;overflow:hidden}
+.left{flex:1;background:#ECE5DD;overflow-y:auto;height:100%;padding-bottom:30px;overscroll-behavior:contain}
+.right{width:340px;background:#ECE5DD;border-left:2px solid #D9D9D9;padding:12px;overflow-y:auto;height:100%;flex-shrink:0}
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;padding:12px}
 @media(min-width:768px){.grid{grid-template-columns:repeat(3,1fr)}}
 .card{background:#fff;border:1.5px solid #D9D9D9;border-radius:16px;overflow:hidden;position:relative;box-shadow:0 2px 8px rgba(0,0,0,0.06)}
@@ -69,7 +71,7 @@ body{background:#F5F5F5;color:#111B21;font-family:Inter,system-ui,sans-serif}
 .key-clear{background:#E53935;color:#fff;border-color:#E53935}
 .tillAlert{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:500;align-items:center;justify-content:center;text-align:center}
 .tillBox{background:var(--green);color:#fff;padding:30px;border-radius:20px;max-width:340px}
-@media(max-width:767px){.main{flex-direction:column}.right{width:100%;position:static;height:auto;border-left:none;border-top:2px solid var(--green)}}
+@media(max-width:767px){body{overflow:auto;height:auto;display:block}.main{flex-direction:column;overflow:visible}.left{overflow:visible;height:auto}.right{width:100%;position:static;height:auto;border-left:none;border-top:2px solid var(--green)}}
 .stockRow{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #D9D9D9;font-size:12px}
 .cashRow{display:flex;justify-content:space-between;padding:9px;background:#ECE5DD;border-radius:10px;margin:5px 0;font-size:12px;border:1px solid #D9D9D9}
 .setupBox{background:#fff;border:2px solid var(--green);padding:16px;border-radius:14px;margin-top:10px}
@@ -93,7 +95,7 @@ body{background:#F5F5F5;color:#111B21;font-family:Inter,system-ui,sans-serif}
 <div id="lock"><h2 style="color:#111B21;letter-spacing:3px">MUSINA <span style="color:#00A884">CHISANYAMA</span> 🇿🇦</h2><p style="color:#00A884;letter-spacing:5px;font-weight:900">BAR POS</p><p style="margin-top:14px;color:#999">MUSINA POS • ENTER PIN TO UNLOCK</p><div class="pin-display" id="pinShow">----</div><div class="keypad"><button class="key" onclick="pressPin('1')">1</button><button class="key" onclick="pressPin('2')">2</button><button class="key" onclick="pressPin('3')">3</button><button class="key" onclick="pressPin('4')">4</button><button class="key" onclick="pressPin('5')">5</button><button class="key" onclick="pressPin('6')">6</button><button class="key" onclick="pressPin('7')">7</button><button class="key" onclick="pressPin('8')">8</button><button class="key" onclick="pressPin('9')">9</button><button class="key key-clear" onclick="clearPin()">CLEAR</button><button class="key" onclick="pressPin('0')">0</button><button class="key" onclick="clearPin()">⌫</button><button class="key-enter" onclick="unlock()">ENTER → UNLOCK</button></div><p id="pinHint" style="color:#999;margin-top:12px">Enter your PIN like ATM</p></div>
 <div id="tillAlert" class="tillAlert"><div class="tillBox"><h2>TILL OPENED</h2><div id="tillChangeText" style="font-size:42px;font-weight:900">R0.00</div><div id="tillDetail" style="font-size:14px"></div><p style="margin-top:10px;font-size:12px">Give change to customer</p><button onclick="closeTill();printReceipt()" style="margin-top:16px;background:#fff;color:#000;padding:12px 22px;border-radius:12px;border:none;font-weight:900">PRINT RECEIPT</button><button onclick="closeTill()" style="margin-top:8px;background:#111B21;color:#fff;padding:12px 22px;border-radius:12px;border:none;font-weight:900">CLOSE TILL</button></div></div>
 <div class="topBanner"><h1>MUSINA <span>CHISANYAMA</span> 🇿🇦</h1><h2>BAR POS</h2><p>MUSINA POS SYSTEMS</p></div>
-<div style="display:flex;justify-content:space-between;align-items:center;padding:12px 14px;background:#fff;border-bottom:1px solid #D9D9D9"><span style="color:#111B21;font-weight:700">POS • <span id="tableLabel" style="color:#00A884;font-weight:900">WALK-IN SALE</span> • <span id="cashierLabel" style="color:#00A884">Not Logged In</span></span></div>
+<div style="display:flex;justify-content:space-between;align-items:center;padding:12px 14px;background:#fff;border-bottom:1px solid #D9D9D9;flex-shrink:0"><span style="color:#111B21;font-weight:700">POS • <span id="tableLabel" style="color:#00A884;font-weight:900">WALK-IN SALE</span> • <span id="cashierLabel" style="color:#00A884">Not Logged In</span></span></div>
 <div class="topActions"><button class="b b-tables" onclick="openTables()">🪑 TABLES (<span id="openCount">0</span>)</button><button class="b b-cashup" onclick="cashUp()">CASH UP PER CASHIER</button><button class="b b-office" onclick="openBackOffice()">STOCK / BACK OFFICE</button><button class="b" onclick="checkManager('X')">X-READ</button><button class="b" onclick="checkManager('Z')" style="background:#D32F2F;color:#fff;border-color:#D32F2F">DAY END Z-READ</button><button class="b" onclick="openIssue()" style="background:#FF9800;color:#fff;border-color:#FF9800">📦 MANAGEMENT ISSUE</button><button class="b" onclick="printMonthReport()" style="background:#111B21;color:#fff">🖨 MONTH REPORT</button><button class="b" onclick="lockNow()">LOCK</button><button class="b" onclick="printReceipt()">🖨 PRINT RECEIPT</button><span style="font-size:11px;color:#999;align-self:center" id="clock">--:--</span></div>
 <div class="tableBar" id="tableBar"></div>
 <div class="main">
